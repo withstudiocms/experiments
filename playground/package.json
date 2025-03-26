@@ -24,6 +24,7 @@
     "studiocms": "catalog:",
     "sharp": "catalog:",
     "@studiocms/blog": "catalog:",
-    "@studiocms/devapps": "catalog:"
+    "@studiocms/devapps": "catalog:",
+    "@studiocms/wysiwyg": "workspace:*"
   }
 }
