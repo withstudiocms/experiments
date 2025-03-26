@@ -20,7 +20,14 @@ export function studiocmsWYSIWYG(): StudioCMSPlugin {
 		identifier: packageIdentifier,
 		name: 'StudioCMS WYSIWYG Editor',
 		studiocmsMinimumVersion: '0.1.0-beta.13',
-		pageTypes: [],
+		pageTypes: [
+			{
+				identifier: 'studiocms/wysiwyg',
+				label: 'WYSIWYG',
+				rendererComponent: 'studiocms/html',
+				pageContentComponent: 'studiocms/html',
+			},
+		],
 		integration: {
 			name: packageIdentifier,
 			hooks: {
