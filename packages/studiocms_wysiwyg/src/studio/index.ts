@@ -35,7 +35,7 @@ export function studiocmsWYSIWYGStudio(): StudioCMSPlugin {
 		studiocmsMinimumVersion: '0.1.0-beta.13',
 		pageTypes: [
 			{
-				identifier: 'studiocms/studio',
+				identifier: 'studiocms/wysiwyg/studio',
 				label: 'GrapesJS StudioSDK',
 				rendererComponent: 'studiocms/html',
 				pageContentComponent: 'studiocms/html',

@@ -1,3 +1,3 @@
 declare module 'virtual:studiocms/plugins/renderers' {
-	export const studiocms_studio: typeof import('./components/Render.astro').default;
+	export const studiocms_wysiwyg_studio: typeof import('./components/Render.astro').default;
 }
