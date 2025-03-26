@@ -8,8 +8,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/withstudiocms/studiocms.git",
-    "directory": "packages/studiocms_mdx"
+    "url": "git+https://github.com/withstudiocms/experiments.git",
+    "directory": "packages/studiocms_wysiwyg"
   },
   "contributors": [
     "Adammatthiesen",
