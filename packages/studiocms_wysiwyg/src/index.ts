@@ -3,6 +3,7 @@
  * loaded when a user imports the StudioCMS plugin in their Astro configuration file. These
  * directives must be first at the top of the file and can only be preceded by this comment.
  */
+/// <reference types="./virtual.d.ts" preserve="true" />
 /// <reference types="studiocms/v/types" />
 
 import { addVirtualImports, createResolver } from 'astro-integration-kit';
