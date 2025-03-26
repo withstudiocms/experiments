@@ -47,9 +47,15 @@
   },
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
+      "types": "./dist/wysiwyg/index.d.ts",
+      "default": "./dist/wysiwyg/index.js"
+    },
+    "./v/types": "./dist/wysiwyg/virtual.d.ts",
+    "./studio": {
+      "types": "./dist/studio/index.d.ts",
+      "default": "./dist/studio/index.js"
+    },
+    "./studio/v/types": "./dist/studio/virtual.d.ts"
   },
   "type": "module",
   "dependencies": {
