@@ -6,8 +6,20 @@
 /// <reference types="./virtual.d.ts" preserve="true" />
 /// <reference types="studiocms/v/types" />
 
+import type { AstroIntegration } from 'astro';
 import { addVirtualImports, createResolver } from 'astro-integration-kit';
 import { type StudioCMSPlugin, definePlugin } from 'studiocms/plugins';
+
+// export function studiocmsWYSIWYGDBTables(): AstroIntegration {
+// 	return {
+// 		name: '@studiocms/wysiwyg/db',
+// 		hooks: {
+// 			'astro:db:setup': ({ extendDb }) => {
+// 				extendDb({});
+// 			},
+// 		},
+// 	};
+// }
 
 export function studiocmsWYSIWYG(): StudioCMSPlugin {
 	// Resolve the path to the current file
@@ -38,5 +50,3 @@ export function studiocmsWYSIWYG(): StudioCMSPlugin {
 		},
 	});
 }
-
-export default studiocmsWYSIWYG;
