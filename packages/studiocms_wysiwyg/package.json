@@ -61,6 +61,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@grapesjs/studio-sdk": "^1.0.35",
     "astro-integration-kit": "catalog:"
   },
   "devDependencies": {
