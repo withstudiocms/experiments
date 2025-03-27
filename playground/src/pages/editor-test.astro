@@ -9,6 +9,38 @@ import StudioSDKEditor from '@studiocms/wysiwyg/studio/components/StudioSDKEdito
     <title>Editor Testing</title>
 </head>
 <body>
-<StudioSDKEditor />
+<StudioSDKEditor content={JSON.stringify({
+	assets: [],
+	styles: [{ selectors: ['#i54b'], style: { padding: '2rem', 'text-align': 'center' } }],
+	pages: [
+		{
+			frames: [
+				{
+					component: {
+						type: 'wrapper',
+						attributes: { id: 'i3li' },
+						components: [
+							{
+								type: 'heading',
+								attributes: { id: 'i54b' },
+								components: [{ type: 'textnode', content: 'Hello StudioCMS 👋' }],
+							},
+							{ tagName: 'test', type: 'astro-component' },
+						],
+						head: { type: 'head' },
+						docEl: { tagName: 'html' },
+					},
+					id: 'NszgkuEiQ5PVrhCb',
+				},
+			],
+			id: 'J4ifceanm5CTENzc',
+		},
+	],
+	symbols: [],
+	dataSources: [],
+	custom: { projectType: 'web', id: '' },
+	__STUDIOCMS_HTML:
+		'<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width,initial-scale=1">\n  <meta name="robots" content="index,follow">\n  <meta name="generator" content="GrapesJS Studio">\n  <style>* { box-sizing: border-box; } body {margin: 0;}#i54b{padding:2rem;text-align:center;}</style>\n  </head>\n  <body id="i3li"><h1 id="i54b">Hello StudioCMS 👋</h1><test></test></body>\n</html>\n',
+})} />
 </body>
 </html>

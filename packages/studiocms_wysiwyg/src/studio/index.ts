@@ -6,22 +6,14 @@
 /// <reference types="./virtual.d.ts" preserve="true" />
 /// <reference types="studiocms/v/types" />
 
-import type { AstroIntegration } from 'astro';
 import { addVirtualImports, createResolver } from 'astro-integration-kit';
 import { type StudioCMSPlugin, definePlugin } from 'studiocms/plugins';
 
-// export function studiocmsWYSIWYGStudioDBTables(): AstroIntegration {
-// 	return {
-// 		name: '@studiocms/wysiwyg/studio/db',
-// 		hooks: {
-// 			'astro:db:setup': ({ extendDb }) => {
-// 				extendDb({});
-// 			},
-// 		},
-// 	};
-// }
+type StudioOptions = {
+	licenseKey: string;
+};
 
-export function studiocmsWYSIWYGStudio(): StudioCMSPlugin {
+function studiocmsWYSIWYGStudio(options: StudioOptions): StudioCMSPlugin {
 	// Resolve the path to the current file
 	const { resolve } = createResolver(import.meta.url);
 
@@ -37,16 +29,28 @@ export function studiocmsWYSIWYGStudio(): StudioCMSPlugin {
 			{
 				identifier: 'studiocms/wysiwyg/studio',
 				label: 'GrapesJS StudioSDK',
-				rendererComponent: 'studiocms/html',
-				pageContentComponent: 'studiocms/html',
+				rendererComponent: resolve('./components/Render.astro'),
+				pageContentComponent: resolve('./components/StudioSDKEditor.astro'),
 			},
 		],
 		integration: {
 			name: packageIdentifier,
 			hooks: {
-				'astro:config:setup': () => {},
+				'astro:config:setup': (params) => {
+					addVirtualImports(params, {
+						name: packageIdentifier,
+						imports: {
+							'studiocms:wysiwyg/studio/client': `
+								export const licenseKey = ${JSON.stringify(options.licenseKey)};
+								export * from '${resolve('./utils.js')}';
+							`,
+						},
+					});
+				},
 				'astro:config:done': () => {},
 			},
 		},
 	});
 }
+
+export default studiocmsWYSIWYGStudio;
