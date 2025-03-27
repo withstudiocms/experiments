@@ -1,65 +1,122 @@
 ---
 import '@grapesjs/studio-sdk/style';
-import type { ProjectConfig } from '@grapesjs/studio-sdk';
+import type { PluginPageTypeEditorProps } from 'studiocms/types';
 
-const projectJSONFromServer: ProjectConfig = {
-	id: 'StudioCMS_GrapesJSStudioSDK_Project',
-	type: 'web',
-	default: {
-		pages: [
-			{
-				name: 'Home',
-				id: 'xxxxxx1',
-				component: `<h1 style="padding: 2rem; text-align: center">Hello Studio 👋</h1>`,
-			},
-		],
-	},
-};
+interface Props extends PluginPageTypeEditorProps {}
+
+// const { content } = Astro.props;
+
+const content = JSON.stringify({
+	assets: [],
+	styles: [{ selectors: ['#i54b'], style: { padding: '2rem', 'text-align': 'center' } }],
+	pages: [
+		{
+			frames: [
+				{
+					component: {
+						type: 'wrapper',
+						attributes: { id: 'i3li' },
+						components: [
+							{
+								type: 'heading',
+								attributes: { id: 'i54b' },
+								components: [{ type: 'textnode', content: 'Hello StudioCMS 👋' }],
+							},
+						],
+						head: { type: 'head' },
+						docEl: { tagName: 'html' },
+					},
+					id: 'NszgkuEiQ5PVrhCb',
+				},
+			],
+			id: 'J4ifceanm5CTENzc',
+		},
+	],
+	symbols: [],
+	dataSources: [],
+	custom: { projectType: 'web', id: '' },
+	__STUDIOCMS_HTML:
+		'<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width,initial-scale=1">\n  <meta name="robots" content="index,follow">\n  <meta name="generator" content="GrapesJS Studio">\n  <style>* { box-sizing: border-box; } body {margin: 0;}#i54b{padding:2rem;text-align:center;}</style>\n  </head>\n  <body id="i3li"><h1 id="i54b">Hello StudioCMS 👋</h1></body>\n</html>\n',
+});
 ---
 <div id="app">
     <div class="cnt">
         <div class="cnt-nav">
-            <div>Grapes StudioSDK</div>
+            <div>GrapesJS StudioSDK</div>
         </div>
         <div class="cnt-body">
             <div 
               class="editor" 
-              data-projectdata={JSON.stringify(projectJSONFromServer)}
+              data-projectdata={content}
               ></div>
+            <textarea id="page-content" name="page-content" style="display: none;">{content}</textarea>
         </div>
     </div>
 </div>
 
 <script>
-    import createStudioEditor, { type ProjectConfig } from '@grapesjs/studio-sdk';
+    import createStudioEditor, { type WithEditorProps } from '@grapesjs/studio-sdk';
 
     function setupEditor(root: HTMLElement) {
+        const pageContent = document.querySelector<HTMLTextAreaElement>('#page-content') as HTMLTextAreaElement;
+        const projectData = JSON.parse(pageContent.innerText);
 
-        const projectJSONFromServer: ProjectConfig | undefined = root.dataset.projectdata ? JSON.parse(root.dataset.projectdata) : undefined;
+        const generateHTML = async (editor: WithEditorProps['editor']) => {
+          const files = await editor.runCommand('studio:projectFiles', { styles: 'inline' })
+          // For simplicity, we'll "publish" only the first page.
+          const firstPage = files.find((file: { mimeType: string; }) => file.mimeType === 'text/html');
+          const pageHTML = firstPage.content;
+          return pageHTML;
+        }
 
         createStudioEditor({
             root,
             // TODO: Setup License key system so that we can get this value
             licenseKey: 'YOUR_LICENSE_KEY',
-            project: projectJSONFromServer,
+            project: {
+              type: 'web',
+              default: {
+                pages: [
+                  { name: 'Home', component: '<h1>Fallback Project, reload to retry</h1>' },
+                ]
+              },
+            },
+            pages: false,
             // TODO: Setup ability to get user ID
             identity: {
               id: 'UNIQUE_END_USER_ID',
             },
-            // TODO: Setup Assets config (Allow switching between cloud or StudioCMS)
-            assets: {},
             // TODO: Setup Storage config (Allow switching between cloud or StudioCMS)
             storage: {
                 type: 'self',
                 // Provide a custom handler for saving the project data.
-                onSave: async ({ project }) => console.log('Save project', { project }),
+                onSave: async ({ project, editor }) => {
+                  const html = await generateHTML(editor);
+                  const projectData = {
+                    ...project,
+                    __STUDIOCMS_HTML: html
+                  }
+                  console.log('Save project', { projectData });
+                    pageContent.innerText = JSON.stringify(projectData)
+                },
+                onLoad: async () => {
+                  return {
+                    project: projectData || {
+                      pages: [
+                        { name: 'Home', component: '<h1>New project</h1>' },
+                      ]
+                    }
+                  }
+                },
                 autosaveChanges: 100,
                 autosaveIntervalMs: 10000
             }
         });
     }
+
+    const editor = document.querySelector<HTMLDivElement>('.editor') as HTMLDivElement;
     
-    setupEditor(document.querySelector<HTMLDivElement>('.editor')!);
+    setupEditor(editor);
 </script>
 
 <style>
