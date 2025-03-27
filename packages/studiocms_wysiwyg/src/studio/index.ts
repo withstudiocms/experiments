@@ -17,6 +17,7 @@ import { shared } from './shared.js';
 export type StudioCMSWYSIWYGStudioOptions = {
 	/** The license key required for the GrapesJS StudioSDK. */
 	licenseKey: string;
+	/** Options passed to the HTML Transformer during rendering */
 	sanitize?: SanitizeOptions;
 };
 
