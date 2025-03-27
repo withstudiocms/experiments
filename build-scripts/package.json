@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "esbuild": "^0.25.0",
-    "esbuild-plugin-copy": "^2.1.1",
     "fast-glob": "^3.3.3",
     "kleur": "^4.1.5"
   }

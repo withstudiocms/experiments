@@ -42,19 +42,21 @@
     "dist"
   ],
   "scripts": {
-    "build": "build-scripts build 'src/**/*.ts'",
-    "dev": "build-scripts dev 'src/**/*.ts'"
+    "build": "build-scripts build 'src/**/*.{ts,astro}'",
+    "dev": "build-scripts dev 'src/**/*.{ts,astro}'"
   },
   "exports": {
     ".": {
       "types": "./dist/wysiwyg/index.d.ts",
       "default": "./dist/wysiwyg/index.js"
     },
+    "./components/*": "./dist/wysiwyg/components/*",
     "./v/types": "./dist/wysiwyg/virtual.d.ts",
     "./studio": {
       "types": "./dist/studio/index.d.ts",
       "default": "./dist/studio/index.js"
     },
+    "./studio/components/*": "./dist/studio/components/*",
     "./studio/v/types": "./dist/studio/virtual.d.ts"
   },
   "type": "module",
