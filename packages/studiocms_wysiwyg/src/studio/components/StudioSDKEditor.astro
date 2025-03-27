@@ -1,6 +1,32 @@
 ---
 import '@grapesjs/studio-sdk/style';
 import type { PluginPageTypeEditorProps } from 'studiocms/types';
+import { importComponentsKeys } from 'studiocms/lib/renderer/runtime.js';
+
+// Import components
+const _components = await importComponentsKeys();
+
+const componentKeys = Object.keys(_components);
+
+const firstUpperCase = (text: string) => {
+	if (text.length > 1) {
+		const p1 = text.slice(0, 1);
+		const p2 = text.slice(1);
+		return `${p1.toUpperCase()}${p2}`;
+	}
+	return text;
+};
+
+const AstroComponentBlocks = componentKeys.map((key) => {
+	return {
+		id: `astro-component-${key}`,
+		label: firstUpperCase(key),
+		category: 'Astro Components',
+		media:
+			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M9.24 19.035c-.901-.826-1.164-2.561-.789-3.819c.65.793 1.552 1.044 2.486 1.186c1.44.218 2.856.137 4.195-.524c.153-.076.295-.177.462-.278c.126.365.159.734.115 1.11c-.107.915-.56 1.622-1.283 2.158c-.289.215-.594.406-.892.608c-.916.622-1.164 1.35-.82 2.41l.034.114a2.4 2.4 0 0 1-1.07-.918a2.6 2.6 0 0 1-.412-1.401c-.003-.248-.003-.497-.036-.74c-.081-.595-.36-.86-.883-.876a1.034 1.034 0 0 0-1.075.843q-.013.058-.033.126M4.1 15.007s2.666-1.303 5.34-1.303l2.016-6.26c.075-.304.296-.51.544-.51c.25 0 .47.206.545.51l2.016 6.26c3.167 0 5.34 1.303 5.34 1.303L15.363 2.602c-.13-.366-.35-.602-.645-.602H9.283c-.296 0-.506.236-.645.602c-.01.024-4.538 12.405-4.538 12.405"/></svg>',
+		key,
+	};
+});
 
 interface Props extends PluginPageTypeEditorProps {}
 
@@ -22,6 +48,7 @@ const content = JSON.stringify({
 								attributes: { id: 'i54b' },
 								components: [{ type: 'textnode', content: 'Hello StudioCMS 👋' }],
 							},
+							{ tagName: 'test', type: 'astro-component' },
 						],
 						head: { type: 'head' },
 						docEl: { tagName: 'html' },
@@ -36,7 +63,7 @@ const content = JSON.stringify({
 	dataSources: [],
 	custom: { projectType: 'web', id: '' },
 	__STUDIOCMS_HTML:
-		'<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width,initial-scale=1">\n  <meta name="robots" content="index,follow">\n  <meta name="generator" content="GrapesJS Studio">\n  <style>* { box-sizing: border-box; } body {margin: 0;}#i54b{padding:2rem;text-align:center;}</style>\n  </head>\n  <body id="i3li"><h1 id="i54b">Hello StudioCMS 👋</h1></body>\n</html>\n',
+		'<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width,initial-scale=1">\n  <meta name="robots" content="index,follow">\n  <meta name="generator" content="GrapesJS Studio">\n  <style>* { box-sizing: border-box; } body {margin: 0;}#i54b{padding:2rem;text-align:center;}</style>\n  </head>\n  <body id="i3li"><h1 id="i54b">Hello StudioCMS 👋</h1><test></test></body>\n</html>\n',
 });
 ---
 <div id="app">
@@ -45,9 +72,9 @@ const content = JSON.stringify({
             <div>GrapesJS StudioSDK</div>
         </div>
         <div class="cnt-body">
-            <div 
-              class="editor" 
-              data-projectdata={content}
+            <div class="editor" 
+              data-blocks={JSON.stringify(AstroComponentBlocks || [])}
+              data-compkeys={JSON.stringify(componentKeys || [])}
               ></div>
             <textarea id="page-content" name="page-content" style="display: none;">{content}</textarea>
         </div>
@@ -55,62 +82,230 @@ const content = JSON.stringify({
 </div>
 
 <script>
-    import createStudioEditor, { type WithEditorProps } from '@grapesjs/studio-sdk';
+    import createStudioEditor, { type StorageConfig, type WithEditorProps } from '@grapesjs/studio-sdk';
+
+    type AstroComponentBlocks = {
+      id: string;
+      label: string;
+      category: string;
+      media: string;
+      key: string;
+    }[]
+
+    type AstroComponentEditorBlocks = {
+      id: string;
+      label: string;
+      category: string;
+      media: string;
+      content: () => string;
+    }[]
+
+    function convertComponentBlocks(blocks: AstroComponentBlocks): AstroComponentEditorBlocks {
+      return blocks.map(({ key, ...block }) => ({
+        ...block,
+        content: () => `<${key}></${key}>`
+      }));
+    }
+
+    function parse<T extends object>(data: string): T {
+      return JSON.parse(data) as T;
+    }
+
+    const firstUpperCase = (text: string) => {
+      if (text.length > 1) {
+        const p1 = text.slice(0, 1);
+        const p2 = text.slice(1);
+        return `${p1.toUpperCase()}${p2}`;
+      }
+      return text;
+    };
+
+    const project = {
+      default: {
+        pages: [
+          { component: '<h1>Fallback Project, reload to retry</h1>' },
+        ]
+      },
+    }
 
     function setupEditor(root: HTMLElement) {
         const pageContent = document.querySelector<HTMLTextAreaElement>('#page-content') as HTMLTextAreaElement;
         const projectData = JSON.parse(pageContent.innerText);
 
-        const generateHTML = async (editor: WithEditorProps['editor']) => {
+        const rawBlocks = parse<AstroComponentBlocks>(root.dataset.blocks as string);
+        const componentKeys = parse<string[]>(root.dataset.compkeys as string)
+
+        const blocks = {
+          default: convertComponentBlocks(rawBlocks),
+        };
+
+        const generateHTML = async (editor: WithEditorProps['editor']): Promise<string> => {
           const files = await editor.runCommand('studio:projectFiles', { styles: 'inline' })
           // For simplicity, we'll "publish" only the first page.
           const firstPage = files.find((file: { mimeType: string; }) => file.mimeType === 'text/html');
-          const pageHTML = firstPage.content;
+          const pageHTML = firstPage.content as string;
           return pageHTML;
         }
 
+        // TODO: Setup Storage config (Allow switching between cloud or StudioCMS)
+        const storage: StorageConfig = {
+          type: 'self',
+          // Provide a custom handler for saving the project data.
+          onSave: async ({ project, editor }) => {
+            const html = await generateHTML(editor);
+            const projectData = {
+              ...project,
+              __STUDIOCMS_HTML: html
+            }
+            console.log('Save project', { projectData });
+            pageContent.innerText = JSON.stringify(projectData)
+          },
+          onLoad: async () => {
+            return {
+              project: projectData || {
+                pages: [
+                  { component: '<h1>New project</h1>' },
+                ]
+              }
+            }
+          },
+          autosaveChanges: 100,
+          autosaveIntervalMs: 10000
+        };
+
+        const astroComponentTypes = (editor: WithEditorProps['editor']) => {
+          editor.DomComponents.addType('astro-component', {
+            isComponent: el => {
+              const test = el.tagName;
+              console.log('tagname', test)
+              return componentKeys.includes(el.tagName.toLowerCase())
+            },
+            view: {
+              tagName: () => 'div',
+              onRender({ el, model }) {
+                const placeholder = document.createElement('div');
+                placeholder.innerHTML = `
+<div class="container">
+  <section class="card">
+    <div class="card-detail">
+      <div class="card-description loading">Astro Component Placeholder for "${firstUpperCase(model.tagName)}"</div>
+    </div>
+  </section>
+</div>
+<style>
+
+.container {
+  max-width: 800px;
+}
+
+.card {
+  overflow: hidden;
+  background: white;
+  border-radius: .25rem;
+  max-width: 380px;
+  width: 380px;
+  box-shadow: 
+    0 15px 30px 0 rgba(0,0,0,0.05),
+    0 5px 15px 0 rgba(0,0,0,.05);
+  transition: ease box-shadow 0.3s;
+  &:hover {
+   box-shadow: 
+    0 15px 60px 0 rgba(0,0,0,0.08),
+    0 5px 25px 0 rgba(0,0,0,.08);
+  }
+}
+
+.card-detail {
+  padding: .5rem 1rem;
+  
+  h3 { 
+    font-size: 1.5rem; 
+    margin-bottom: none; 
+    line-height: .09;
+  }
+  
+  p {
+    line-height: 1.3rem;
+  }
+}
+
+.card-image {
+  margin: 0;
+  padding: 0;
+  height: 200px;
+  overflow: hidden;
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+
+.loading {
+  position: relative;
+  background-color: #E2E2E2;
+  
+  &.card-image {
+    border-radius: 0;
+  }
+  
+  &::after {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .2), transparent);
+    animation: loading 1.5s infinite;
+  }
+}
+
+@keyframes loading {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.card-title.loading {
+  height: 1.8rem;
+}
+
+.card-image.image {
+  max-width: 100%;
+  height: auto;
+}
+
+.card-description.loading {
+  height: 80px;
+}
+
+.card-description {
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+</style>
+`
+                el.appendChild(placeholder);
+              },
+            }
+          });
+        };
+
         createStudioEditor({
-            root,
             // TODO: Setup License key system so that we can get this value
             licenseKey: 'YOUR_LICENSE_KEY',
-            project: {
-              type: 'web',
-              default: {
-                pages: [
-                  { name: 'Home', component: '<h1>Fallback Project, reload to retry</h1>' },
-                ]
-              },
-            },
+            plugins: [astroComponentTypes],
             pages: false,
-            // TODO: Setup ability to get user ID
-            identity: {
-              id: 'UNIQUE_END_USER_ID',
-            },
-            // TODO: Setup Storage config (Allow switching between cloud or StudioCMS)
-            storage: {
-                type: 'self',
-                // Provide a custom handler for saving the project data.
-                onSave: async ({ project, editor }) => {
-                  const html = await generateHTML(editor);
-                  const projectData = {
-                    ...project,
-                    __STUDIOCMS_HTML: html
-                  }
-                  console.log('Save project', { projectData });
-                    pageContent.innerText = JSON.stringify(projectData)
-                },
-                onLoad: async () => {
-                  return {
-                    project: projectData || {
-                      pages: [
-                        { name: 'Home', component: '<h1>New project</h1>' },
-                      ]
-                    }
-                  }
-                },
-                autosaveChanges: 100,
-                autosaveIntervalMs: 10000
-            }
+            root,
+            project,
+            blocks,
+            storage,
         });
     }
 
