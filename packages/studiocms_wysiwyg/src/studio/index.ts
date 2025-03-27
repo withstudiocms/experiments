@@ -8,12 +8,28 @@
 
 import { addVirtualImports, createResolver } from 'astro-integration-kit';
 import { type StudioCMSPlugin, definePlugin } from 'studiocms/plugins';
+import type { SanitizeOptions } from 'ultrahtml/transformers/sanitize';
+import { shared } from './shared.js';
 
-type StudioOptions = {
+/**
+ * Represents the configuration options for the StudioCMS WYSIWYG Plugin.
+ */
+export type StudioCMSWYSIWYGStudioOptions = {
+	/** The license key required for the GrapesJS StudioSDK. */
 	licenseKey: string;
+	sanitize?: SanitizeOptions;
 };
 
-function studiocmsWYSIWYGStudio(options: StudioOptions): StudioCMSPlugin {
+/**
+ * Creates a StudioCMS plugin for integrating the GrapesJS StudioSDK WYSIWYG editor into the StudioCMS environment.
+ *
+ * @param options - Configuration options for the WYSIWYG Studio plugin.
+ * @param options.licenseKey - The license key required for the GrapesJS StudioSDK.
+ *
+ * @returns A `StudioCMSPlugin` object that defines the plugin configuration, including page types,
+ *          integration hooks, and other metadata.
+ */
+function studiocmsWYSIWYGStudio(options: StudioCMSWYSIWYGStudioOptions): StudioCMSPlugin {
 	// Resolve the path to the current file
 	const { resolve } = createResolver(import.meta.url);
 
@@ -23,7 +39,7 @@ function studiocmsWYSIWYGStudio(options: StudioOptions): StudioCMSPlugin {
 	// Return the plugin configuration
 	return definePlugin({
 		identifier: packageIdentifier,
-		name: 'StudioCMS WYSIWYG Studio',
+		name: 'StudioCMS WYSIWYG (Studio)',
 		studiocmsMinimumVersion: '0.1.0-beta.13',
 		pageTypes: [
 			{
@@ -47,7 +63,9 @@ function studiocmsWYSIWYGStudio(options: StudioOptions): StudioCMSPlugin {
 						},
 					});
 				},
-				'astro:config:done': () => {},
+				'astro:config:done': () => {
+					shared.sanitize = options.sanitize || {};
+				},
 			},
 		},
 	});
