@@ -23,7 +23,7 @@ const AstroComponentBlocks = componentKeys.map((key) => {
 		label: firstUpperCase(key),
 		category: 'Astro Components',
 		media:
-			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M9.24 19.035c-.901-.826-1.164-2.561-.789-3.819c.65.793 1.552 1.044 2.486 1.186c1.44.218 2.856.137 4.195-.524c.153-.076.295-.177.462-.278c.126.365.159.734.115 1.11c-.107.915-.56 1.622-1.283 2.158c-.289.215-.594.406-.892.608c-.916.622-1.164 1.35-.82 2.41l.034.114a2.4 2.4 0 0 1-1.07-.918a2.6 2.6 0 0 1-.412-1.401c-.003-.248-.003-.497-.036-.74c-.081-.595-.36-.86-.883-.876a1.034 1.034 0 0 0-1.075.843q-.013.058-.033.126M4.1 15.007s2.666-1.303 5.34-1.303l2.016-6.26c.075-.304.296-.51.544-.51c.25 0 .47.206.545.51l2.016 6.26c3.167 0 5.34 1.303 5.34 1.303L15.363 2.602c-.13-.366-.35-.602-.645-.602H9.283c-.296 0-.506.236-.645.602c-.01.024-4.538 12.405-4.538 12.405"/></svg>',
+			'<svg xmlns="http://www.w3.org/2000/svg" style="width:48px;height:48px" viewBox="0 0 24 24"><path fill="currentColor" d="M9.24 19.035c-.901-.826-1.164-2.561-.789-3.819c.65.793 1.552 1.044 2.486 1.186c1.44.218 2.856.137 4.195-.524c.153-.076.295-.177.462-.278c.126.365.159.734.115 1.11c-.107.915-.56 1.622-1.283 2.158c-.289.215-.594.406-.892.608c-.916.622-1.164 1.35-.82 2.41l.034.114a2.4 2.4 0 0 1-1.07-.918a2.6 2.6 0 0 1-.412-1.401c-.003-.248-.003-.497-.036-.74c-.081-.595-.36-.86-.883-.876a1.034 1.034 0 0 0-1.075.843q-.013.058-.033.126M4.1 15.007s2.666-1.303 5.34-1.303l2.016-6.26c.075-.304.296-.51.544-.51c.25 0 .47.206.545.51l2.016 6.26c3.167 0 5.34 1.303 5.34 1.303L15.363 2.602c-.13-.366-.35-.602-.645-.602H9.283c-.296 0-.506.236-.645.602c-.01.024-4.538 12.405-4.538 12.405"/></svg>',
 		key,
 	};
 });
@@ -66,19 +66,12 @@ const content = JSON.stringify({
 		'<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width,initial-scale=1">\n  <meta name="robots" content="index,follow">\n  <meta name="generator" content="GrapesJS Studio">\n  <style>* { box-sizing: border-box; } body {margin: 0;}#i54b{padding:2rem;text-align:center;}</style>\n  </head>\n  <body id="i3li"><h1 id="i54b">Hello StudioCMS 👋</h1><test></test></body>\n</html>\n',
 });
 ---
-<div id="app">
-    <div class="cnt">
-        <div class="cnt-nav">
-            <div>GrapesJS StudioSDK</div>
-        </div>
-        <div class="cnt-body">
-            <div class="editor" 
-              data-blocks={JSON.stringify(AstroComponentBlocks || [])}
-              data-compkeys={JSON.stringify(componentKeys || [])}
-              ></div>
-            <textarea id="page-content" name="page-content" style="display: none;">{content}</textarea>
-        </div>
-    </div>
+<div class="cnt-body">
+  <div class="editor" 
+    data-blocks={JSON.stringify(AstroComponentBlocks || [])}
+    data-compkeys={JSON.stringify(componentKeys || [])}
+    ></div>
+  <textarea id="page-content" name="page-content" style="display: none;">{content}</textarea>
 </div>
 
 <script>
@@ -175,16 +168,10 @@ const content = JSON.stringify({
 
         const astroComponentTypes = (editor: WithEditorProps['editor']) => {
           editor.DomComponents.addType('astro-component', {
-            isComponent: el => {
-              const test = el.tagName;
-              console.log('tagname', test)
-              return componentKeys.includes(el.tagName.toLowerCase())
-            },
+            isComponent: el => componentKeys.includes(el.tagName.toLowerCase()),
             view: {
               tagName: () => 'div',
-              onRender({ el, model }) {
-                const placeholder = document.createElement('div');
-                placeholder.innerHTML = `
+              onRender: ({ el, model }) => el.innerHTML = `
 <div class="container">
   <section class="card">
     <div class="card-detail">
@@ -193,16 +180,15 @@ const content = JSON.stringify({
   </section>
 </div>
 <style>
-
 .container {
-  max-width: 800px;
+  max-width: 100%;
 }
 
 .card {
   overflow: hidden;
   background: white;
   border-radius: .25rem;
-  max-width: 380px;
+  max-width: 100%;
   width: 380px;
   box-shadow: 
     0 15px 30px 0 rgba(0,0,0,0.05),
@@ -229,18 +215,15 @@ const content = JSON.stringify({
   }
 }
 
-.card-image {
-  margin: 0;
-  padding: 0;
-  height: 200px;
-  overflow: hidden;
-  
-  img {
-    max-width: 100%;
-    height: auto;
-  }
+.card-description {
+  height: 80px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 }
-
 
 .loading {
   position: relative;
@@ -267,32 +250,8 @@ const content = JSON.stringify({
     transform: translateX(100%);
   }
 }
-
-.card-title.loading {
-  height: 1.8rem;
-}
-
-.card-image.image {
-  max-width: 100%;
-  height: auto;
-}
-
-.card-description.loading {
-  height: 80px;
-}
-
-.card-description {
-  margin: 0 auto;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-}
 </style>
-`
-                el.appendChild(placeholder);
-              },
+`,
             }
           });
         };
@@ -306,6 +265,9 @@ const content = JSON.stringify({
             project,
             blocks,
             storage,
+            assets: {
+              storageType: 'self',
+            }
         });
     }
 
@@ -329,25 +291,11 @@ const content = JSON.stringify({
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
-  .logo {
-    height: 20px;
-  }
-  
-  .cnt {
+
+  .cnt-body {
     display: flex;
     flex-direction: column;
-    height: 100dvh;
-  }
-  
-  .cnt-nav {
-    padding: 10px;
-    display: flex;
-    gap: 5px;
-  }
-  
-  .cnt-body {
-    flex-grow: 1;
+    height: 80dvh;
   }
   .editor {
     height: 100%;
