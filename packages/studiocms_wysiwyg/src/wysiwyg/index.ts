@@ -11,11 +11,12 @@ import { addVirtualImports, createResolver } from 'astro-integration-kit';
 import { type StudioCMSPlugin, definePlugin } from 'studiocms/plugins';
 
 // export function studiocmsWYSIWYGDBTables(): AstroIntegration {
+// 	const { resolve } = createResolver(import.meta.url);
 // 	return {
 // 		name: '@studiocms/wysiwyg/db',
 // 		hooks: {
 // 			'astro:db:setup': ({ extendDb }) => {
-// 				extendDb({});
+// 				extendDb({ configEntrypoint: resolve('./db/config.js') });
 // 			},
 // 		},
 // 	};
