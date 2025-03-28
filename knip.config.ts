@@ -13,6 +13,7 @@ const config: KnipConfig = {
 			project: '**/*.js',
 		},
 		'packages/*': {
+			ignoreDependencies: ['@grapesjs/studio-sdk-plugins'],
 			entry: ['src/**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}'],
 			project: ['**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}'],
 			astro: {
