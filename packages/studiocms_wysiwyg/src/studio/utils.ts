@@ -79,11 +79,12 @@ export function convertComponentBlocks(blocks: AstroComponentBlocks): AstroCompo
  * @throws Will throw an error if the `studio:projectFiles` command fails or if no HTML file is found.
  */
 export const generateHTML = async (editor: WithEditorProps['editor']): Promise<string> => {
-	const files = await editor.runCommand('studio:projectFiles', { styles: 'inline' });
-	// For simplicity, we'll "publish" only the first page.
-	const firstPage = files.find((file: { mimeType: string }) => file.mimeType === 'text/html');
-	const pageHTML = firstPage.content as string;
-	return pageHTML;
+	const page = editor.Pages.getMain();
+	const component = page.getMainComponent();
+	const htmlData = component.toHTML({ tag: 'div' });
+	const styles = editor.getCss({ component })?.replaceAll('body', 'div');
+	const html = `${htmlData}${styles ? `<style>${styles}</style>` : ''}`;
+	return html;
 };
 
 /**
@@ -249,7 +250,7 @@ export function getEditorSettings(
 				});
 			},
 			onLoad: async () => ({ project: projectData }),
-			autosaveChanges: 100,
+			autosaveChanges: 50,
 			autosaveIntervalMs: 10000,
 		},
 		layout: {
@@ -375,6 +376,36 @@ export function getEditorSettings(
 							{
 								type: 'sidebarTop',
 								leftContainer: false,
+								rightContainer: {
+									buttons: [
+										{
+											id: 'undo',
+											icon: 'arrowULeftTop',
+											disabled: !0,
+											onClick: ({ editor }) => editor.runCommand('core:undo'),
+											editorEvents: {
+												'change:changesCount': ({ setState, editor }) =>
+													setState({ disabled: !editor.UndoManager.hasUndo() }),
+											},
+										},
+										{
+											id: 'redo',
+											icon: 'arrowURightTop',
+											disabled: !0,
+											onClick: ({ editor }) => editor.runCommand('core:redo'),
+											editorEvents: {
+												'change:changesCount': ({ setState, editor }) =>
+													setState({ disabled: !editor.UndoManager.hasRedo() }),
+											},
+										},
+										{
+											id: 'store',
+											icon: 'floppy',
+											tooltip: 'Save Changes',
+											onClick: async ({ editor }) => editor.store(),
+										},
+									],
+								},
 							},
 							{ type: 'canvas', grow: true },
 						],

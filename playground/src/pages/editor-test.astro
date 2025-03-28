@@ -1,5 +1,38 @@
 ---
 import StudioSDKEditor from '@studiocms/wysiwyg/studio/components/StudioSDKEditor.astro';
+
+const data = JSON.stringify({
+	assets: [],
+	styles: [],
+	pages: [
+		{
+			frames: [
+				{
+					component: {
+						type: 'wrapper',
+						attributes: { id: 'iiag' },
+						components: [
+							{
+								type: 'heading',
+								attributes: { id: 'ibyg' },
+								components: [{ type: 'textnode', content: 'New project Test' }],
+							},
+						],
+						head: { type: 'head' },
+						docEl: { tagName: 'html' },
+					},
+					id: 'TRTpJbERqAtcsjGH',
+				},
+			],
+			id: 'qvCVh1lkdM4YZhUZ',
+		},
+	],
+	symbols: [],
+	dataSources: [],
+	custom: { projectType: 'web', id: '' },
+	__STUDIOCMS_HTML:
+		'<div id="iiag"><h1 id="ibyg">New project Test</h1></div><style>* { box-sizing: border-box; } div {margin: 0;}</style>',
+});
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -9,38 +42,6 @@ import StudioSDKEditor from '@studiocms/wysiwyg/studio/components/StudioSDKEdito
     <title>Editor Testing</title>
 </head>
 <body>
-<StudioSDKEditor content={JSON.stringify({
-	assets: [],
-	styles: [{ selectors: ['#i54b'], style: { padding: '2rem', 'text-align': 'center' } }],
-	pages: [
-		{
-			frames: [
-				{
-					component: {
-						type: 'wrapper',
-						attributes: { id: 'i3li' },
-						components: [
-							{
-								type: 'heading',
-								attributes: { id: 'i54b' },
-								components: [{ type: 'textnode', content: 'Hello StudioCMS 👋' }],
-							},
-							{ tagName: 'test', type: 'astro-component' },
-						],
-						head: { type: 'head' },
-						docEl: { tagName: 'html' },
-					},
-					id: 'NszgkuEiQ5PVrhCb',
-				},
-			],
-			id: 'J4ifceanm5CTENzc',
-		},
-	],
-	symbols: [],
-	dataSources: [],
-	custom: { projectType: 'web', id: '' },
-	__STUDIOCMS_HTML:
-		'<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width,initial-scale=1">\n  <meta name="robots" content="index,follow">\n  <meta name="generator" content="GrapesJS Studio">\n  <style>* { box-sizing: border-box; } body {margin: 0;}#i54b{padding:2rem;text-align:center;}</style>\n  </head>\n  <body id="i3li"><h1 id="i54b">Hello StudioCMS 👋</h1><test></test></body>\n</html>\n',
-})} />
+<StudioSDKEditor content={data} />
 </body>
 </html>
