@@ -40,6 +40,12 @@ declare module 'studiocms:wysiwyg/studio/client' {
 	export const fallbackProject: typeof import('./utils').fallbackProject;
 	/** License Key for GrapesJS StudioSDK */
 	export const licenseKey: string;
+	/**
+	 * YouTube API Key
+	 *
+	 * You must provide your own apiKey in the plugin options when using this in your project. Get a YouTube Data API v3 key from the [Google Cloud Console](https://console.cloud.google.com/apis/library/browse?q=youtube).
+	 */
+	export const youtubeAPIKey: string | undefined;
 	/** Astro Logo SVG */
 	export const AstroSVG: string;
 	/**

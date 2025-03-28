@@ -17,6 +17,12 @@ import { shared } from './shared.js';
 export type StudioCMSWYSIWYGStudioOptions = {
 	/** The license key required for the GrapesJS StudioSDK. */
 	licenseKey: string;
+	/**
+	 * YouTube API Key
+	 *
+	 * You must provide your own apiKey in the plugin options when using this in your project. Get a YouTube Data API v3 key from the [Google Cloud Console](https://console.cloud.google.com/apis/library/browse?q=youtube).
+	 */
+	youtubeAPIKey?: string;
 	/** Options passed to the HTML Transformer during rendering */
 	sanitize?: SanitizeOptions;
 };
@@ -59,6 +65,7 @@ function studiocmsWYSIWYGStudio(options: StudioCMSWYSIWYGStudioOptions): StudioC
 						imports: {
 							'studiocms:wysiwyg/studio/client': `
 								export const licenseKey = ${JSON.stringify(options.licenseKey)};
+								export const youtubeAPIKey = ${JSON.stringify(options.youtubeAPIKey)};
 								export * from '${resolve('./utils.js')}';
 							`,
 						},
