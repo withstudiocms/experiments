@@ -100,7 +100,7 @@ export const generateHTML = async (editor: WithEditorProps['editor']): Promise<s
  */
 export const getPlugin = (componentKeys: string[]) => (editor: WithEditorProps['editor']) => {
 	editor.DomComponents.addType('astro-component', {
-		isComponent: (el) => componentKeys.includes(el.tagName.toLowerCase()),
+		isComponent: (el) => componentKeys.includes(el.tagName?.toLowerCase()),
 		view: {
 			tagName: () => 'div',
 			onRender: ({ el, model }) =>
@@ -211,7 +211,12 @@ export function getEditorSettings(
 	root: HTMLElement,
 	pageContent: HTMLElement
 ): CreateEditorOptions {
-	const projectData = JSON.parse(pageContent.innerText);
+	const projectData = JSON.parse(
+		pageContent.innerText ||
+			JSON.stringify({
+				pages: [{ component: '<h1>New project</h1>' }],
+			})
+	);
 	const rawBlocks = parse<AstroComponentBlocks>(root.dataset.blocks as string);
 	const componentKeys = parse<string[]>(root.dataset.compkeys as string);
 
@@ -236,11 +241,7 @@ export function getEditorSettings(
 					__STUDIOCMS_HTML: await generateHTML(editor),
 				});
 			},
-			onLoad: async () => ({
-				project: projectData || {
-					pages: [{ component: '<h1>New project</h1>' }],
-				},
-			}),
+			onLoad: async () => ({ project: projectData }),
 			autosaveChanges: 100,
 			autosaveIntervalMs: 10000,
 		},
