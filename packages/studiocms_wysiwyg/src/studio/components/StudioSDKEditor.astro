@@ -25,7 +25,10 @@ interface Props extends PluginPageTypeEditorProps {}
 </div>
 
 <script>
-  import { licenseKey, youtubeAPIKey, googleFontsAPIKey, getEditorSettings } from 'studiocms:wysiwyg/studio/client';
+  import { 
+    licenseKey, youtubeAPIKey, 
+    googleFontsAPIKey, getEditorSettings 
+  } from 'studiocms:wysiwyg/studio/client';
   import { 
     tableComponent, fsLightboxComponent, 
     lightGalleryComponent, swiperComponent, 
@@ -34,7 +37,10 @@ interface Props extends PluginPageTypeEditorProps {}
     canvasEmptyState, youtubeAssetProvider,
     googleFontsAssetProvider
   } from "@grapesjs/studio-sdk-plugins";
-  import createStudioEditor, { StudioCommands, type CreateEditorOptions, type WithEditorProps } from '@grapesjs/studio-sdk';
+  import { 
+    createStudioEditor, StudioCommands, 
+    type CreateEditorOptions, type WithEditorProps 
+  } from '@grapesjs/studio-sdk';
 
   const editor = document.querySelector<HTMLDivElement>('.editor') as HTMLDivElement;
   const pageContent = document.querySelector<HTMLTextAreaElement>('#page-content') as HTMLTextAreaElement;
