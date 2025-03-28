@@ -30,8 +30,8 @@ export type StudioCMSWYSIWYGStudioOptions = {
 /**
  * Creates a StudioCMS plugin for integrating the GrapesJS StudioSDK WYSIWYG editor into the StudioCMS environment.
  *
- * @param options - Configuration options for the WYSIWYG Studio plugin.
- * @param options.licenseKey - The license key required for the GrapesJS StudioSDK.
+ * > **Important:** GrapesJS StudioSDK License is required. If you would like a WYSIWYG Editor that does not require
+ * > a license please try the `@studiocms/wysiwyg` default export instead.
  *
  * @returns A `StudioCMSPlugin` object that defines the plugin configuration, including page types,
  *          integration hooks, and other metadata.
@@ -46,7 +46,7 @@ function studiocmsWYSIWYGStudio(options: StudioCMSWYSIWYGStudioOptions): StudioC
 	// Return the plugin configuration
 	return definePlugin({
 		identifier: packageIdentifier,
-		name: 'StudioCMS WYSIWYG (Studio)',
+		name: 'StudioCMS WYSIWYG (GrapesJS StudioSDK)',
 		studiocmsMinimumVersion: '0.1.0-beta.13',
 		pageTypes: [
 			{
