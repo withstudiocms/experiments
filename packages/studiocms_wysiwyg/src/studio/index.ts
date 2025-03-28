@@ -75,6 +75,11 @@ function studiocmsWYSIWYGStudio(options: StudioCMSWYSIWYGStudioOptions): StudioC
 							`,
 						},
 					});
+
+					params.injectRoute({
+						entrypoint: resolve('./routes/container-api.js'),
+						pattern: '/studiocms_wysiwyg_studiosdk_container/render',
+					});
 				},
 				'astro:config:done': () => {
 					shared.sanitize = options.sanitize || {};

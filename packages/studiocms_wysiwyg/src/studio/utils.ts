@@ -106,89 +106,26 @@ export const getPlugin = (componentKeys: string[]) => (editor: WithEditorProps['
 		isComponent: (el) => componentKeys.includes(el.tagName?.toLowerCase()),
 		view: {
 			tagName: () => 'div',
-			onRender: ({ el, model }) =>
-				// biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-				(el.innerHTML = `
-<div class="container">
-    <section class="card">
-        <div class="card-detail">
-            <div class="card-description loading">Astro Component Placeholder for "${firstUpperCase(model.tagName)}"</div>
-        </div>
-    </section>
-</div>
-<style>
-.container {
-max-width: 100%;
-}
+			onRender: async ({ el, model }) => {
+				// Fetch from API endpoint that uses Astro Container API to render Component to html
+				const getCompResponse = await fetch('/studiocms_wysiwyg_studiosdk_container/render', {
+					method: 'POST',
+					body: JSON.stringify({ componentKey: model.tagName }),
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				});
 
-.card {
-overflow: hidden;
-background: white;
-border-radius: .25rem;
-max-width: 100%;
-width: 380px;
-box-shadow: 
-0 15px 30px 0 rgba(0,0,0,0.05),
-0 5px 15px 0 rgba(0,0,0,.05);
-transition: ease box-shadow 0.3s;
-&:hover {
-box-shadow: 
-0 15px 60px 0 rgba(0,0,0,0.08),
-0 5px 25px 0 rgba(0,0,0,.08);
-}
-}
+				// If response is not valid, log error.
+				if (!getCompResponse.ok)
+					console.log('[Error]: Could not fetch component HTML, please try again.');
 
-.card-detail {
-padding: .5rem 1rem;
+				// Get HTML from JSON response
+				const { html } = await getCompResponse.json();
 
-h3 { 
-font-size: 1.5rem; 
-margin-bottom: none; 
-line-height: .09;
-}
-
-p {
-line-height: 1.3rem;
-}
-}
-
-.card-description {
-height: 80px;
-margin: 0 auto;
-width: 100%;
-display: flex;
-align-items: center;
-align-content: center;
-justify-content: center;
-}
-
-.loading {
-position: relative;
-background-color: #E2E2E2;
-
-&.card-image {
-border-radius: 0;
-}
-
-&::after {
-display: block;
-content: '';
-position: absolute;
-width: 100%;
-height: 100%;
-transform: translateX(-100%);
-background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .2), transparent);
-animation: loading 1.5s infinite;
-}
-}
-
-@keyframes loading {
-100% {
-transform: translateX(100%);
-}
-}
-</style>
-`),
+				// Set the HTML in the Editor View
+				el.innerHTML = html;
+			},
 		},
 	});
 };

@@ -11,10 +11,30 @@ export const POST: APIRoute = async (context: APIContext) => {
 
 	const container = await experimental_AstroContainer.create();
 
-	const response = await container.renderToString(
-		components[componentKey] as AstroComponentFactory
-	);
+	const html = await container.renderToString(components[componentKey] as AstroComponentFactory);
 
+	return new Response(JSON.stringify({ html }), {
+		status: 200,
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
+};
+
+export const OPTIONS: APIRoute = async () => {
+	return new Response(null, {
+		status: 204,
+		statusText: 'No Content',
+		headers: {
+			Allow: 'OPTIONS, POST',
+			'ALLOW-ACCESS-CONTROL-ORIGIN': '*',
+			'Cache-Control': 'public, max-age=604800, immutable',
+			Date: new Date().toUTCString(),
+		},
+	});
+};
+
+export const ALL: APIRoute = async () => {
 	return new Response(null, {
 		status: 405,
 		statusText: 'Method Not Allowed',
