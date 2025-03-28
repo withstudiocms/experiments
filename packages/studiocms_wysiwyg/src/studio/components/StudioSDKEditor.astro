@@ -25,13 +25,14 @@ interface Props extends PluginPageTypeEditorProps {}
 </div>
 
 <script>
-  import { licenseKey, youtubeAPIKey, getEditorSettings } from 'studiocms:wysiwyg/studio/client';
+  import { licenseKey, youtubeAPIKey, googleFontsAPIKey, getEditorSettings } from 'studiocms:wysiwyg/studio/client';
   import { 
     tableComponent, fsLightboxComponent, 
     lightGalleryComponent, swiperComponent, 
     iconifyComponent, accordionComponent,
     flexComponent, rteTinyMce,
     canvasEmptyState, youtubeAssetProvider,
+    googleFontsAssetProvider
   } from "@grapesjs/studio-sdk-plugins";
   import createStudioEditor, { StudioCommands, type CreateEditorOptions, type WithEditorProps } from '@grapesjs/studio-sdk';
 
@@ -289,6 +290,12 @@ interface Props extends PluginPageTypeEditorProps {}
         });
       },
     )
+  }
+
+  if (googleFontsAPIKey) {
+    plugins.push(googleFontsAssetProvider.init({
+      apiKey: googleFontsAPIKey,
+    }))
   }
 
   createStudioEditor(getEditorSettings(licenseKey, editor, pageContent, plugins));

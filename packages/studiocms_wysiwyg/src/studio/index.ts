@@ -23,6 +23,10 @@ export type StudioCMSWYSIWYGStudioOptions = {
 	 * You must provide your own apiKey in the plugin options when using this in your project. Get a YouTube Data API v3 key from the [Google Cloud Console](https://console.cloud.google.com/apis/library/browse?q=youtube).
 	 */
 	youtubeAPIKey?: string;
+	/**
+	 * Google Data API v3 Key, Get yours at [Google Cloud Console](https://console.cloud.google.com/)
+	 */
+	googleFontsAPIKey?: string;
 	/** Options passed to the HTML Transformer during rendering */
 	sanitize?: SanitizeOptions;
 };
@@ -66,6 +70,7 @@ function studiocmsWYSIWYGStudio(options: StudioCMSWYSIWYGStudioOptions): StudioC
 							'studiocms:wysiwyg/studio/client': `
 								export const licenseKey = ${JSON.stringify(options.licenseKey)};
 								export const youtubeAPIKey = ${JSON.stringify(options.youtubeAPIKey)};
+								export const googleFontsAPIKey = ${JSON.stringify(options.googleFontsAPIKey)};
 								export * from '${resolve('./utils.js')}';
 							`,
 						},

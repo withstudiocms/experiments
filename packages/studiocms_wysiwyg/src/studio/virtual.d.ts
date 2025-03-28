@@ -46,6 +46,10 @@ declare module 'studiocms:wysiwyg/studio/client' {
 	 * You must provide your own apiKey in the plugin options when using this in your project. Get a YouTube Data API v3 key from the [Google Cloud Console](https://console.cloud.google.com/apis/library/browse?q=youtube).
 	 */
 	export const youtubeAPIKey: string | undefined;
+	/**
+	 * Google Data API v3 Key, Get yours at https://console.cloud.google.com/
+	 */
+	export const googleFontsAPIKey: string | undefined;
 	/** Astro Logo SVG */
 	export const AstroSVG: string;
 	/**
