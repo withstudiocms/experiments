@@ -121,7 +121,7 @@ export const getPlugin = (componentKeys: string[]) => (editor: WithEditorProps['
 					console.log('[Error]: Could not fetch component HTML, please try again.');
 
 				// Get HTML from JSON response
-				const { html } = await getCompResponse.json();
+				const html = await getCompResponse.text();
 
 				// Set the HTML in the Editor View
 				el.innerHTML = html;

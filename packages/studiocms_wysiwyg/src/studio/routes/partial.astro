@@ -1,0 +1,11 @@
+---
+import { importComponentsKeys } from 'studiocms/lib/renderer/runtime.js';
+
+// Import components
+const components = await importComponentsKeys();
+
+const { componentKey }: { componentKey: string } = await Astro.request.json();
+
+const Component = components[componentKey];
+---
+<Component />
