@@ -108,7 +108,7 @@ export const getPlugin = (componentKeys: string[]) => (editor: WithEditorProps['
 			tagName: () => 'div',
 			onRender: async ({ el, model }) => {
 				// Fetch from API endpoint that uses Astro Container API to render Component to html
-				const getCompResponse = await fetch('/studiocms_wysiwyg_studiosdk_container/render', {
+				const getCompResponse = await fetch('/studiocms_api/wysiwyg_editor/studiosdk/partial', {
 					method: 'POST',
 					body: JSON.stringify({ componentKey: model.tagName }),
 					headers: {

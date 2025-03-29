@@ -78,7 +78,7 @@ function studiocmsWYSIWYGStudio(options: StudioCMSWYSIWYGStudioOptions): StudioC
 
 					params.injectRoute({
 						entrypoint: resolve('./routes/partial.astro'),
-						pattern: '/studiocms_wysiwyg_studiosdk_container/render',
+						pattern: '/studiocms_api/wysiwyg_editor/studiosdk/partial',
 						prerender: false,
 					});
 				},
