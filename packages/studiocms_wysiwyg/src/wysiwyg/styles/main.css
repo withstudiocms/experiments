@@ -1,4 +1,7 @@
 .editor-container {
+	display: flex;
+	flex-direction: column;
+	height: 80dvh !important;
 	width: 100%;
 	border: 2px solid hsl(var(--border));
 }
