@@ -5,6 +5,13 @@ import type { SanitizeOptions } from 'ultrahtml/transformers/sanitize';
 import { parse } from '../utils.js';
 import type { SSRResult } from 'astro';
 
+/**
+ * Prepares HTML content for rendering in the WYSIWYG editor.
+ * @param result - The Astro SSR result object
+ * @param data - The page data containing content to render
+ * @param sanitize - Optional sanitization options for HTML content
+ * @returns Transformed HTML ready for rendering
+ */
 export async function prepareRender(
 	result: SSRResult,
 	data: PluginPageTypeRendererProps['data'],
@@ -31,6 +38,6 @@ export async function prepareRender(
 		contentToRender = `<h1>Error parsing content: ${error instanceof Error ? error.message : 'Unknown error'}</h1>`;
 	}
 
-	// Render content
+	// Returns the transformed HTML with components rendered
 	return transformHTML(contentToRender, components, sanitize);
 }
