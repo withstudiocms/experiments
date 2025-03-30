@@ -28,21 +28,11 @@ interface Props extends PluginPageTypeEditorProps {}
   data-blocks={JSON.stringify(AstroComponentBlocks || [])}
   data-compkeys={JSON.stringify(componentKeys || [])}
 >
-
-  <div class="grapes-sidebar" id="gjs-sidebar"></div>
-  <div class="panel__right">
-    <div class="blocks-container"></div>
-    <div class="layers-container"></div>
-    <div class="styles-container"></div>
-    <div class="traits-container"></div>
-  </div>
-
   <div class="editor">
     <div id="gjs" style=" overflow:hidden">
       <h1>Hello World Component!</h1>
     </div>
   </div>
-
 </div>
 <textarea id="page-content" name="page-content" style="display: none;"
   >{Astro.props.content}</textarea
@@ -206,6 +196,7 @@ interface Props extends PluginPageTypeEditorProps {}
     width: "auto",
     // Disable the storage manager for the moment
     storageManager: { type: "inline" },
+    panels: { defaults: [] },
     plugins: [
       usePlugin(getPlugin(componentKeys)),
       usePlugin(blocks, { flexGrid: true }),
@@ -734,14 +725,6 @@ interface Props extends PluginPageTypeEditorProps {}
     el.setAttribute("data-tooltip", title);
     el.setAttribute("title", "");
   }
-
-  // Store and load events
-  editor.on("storage:load", function (e) {
-    console.log("Loaded ", e);
-  });
-  editor.on("storage:store", function (e) {
-    console.log("Stored ", e);
-  });
 
   // Do stuff on load
   editor.on("load", function () {
