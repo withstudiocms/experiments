@@ -17,9 +17,19 @@ export async function prepareRender(
 	const components = createComponentProxy(result, _components);
 
 	// Get content to render
-	const contentToRender = data.defaultContent?.content
-		? parse<{ __STUDIOCMS_HTML: string }>(data.defaultContent.content).__STUDIOCMS_HTML
-		: '<h1>Error: No content found</h1>';
+	let contentToRender = '<h1>Error: No content found</h1>';
+	try {
+		if (data.defaultContent?.content) {
+			const parsed = parse<{ __STUDIOCMS_HTML: string }>(data.defaultContent.content);
+			if (parsed?.__STUDIOCMS_HTML) {
+				contentToRender = parsed.__STUDIOCMS_HTML;
+			} else {
+				contentToRender = '<h1>Error: Content found but invalid format</h1>';
+			}
+		}
+	} catch (error) {
+		contentToRender = `<h1>Error parsing content: ${error instanceof Error ? error.message : 'Unknown error'}</h1>`;
+	}
 
 	// Render content
 	return transformHTML(contentToRender, components, sanitize);
