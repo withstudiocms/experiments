@@ -144,6 +144,9 @@ importers:
       grapesjs-plugin-forms:
         specifier: ^2.0.6
         version: 2.0.6
+      grapesjs-rte-extensions:
+        specifier: ^1.0.10
+        version: 1.0.10
       grapesjs-style-bg:
         specifier: ^2.0.2
         version: 2.0.2
@@ -2998,6 +3001,9 @@ packages:
 
   grapesjs-plugin-forms@2.0.6:
     resolution: {integrity: sha512-4rDob01NLiJWas5JW1FCpQc/4R4oS4wc/qr7pQwjGUiDzHNPKZLix10FqUKEv7hnzPmBaR2ejBL87sMwz11Tlw==}
+
+  grapesjs-rte-extensions@1.0.10:
+    resolution: {integrity: sha512-zP4UqgRAFpMH8JEIFy0JUhDpGOWtcR+AsXln7Mf4CNvhMI4o+IELMF4ZDD9Tuu+4wAml1rOX5S0w9fbj0Bbh9g==}
 
   grapesjs-style-bg@2.0.2:
     resolution: {integrity: sha512-LFPRjWeGpnwW6WbbxvbQIG6F52RAFuHyO5L7Rov39rltvERlyrE1n/xaZW8arFAF4yxylPHQ/hhxJaVlILf2Iw==}
@@ -8412,6 +8418,8 @@ snapshots:
       '@types/file-saver': 2.0.7
 
   grapesjs-plugin-forms@2.0.6: {}
+
+  grapesjs-rte-extensions@1.0.10: {}
 
   grapesjs-style-bg@2.0.2:
     dependencies:

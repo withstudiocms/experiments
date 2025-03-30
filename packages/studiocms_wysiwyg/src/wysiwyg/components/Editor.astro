@@ -1,6 +1,7 @@
 ---
 import '@studiocms/ui/css/colors.css';
 import 'grapesjs/dist/css/grapes.min.css';
+import 'grapesjs-rte-extensions/dist/grapesjs-rte-extensions.min.css';
 import '../styles/main.css';
 import type { PluginPageTypeEditorProps } from 'studiocms/types';
 import { importComponentsKeys } from 'studiocms/lib/renderer/runtime.js';
@@ -22,578 +23,671 @@ const AstroComponentBlocks = componentKeys.map((key) => ({
 interface Props extends PluginPageTypeEditorProps {}
 ---
 
-<div class="editor-container"
-    data-blocks={JSON.stringify(AstroComponentBlocks || [])}
-    data-compkeys={JSON.stringify(componentKeys || [])}
-    >
-    <div id="gjs" style=" overflow:hidden">
-        <h1>Hello World Component!</h1>
-    </div>
+<div
+  class="editor-container"
+  data-blocks={JSON.stringify(AstroComponentBlocks || [])}
+  data-compkeys={JSON.stringify(componentKeys || [])}
+>
+  <div id="gjs" style=" overflow:hidden">
+    <h1>Hello World Component!</h1>
+  </div>
 </div>
-<textarea id="page-content" name="page-content" style="display: none;">{Astro.props.content}</textarea>
+<textarea id="page-content" name="page-content" style="display: none;"
+  >{Astro.props.content}</textarea
+>
 
 <script>
-    import { toast } from '@studiocms/ui/components/Toast/toast.js'
-    import grapesjs, { type Editor, usePlugin } from 'grapesjs';
-    import '@studiocms/grapesjs-plugin';
-    import blocks from 'grapesjs-blocks-basic';
-    import countdown from 'grapesjs-component-countdown';
-    import exporter from 'grapesjs-plugin-export';
-    import customCode from 'grapesjs-custom-code';
-    import postcss from 'grapesjs-parser-postcss';
-    import tooltip from 'grapesjs-tooltip';
-    import tuiImage from 'grapesjs-tui-image-editor';
-    import typed from 'grapesjs-typed';
-    import styleBg from 'grapesjs-style-bg';
-    // @ts-ignore
-    import tabs from 'grapesjs-tabs';
-    // @ts-ignore
-    import touch from 'grapesjs-touch';
-    import { parse } from '../../utils.js';
+  import { toast } from "@studiocms/ui/components/Toast/toast.js";
+  import grapesjs, { type Editor, usePlugin } from "grapesjs";
+  import "@studiocms/grapesjs-plugin";
+  import blocks from "grapesjs-blocks-basic";
+  import countdown from "grapesjs-component-countdown";
+  import exporter from "grapesjs-plugin-export";
+  import customCode from "grapesjs-custom-code";
+  import postcss from "grapesjs-parser-postcss";
+  import tooltip from "grapesjs-tooltip";
+  import tuiImage from "grapesjs-tui-image-editor";
+  import typed from "grapesjs-typed";
+  import styleBg from "grapesjs-style-bg";
+  import forms from "grapesjs-plugin-forms";
+  // @ts-ignore
+  import rte from "grapesjs-rte-extensions";
+  // @ts-ignore
+  import tabs from "grapesjs-tabs";
+  // @ts-ignore
+  import touch from "grapesjs-touch";
+  import { parse } from "../../utils.js";
 
-    /**
-     * Represents an array of Astro component blocks, where each block contains metadata
-     * about a specific component used in the system.
-     */
-    export type AstroComponentBlocks = {
-        id: string;
-        label: string;
-        category: string;
-        media: string;
-        key: string;
-    }[];
+  /**
+   * Represents an array of Astro component blocks, where each block contains metadata
+   * about a specific component used in the system.
+   */
+  type AstroComponentBlocks = {
+    id: string;
+    label: string;
+    category: string;
+    media: string;
+    key: string;
+  }[];
 
-    /**
-     * Represents an array of editor blocks used in the Astro component editor.
-     * Each block contains metadata and a function to generate its content.
-     */
-    export type AstroComponentEditorBlocks = {
-        id: string;
-        label: string;
-        category: string;
-        media: string;
-        content: () => string;
-    }[];
+  /**
+   * Represents an array of editor blocks used in the Astro component editor.
+   * Each block contains metadata and a function to generate its content.
+   */
+  type AstroComponentEditorBlocks = {
+    id: string;
+    label: string;
+    category: string;
+    media: string;
+    content: () => string;
+  }[];
 
-    /**
-     * Converts an array of `AstroComponentBlocks` into an array of `AstroComponentEditorBlocks`.
-     *
-     * Each block in the input array is transformed by extracting its `key` property
-     * and using it to generate a `content` function that returns a string representation
-     * of an HTML element with the given key as its tag name. The rest of the block's properties
-     * are preserved in the output.
-     *
-     * @param blocks - An array of `AstroComponentBlocks` to be converted.
-     * @returns An array of `AstroComponentEditorBlocks` with updated `content` functions.
-     */
-    export function convertComponentBlocks(blocks: AstroComponentBlocks): AstroComponentEditorBlocks {
-        return blocks.map(({ key, ...block }) => ({
-            ...block,
-            content: () => `<${key}></${key}>`,
-        }));
-    }
+  /**
+   * Converts an array of `AstroComponentBlocks` into an array of `AstroComponentEditorBlocks`.
+   *
+   * Each block in the input array is transformed by extracting its `key` property
+   * and using it to generate a `content` function that returns a string representation
+   * of an HTML element with the given key as its tag name. The rest of the block's properties
+   * are preserved in the output.
+   *
+   * @param blocks - An array of `AstroComponentBlocks` to be converted.
+   * @returns An array of `AstroComponentEditorBlocks` with updated `content` functions.
+   */
+  function convertComponentBlocks(
+    blocks: AstroComponentBlocks,
+  ): AstroComponentEditorBlocks {
+    return blocks.map(({ key, ...block }) => ({
+      ...block,
+      content: () => `<${key}></${key}>`,
+    }));
+  }
 
-    export const getPlugin = (componentKeys: string[]) => (editor: Editor) => {
-        editor.DomComponents.addType('astro-component', {
-            isComponent: (el) => componentKeys.includes(el.tagName?.toLowerCase()),
-            view: {
-                tagName: () => 'div',
-                onRender: async ({ el, model }) => {
-                    // Fetch from API endpoint that uses Astro Container API to render Component to html
-                    const getCompResponse = await fetch('/studiocms_api/wysiwyg_editor/partial', {
-                        method: 'POST',
-                        body: JSON.stringify({ componentKey: model.tagName }),
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    });
-
-                    // If response is not valid, log error.
-                    if (!getCompResponse.ok)
-                        console.log('[Error]: Could not fetch component HTML, please try again.');
-
-                    // Get HTML from JSON response
-                    const html = await getCompResponse.text();
-
-                    // Set the HTML in the Editor View
-                    el.innerHTML = html;
-                },
+  const getPlugin = (componentKeys: string[]) => (editor: Editor) => {
+    editor.DomComponents.addType("astro-component", {
+      isComponent: (el) => componentKeys.includes(el.tagName?.toLowerCase()),
+      view: {
+        tagName: () => "div",
+        onRender: async ({ el, model }) => {
+          // Fetch from API endpoint that uses Astro Container API to render Component to html
+          const getCompResponse = await fetch(
+            "/studiocms_api/wysiwyg_editor/partial",
+            {
+              method: "POST",
+              body: JSON.stringify({ componentKey: model.tagName }),
+              headers: {
+                "Content-Type": "application/json",
+              },
             },
+          );
+
+          // If response is not valid, log error.
+          if (!getCompResponse.ok)
+            console.log(
+              "[Error]: Could not fetch component HTML, please try again.",
+            );
+
+          // Get HTML from JSON response
+          const html = await getCompResponse.text();
+
+          // Set the HTML in the Editor View
+          el.innerHTML = html;
+        },
+      },
+    });
+  };
+
+  const pageContent = document.querySelector<HTMLTextAreaElement>(
+    "#page-content",
+  ) as HTMLTextAreaElement;
+  const editorContainer = document.querySelector<HTMLDivElement>(
+    ".editor-container",
+  ) as HTMLDivElement;
+
+  const rawBlocks = parse<AstroComponentBlocks>(
+    editorContainer.dataset.blocks as string,
+  );
+  const componentKeys = parse<string[]>(
+    editorContainer.dataset.compkeys as string,
+  );
+
+  const fallbackPages = {
+    pages: [{ name: "page" }],
+  };
+
+  const projectData = JSON.parse(
+    pageContent.innerText || JSON.stringify(fallbackPages),
+  );
+
+  const generateHTML = async (editor: Editor): Promise<string> => {
+    const page = editor.Pages.getMain();
+    const component = page.getMainComponent();
+    const htmlData = component.toHTML({ tag: "div" });
+    const styles = editor.getCss({ component })?.replaceAll("body", "div");
+    const html = `${htmlData}${styles ? `<style>${styles}</style>` : ""}`;
+    return html;
+  };
+
+  // Inline storage
+  const inlineStorage = (editor: Editor) => {
+    editor.Storage.add("inline", {
+      load() {
+        return projectData;
+      },
+      async store(data) {
+        pageContent.innerText = JSON.stringify({
+          ...data,
+          __STUDIOCMS_HTML: await generateHTML(editor),
         });
-    };
+      },
+    });
+  };
 
-    const pageContent = document.querySelector<HTMLTextAreaElement>('#page-content') as HTMLTextAreaElement;
-    const editorContainer = document.querySelector<HTMLDivElement>('.editor-container') as HTMLDivElement
-
-	const rawBlocks = parse<AstroComponentBlocks>(editorContainer.dataset.blocks as string);
-	const componentKeys = parse<string[]>(editorContainer.dataset.compkeys as string);
-
-    const fallbackPages = {
-        pages: [{ name: 'page' }],
-    };
-    
-	const projectData = JSON.parse(pageContent.innerText || JSON.stringify(fallbackPages));
-
-    export const generateHTML = async (editor: Editor): Promise<string> => {
-        const page = editor.Pages.getMain();
-        const component = page.getMainComponent();
-        const htmlData = component.toHTML({ tag: 'div' });
-        const styles = editor.getCss({ component })?.replaceAll('body', 'div');
-        const html = `${htmlData}${styles ? `<style>${styles}</style>` : ''}`;
-        return html;
-    };
-
-    // Inline storage
-    const inlineStorage = (editor: Editor) => {
-        editor.Storage.add('inline', {
-        load() {
-            return projectData;
+  const editor = grapesjs.init({
+    container: "#gjs",
+    height: "80dvh",
+    width: "auto",
+    // Disable the storage manager for the moment
+    storageManager: { type: "inline" },
+    blockManager: {
+      blocks: convertComponentBlocks(rawBlocks),
+    },
+    plugins: [
+      usePlugin(getPlugin(componentKeys)),
+      usePlugin(blocks, { flexGrid: true }),
+      usePlugin(tabs, {
+        tabsBlock: { category: "Extra" },
+      }),
+      usePlugin(touch, {
+        block: {
+          category: "Extra",
+          content: {
+            type: "typed",
+            "type-speed": 40,
+            strings: ["Text row one", "Text row two", "Text row three"],
+          },
         },
-        async store(data) {
-			pageContent.innerText = JSON.stringify({
-				...data,
-				__STUDIOCMS_HTML: await generateHTML(editor),
-			});
-        },
-        });
-    };
-
-    const editor = grapesjs.init({
-        // Indicate where to init the editor. You can also pass an HTMLElement
-        container: '#gjs',
-        // Get the content for the canvas directly from the element
-        // As an alternative we could use: `components: '<h1>Hello World Component!</h1>'`,
-        fromElement: true,
-        // Size of the editor
-        height: '80dvh',
-        width: 'auto',
-        // Disable the storage manager for the moment
-        storageManager: { type: 'inline' },
-        blockManager: {
-            blocks: convertComponentBlocks(rawBlocks)
-        },
-        plugins: [
-            usePlugin(getPlugin(componentKeys)),
-            usePlugin(blocks, { flexGrid: true }),
-            usePlugin(tabs, {
-                tabsBlock: { category: 'Extra' }
-            }),
-            usePlugin(touch, {
-                block: {
-                category: 'Extra',
-                content: {
-                    type: 'typed',
-                    'type-speed': 40,
-                    strings: [
-                    'Text row one',
-                    'Text row two',
-                    'Text row three',
-                    ],
-                }
-                }
-            }),
-            usePlugin(tuiImage, {
-                script: [
-                // 'https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.6.7/fabric.min.js',
-                'https://uicdn.toast.com/tui.code-snippet/v1.5.2/tui-code-snippet.min.js',
-                'https://uicdn.toast.com/tui-color-picker/v2.2.7/tui-color-picker.min.js',
-                'https://uicdn.toast.com/tui-image-editor/v3.15.2/tui-image-editor.min.js'
-                ],
-                style: [
-                'https://uicdn.toast.com/tui-color-picker/v2.2.7/tui-color-picker.min.css',
-                'https://uicdn.toast.com/tui-image-editor/v3.15.2/tui-image-editor.min.css',
-                ],
-            }),
-            usePlugin(countdown),
-            usePlugin(exporter),
-            usePlugin(customCode),
-            usePlugin(postcss),
-            usePlugin(tooltip),
-            usePlugin(typed),
-            usePlugin(styleBg),
-            usePlugin(inlineStorage),
-            '@studiocms/grapesjs-plugin',
+      }),
+      usePlugin(tuiImage, {
+        script: [
+          "https://uicdn.toast.com/tui.code-snippet/v1.5.2/tui-code-snippet.min.js",
+          "https://uicdn.toast.com/tui-color-picker/v2.2.7/tui-color-picker.min.js",
+          "https://uicdn.toast.com/tui-image-editor/v3.15.2/tui-image-editor.min.js",
         ],
-        selectorManager: { componentFirst: true },
-        styleManager: {
-          sectors: [{
-              name: 'General',
-              properties:[
-                {
-                  extend: 'float',
-                  type: 'radio',
-                  default: 'none',
-                  options: [
-                    { value: 'none', className: 'fa fa-times', id: '' },
-                    { value: 'left', className: 'fa fa-align-left', id: '' },
-                    { value: 'right', className: 'fa fa-align-right', id: '' }
-                  ],
-                },
-                'display',
-                { extend: 'position', type: 'select' },
-                'top',
-                'right',
-                'left',
-                'bottom',
+        style: [
+          "https://uicdn.toast.com/tui-color-picker/v2.2.7/tui-color-picker.min.css",
+          "https://uicdn.toast.com/tui-image-editor/v3.15.2/tui-image-editor.min.css",
+        ],
+      }),
+      usePlugin(countdown),
+      usePlugin(exporter),
+      usePlugin(customCode),
+      usePlugin(postcss),
+      usePlugin(tooltip),
+      usePlugin(typed),
+      usePlugin(styleBg),
+      usePlugin(inlineStorage),
+      usePlugin(forms),
+      usePlugin(rte),
+      "@studiocms/grapesjs-plugin",
+    ],
+    selectorManager: { componentFirst: true },
+    styleManager: {
+      sectors: [
+        {
+          name: "General",
+          properties: [
+            {
+              extend: "float",
+              type: "radio",
+              default: "none",
+              options: [
+                { value: "none", className: "fa fa-times", id: "" },
+                { value: "left", className: "fa fa-align-left", id: "" },
+                { value: "right", className: "fa fa-align-right", id: "" },
               ],
-            }, {
-                name: 'Dimension',
-                open: false,
-                properties: [
-                  'width',
-                  {
-                    id: 'flex-width',
-                    type: 'integer',
-                    name: 'Width',
-                    units: ['px', '%'],
-                    property: 'flex-basis',
-                    toRequire: true,
-                  },
-                  'height',
-                  'max-width',
-                  'min-height',
-                  'margin',
-                  'padding'
-                ],
-              },{
-                name: 'Typography',
-                open: false,
-                properties: [
-                    'font-family',
-                    'font-size',
-                    'font-weight',
-                    'letter-spacing',
-                    'color',
-                    'line-height',
-                    {
-                      extend: 'text-align',
-                      options: [
-                        { id : 'left',  label : 'Left',    className: 'fa fa-align-left'},
-                        { id : 'center',  label : 'Center',  className: 'fa fa-align-center' },
-                        { id : 'right',   label : 'Right',   className: 'fa fa-align-right'},
-                        { id : 'justify', label : 'Justify',   className: 'fa fa-align-justify'}
-                      ],
-                    },
-                    {
-                      property: 'text-decoration',
-                      type: 'radio',
-                      default: 'none',
-                      options: [
-                        { id: 'none', label: 'None', className: 'fa fa-times'},
-                        { id: 'underline', label: 'underline', className: 'fa fa-underline' },
-                        { id: 'line-through', label: 'Line-through', className: 'fa fa-strikethrough'}
-                      ],
-                    },
-                    'text-shadow'
-                ],
-              },{
-                name: 'Decorations',
-                open: false,
-                properties: [
-                  'opacity',
-                  'border-radius',
-                  'border',
-                  'box-shadow',
-                  'background', // { id: 'background-bg', property: 'background', type: 'bg' }
-                ],
-              },{
-                name: 'Extra',
-                open: false,
-                buildProps: [
-                  'transition',
-                  'perspective',
-                  'transform'
-                ],
-              },{
-                name: 'Flex',
-                open: false,
-                properties: [{
-                  name: 'Flex Container',
-                  property: 'display',
-                  type: 'select',
-                  defaults: 'block',
-                  list: [
-                    { value: 'block', name: 'Disable', id: '' },
-                    { value: 'flex', name: 'Enable', id: '' }
-                  ],
-                },{
-                  name: 'Flex Parent',
-                  property: 'label-parent-flex',
-                  type: 'integer',
-                },{
-                  name: 'Direction',
-                  property: 'flex-direction',
-                  type: 'radio',
-                  defaults: 'row',
-                  list: [{
-                    value: 'row',
-                    name: 'Row',
-                    className: 'icons-flex icon-dir-row',
-                    title: 'Row',
-                    id: '' 
-                  },{
-                    value: 'row-reverse',
-                    name: 'Row reverse',
-                    className: 'icons-flex icon-dir-row-rev',
-                    title: 'Row reverse',
-                    id: '' 
-                  },{
-                    value: 'column',
-                    name: 'Column',
-                    title: 'Column',
-                    className: 'icons-flex icon-dir-col',
-                    id: '' 
-                  },{
-                    value: 'column-reverse',
-                    name: 'Column reverse',
-                    title: 'Column reverse',
-                    className: 'icons-flex icon-dir-col-rev',
-                    id: '' 
-                  }],
-                },{
-                  name: 'Justify',
-                  property: 'justify-content',
-                  type: 'radio',
-                  defaults: 'flex-start',
-                  list: [{
-                    value: 'flex-start',
-                    className: 'icons-flex icon-just-start',
-                    title: 'Start',
-                    id: ''
-                  },{
-                    value: 'flex-end',
-                    title: 'End',
-                    className: 'icons-flex icon-just-end',
-                    id: ''
-                  },{
-                    value: 'space-between',
-                    title: 'Space between',
-                    className: 'icons-flex icon-just-sp-bet',
-                    id: ''
-                  },{
-                    value: 'space-around',
-                    title: 'Space around',
-                    className: 'icons-flex icon-just-sp-ar',
-                    id: ''
-                  },{
-                    value: 'center',
-                    title: 'Center',
-                    className: 'icons-flex icon-just-sp-cent',
-                    id: ''
-                  }],
-                },{
-                  name: 'Align',
-                  property: 'align-items',
-                  type: 'radio',
-                  defaults: 'center',
-                  list: [{
-                    value: 'flex-start',
-                    title: 'Start',
-                    className: 'icons-flex icon-al-start',
-                    id: ''
-                  },{
-                    value: 'flex-end',
-                    title: 'End',
-                    className: 'icons-flex icon-al-end',
-                    id: ''
-                  },{
-                    value: 'stretch',
-                    title: 'Stretch',
-                    className: 'icons-flex icon-al-str',
-                    id: ''
-                  },{
-                    value: 'center',
-                    title: 'Center',
-                    className: 'icons-flex icon-al-center',
-                    id: ''
-                  }],
-                },{
-                  name: 'Flex Children',
-                  property: 'label-parent-flex',
-                  type: 'integer',
-                },{
-                  name: 'Order',
-                  property: 'order',
-                  type: 'integer',
+            },
+            "display",
+            { extend: "position", type: "select" },
+            "top",
+            "right",
+            "left",
+            "bottom",
+          ],
+        },
+        {
+          name: "Dimension",
+          open: false,
+          properties: [
+            "width",
+            {
+              id: "flex-width",
+              type: "integer",
+              name: "Width",
+              units: ["px", "%"],
+              property: "flex-basis",
+              toRequire: true,
+            },
+            "height",
+            "max-width",
+            "min-height",
+            "margin",
+            "padding",
+          ],
+        },
+        {
+          name: "Typography",
+          open: false,
+          properties: [
+            "font-family",
+            "font-size",
+            "font-weight",
+            "letter-spacing",
+            "color",
+            "line-height",
+            {
+              extend: "text-align",
+              options: [
+                { id: "left", label: "Left", className: "fa fa-align-left" },
+                {
+                  id: "center",
+                  label: "Center",
+                  className: "fa fa-align-center",
+                },
+                { id: "right", label: "Right", className: "fa fa-align-right" },
+                {
+                  id: "justify",
+                  label: "Justify",
+                  className: "fa fa-align-justify",
+                },
+              ],
+            },
+            {
+              property: "text-decoration",
+              type: "radio",
+              default: "none",
+              options: [
+                { id: "none", label: "None", className: "fa fa-times" },
+                {
+                  id: "underline",
+                  label: "underline",
+                  className: "fa fa-underline",
+                },
+                {
+                  id: "line-through",
+                  label: "Line-through",
+                  className: "fa fa-strikethrough",
+                },
+              ],
+            },
+            "text-shadow",
+          ],
+        },
+        {
+          name: "Decorations",
+          open: false,
+          properties: [
+            "opacity",
+            "border-radius",
+            "border",
+            "box-shadow",
+            "background", // { id: 'background-bg', property: 'background', type: 'bg' }
+          ],
+        },
+        {
+          name: "Extra",
+          open: false,
+          buildProps: ["transition", "perspective", "transform"],
+        },
+        {
+          name: "Flex",
+          open: false,
+          properties: [
+            {
+              name: "Flex Container",
+              property: "display",
+              type: "select",
+              defaults: "block",
+              list: [
+                { value: "block", name: "Disable", id: "" },
+                { value: "flex", name: "Enable", id: "" },
+              ],
+            },
+            {
+              name: "Flex Parent",
+              property: "label-parent-flex",
+              type: "integer",
+            },
+            {
+              name: "Direction",
+              property: "flex-direction",
+              type: "radio",
+              defaults: "row",
+              list: [
+                {
+                  value: "row",
+                  name: "Row",
+                  className: "icons-flex icon-dir-row",
+                  title: "Row",
+                  id: "",
+                },
+                {
+                  value: "row-reverse",
+                  name: "Row reverse",
+                  className: "icons-flex icon-dir-row-rev",
+                  title: "Row reverse",
+                  id: "",
+                },
+                {
+                  value: "column",
+                  name: "Column",
+                  title: "Column",
+                  className: "icons-flex icon-dir-col",
+                  id: "",
+                },
+                {
+                  value: "column-reverse",
+                  name: "Column reverse",
+                  title: "Column reverse",
+                  className: "icons-flex icon-dir-col-rev",
+                  id: "",
+                },
+              ],
+            },
+            {
+              name: "Justify",
+              property: "justify-content",
+              type: "radio",
+              defaults: "flex-start",
+              list: [
+                {
+                  value: "flex-start",
+                  className: "icons-flex icon-just-start",
+                  title: "Start",
+                  id: "",
+                },
+                {
+                  value: "flex-end",
+                  title: "End",
+                  className: "icons-flex icon-just-end",
+                  id: "",
+                },
+                {
+                  value: "space-between",
+                  title: "Space between",
+                  className: "icons-flex icon-just-sp-bet",
+                  id: "",
+                },
+                {
+                  value: "space-around",
+                  title: "Space around",
+                  className: "icons-flex icon-just-sp-ar",
+                  id: "",
+                },
+                {
+                  value: "center",
+                  title: "Center",
+                  className: "icons-flex icon-just-sp-cent",
+                  id: "",
+                },
+              ],
+            },
+            {
+              name: "Align",
+              property: "align-items",
+              type: "radio",
+              defaults: "center",
+              list: [
+                {
+                  value: "flex-start",
+                  title: "Start",
+                  className: "icons-flex icon-al-start",
+                  id: "",
+                },
+                {
+                  value: "flex-end",
+                  title: "End",
+                  className: "icons-flex icon-al-end",
+                  id: "",
+                },
+                {
+                  value: "stretch",
+                  title: "Stretch",
+                  className: "icons-flex icon-al-str",
+                  id: "",
+                },
+                {
+                  value: "center",
+                  title: "Center",
+                  className: "icons-flex icon-al-center",
+                  id: "",
+                },
+              ],
+            },
+            {
+              name: "Flex Children",
+              property: "label-parent-flex",
+              type: "integer",
+            },
+            {
+              name: "Order",
+              property: "order",
+              type: "integer",
+              // @ts-ignore
+              defaults: 0,
+              min: 0,
+            },
+            {
+              name: "Flex",
+              property: "flex",
+              type: "composite",
+              properties: [
+                {
+                  name: "Grow",
+                  property: "flex-grow",
+                  type: "integer",
                   // @ts-ignore
                   defaults: 0,
-                  min: 0
-                },{
-                  name: 'Flex',
-                  property: 'flex',
-                  type: 'composite',
-                  properties  : [{
-                    name: 'Grow',
-                    property: 'flex-grow',
-                    type: 'integer',
-                    // @ts-ignore
-                    defaults: 0,
-                    min: 0
-                  },{
-                    name: 'Shrink',
-                    property: 'flex-shrink',
-                    type: 'integer',
-                    // @ts-ignore
-                    defaults: 0,
-                    min: 0
-                  },{
-                    name: 'Basis',
-                    property: 'flex-basis',
-                    type: 'integer',
-                    units: ['px','%',''],
-                    unit: '',
-                    defaults: 'auto',
-                  }],
-                },{
-                  name: 'Align',
-                  property: 'align-self',
-                  type: 'radio',
-                  defaults: 'auto',
-                  list: [{
-                    value: 'auto',
-                    name: 'Auto',
-                    id: ''
-                  },{
-                    value: 'flex-start',
-                    title: 'Start',
-                    className: 'icons-flex icon-al-start',
-                    id: ''
-                  },{
-                    value   : 'flex-end',
-                    title: 'End',
-                    className: 'icons-flex icon-al-end',
-                    id: ''
-                  },{
-                    value   : 'stretch',
-                    title: 'Stretch',
-                    className: 'icons-flex icon-al-str',
-                    id: ''
-                  },{
-                    value   : 'center',
-                    title: 'Center',
-                    className: 'icons-flex icon-al-center',
-                    id: ''
-                  }],
-                }]
-              }
-            ],
-        },
-    });
-
-    editor.I18n.addMessages({
-        en: {
-            styleManager: {
-            properties: {
-                'background-repeat': 'Repeat',
-                'background-position': 'Position',
-                'background-attachment': 'Attachment',
-                'background-size': 'Size',
-            }
+                  min: 0,
+                },
+                {
+                  name: "Shrink",
+                  property: "flex-shrink",
+                  type: "integer",
+                  // @ts-ignore
+                  defaults: 0,
+                  min: 0,
+                },
+                {
+                  name: "Basis",
+                  property: "flex-basis",
+                  type: "integer",
+                  units: ["px", "%", ""],
+                  unit: "",
+                  defaults: "auto",
+                },
+              ],
             },
-        }
-    });
+            {
+              name: "Align",
+              property: "align-self",
+              type: "radio",
+              defaults: "auto",
+              list: [
+                {
+                  value: "auto",
+                  name: "Auto",
+                  id: "",
+                },
+                {
+                  value: "flex-start",
+                  title: "Start",
+                  className: "icons-flex icon-al-start",
+                  id: "",
+                },
+                {
+                  value: "flex-end",
+                  title: "End",
+                  className: "icons-flex icon-al-end",
+                  id: "",
+                },
+                {
+                  value: "stretch",
+                  title: "Stretch",
+                  className: "icons-flex icon-al-str",
+                  id: "",
+                },
+                {
+                  value: "center",
+                  title: "Center",
+                  className: "icons-flex icon-al-center",
+                  id: "",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  });
 
-    var pn = editor.Panels;
-    var modal = editor.Modal;
-    var cmdm = editor.Commands;
+  editor.I18n.addMessages({
+    en: {
+      styleManager: {
+        properties: {
+          "background-repeat": "Repeat",
+          "background-position": "Position",
+          "background-attachment": "Attachment",
+          "background-size": "Size",
+        },
+      },
+    },
+  });
 
-    // Update canvas-clear command
-    cmdm.add('canvas-clear', function() {
-        if(confirm('Are you sure to clean the canvas?')) {
-            editor.runCommand('core:canvas-clear')
-            setTimeout(function(){ localStorage.clear()}, 0)
-        }
-    });
+  var pn = editor.Panels;
+  var modal = editor.Modal;
+  var cmdm = editor.Commands;
 
-    // Simple warn notifier
-    var origWarn = console.warn;
-    console.warn = function (msg) {
-        if (msg.indexOf('[undefined]') == -1) {
-            toast({
-                title: 'Warning',
-                type: 'warning',
-                description: msg
-            })
-        }
-        origWarn(msg);
-    };
-
-    // Add and beautify tooltips
-    [['sw-visibility', 'Show Borders'], ['preview', 'Preview'], ['fullscreen', 'Fullscreen'],
-    ['export-template', 'Export'], ['undo', 'Undo'], ['redo', 'Redo'],
-    ['gjs-open-import-webpage', 'Import'], ['canvas-clear', 'Clear canvas']]
-    .forEach(function(item) {
-        pn.getButton('options', item[0])?.set('attributes', {title: item[1], 'data-tooltip-pos': 'bottom'});
-    });
-    [['open-sm', 'Style Manager'], ['open-layers', 'Layers'], ['open-blocks', 'Blocks']]
-    .forEach(function(item) {
-        pn.getButton('views', item[0])?.set('attributes', {title: item[1], 'data-tooltip-pos': 'bottom'});
-    });
-    var titles = document.querySelectorAll('*[title]');
-
-    for (var i = 0; i < titles.length; i++) {
-        var el = titles[i];
-        var title = el.getAttribute('title');
-        title = title ? title.trim(): '';
-        if(!title)
-          break;
-        el.setAttribute('data-tooltip', title);
-        el.setAttribute('title', '');
+  // Update canvas-clear command
+  cmdm.add("canvas-clear", function () {
+    if (confirm("Are you sure to clean the canvas?")) {
+      editor.runCommand("core:canvas-clear");
+      setTimeout(function () {
+        localStorage.clear();
+      }, 0);
     }
+  });
 
-    // Store and load events
-    editor.on('storage:load', function(e) { console.log('Loaded ', e) });
-    editor.on('storage:store', function(e) { console.log('Stored ', e) });
-
-    // Do stuff on load
-    editor.on('load', function() {
-        var $ = grapesjs.$;
-
-        // Show borders by default
-        pn.getButton('options', 'sw-visibility')?.set({
-          command: 'core:component-outline',
-          'active': true,
-        });
-
-        // Load and show settings and style manager
-        var openTmBtn = pn.getButton('views', 'open-tm');
-        openTmBtn && openTmBtn.set('active', 1);
-        var openSm = pn.getButton('views', 'open-sm');
-        openSm && openSm.set('active', 1);
-
-        // Remove trait view
-        pn.removeButton('views', 'open-tm');
-
-        // Add Settings Sector
-        var traitsSector = $('<div class="gjs-sm-sector no-select">'+
-          '<div class="gjs-sm-sector-title"><span class="icon-settings fa fa-cog"></span> <span class="gjs-sm-sector-label">Settings</span></div>' +
-          '<div class="gjs-sm-properties" style="display: none;"></div></div>');
-        var traitsProps = traitsSector.find('.gjs-sm-properties');
-        traitsProps.append($('.gjs-traits-cs'));
-        $('.gjs-sm-sectors').before(traitsSector);
-        traitsSector.find('.gjs-sm-sector-title').on('click', function(){
-          var traitStyle = traitsProps.get(0).style;
-          var hidden = traitStyle.display == 'none';
-          if (hidden) {
-            traitStyle.display = 'block';
-          } else {
-            traitStyle.display = 'none';
-          }
-        });
-
-        // Open block manager
-        var openBlocksBtn = editor.Panels.getButton('views', 'open-blocks');
-        openBlocksBtn && openBlocksBtn.set('active', 1);
+  // Simple warn notifier
+  var origWarn = console.warn;
+  console.warn = function (msg) {
+    if (msg.indexOf("[undefined]") == -1) {
+      toast({
+        title: "Warning",
+        type: "warning",
+        description: msg,
       });
+    }
+    origWarn(msg);
+  };
+
+  // Add and beautify tooltips
+  [
+    ["sw-visibility", "Show Borders"],
+    ["preview", "Preview"],
+    ["fullscreen", "Fullscreen"],
+    ["export-template", "Export"],
+    ["undo", "Undo"],
+    ["redo", "Redo"],
+    ["gjs-open-import-webpage", "Import"],
+    ["canvas-clear", "Clear canvas"],
+  ].forEach(function (item) {
+    pn.getButton("options", item[0])?.set("attributes", {
+      title: item[1],
+      "data-tooltip-pos": "bottom",
+    });
+  });
+  [
+    ["open-sm", "Style Manager"],
+    ["open-layers", "Layers"],
+    ["open-blocks", "Blocks"],
+  ].forEach(function (item) {
+    pn.getButton("views", item[0])?.set("attributes", {
+      title: item[1],
+      "data-tooltip-pos": "bottom",
+    });
+  });
+  var titles = document.querySelectorAll("*[title]");
+
+  for (var i = 0; i < titles.length; i++) {
+    var el = titles[i];
+    var title = el.getAttribute("title");
+    title = title ? title.trim() : "";
+    if (!title) break;
+    el.setAttribute("data-tooltip", title);
+    el.setAttribute("title", "");
+  }
+
+  // Store and load events
+  editor.on("storage:load", function (e) {
+    console.log("Loaded ", e);
+  });
+  editor.on("storage:store", function (e) {
+    console.log("Stored ", e);
+  });
+
+  // Do stuff on load
+  editor.on("load", function () {
+    var $ = grapesjs.$;
+
+    // Show borders by default
+    pn.getButton("options", "sw-visibility")?.set({
+      command: "core:component-outline",
+      active: true,
+    });
+
+    // Load and show settings and style manager
+    var openTmBtn = pn.getButton("views", "open-tm");
+    openTmBtn && openTmBtn.set("active", 1);
+    var openSm = pn.getButton("views", "open-sm");
+    openSm && openSm.set("active", 1);
+
+    // Remove trait view
+    pn.removeButton("views", "open-tm");
+
+    // Add Settings Sector
+    var traitsSector = $(
+      '<div class="gjs-sm-sector no-select">' +
+        '<div class="gjs-sm-sector-title"><span class="icon-settings fa fa-cog"></span> <span class="gjs-sm-sector-label">Settings</span></div>' +
+        '<div class="gjs-sm-properties" style="display: none;"></div></div>',
+    );
+    var traitsProps = traitsSector.find(".gjs-sm-properties");
+    traitsProps.append($(".gjs-traits-cs"));
+    $(".gjs-sm-sectors").before(traitsSector);
+    traitsSector.find(".gjs-sm-sector-title").on("click", function () {
+      var traitStyle = traitsProps.get(0).style;
+      var hidden = traitStyle.display == "none";
+      if (hidden) {
+        traitStyle.display = "block";
+      } else {
+        traitStyle.display = "none";
+      }
+    });
+
+    // Open block manager
+    var openBlocksBtn = editor.Panels.getButton("views", "open-blocks");
+    openBlocksBtn && openBlocksBtn.set("active", 1);
+  });
+
+  console.log(JSON.stringify(editor.Panels.getPanels()))
+
 </script>
 
 <style>
-
   :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
-  
+
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;

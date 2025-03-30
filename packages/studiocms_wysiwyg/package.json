@@ -79,6 +79,7 @@
     "grapesjs-tui-image-editor": "^1.0.2",
     "grapesjs-typed": "^2.0.1",
     "grapesjs-style-bg": "^2.0.2",
+    "grapesjs-rte-extensions": "^1.0.10",
     "ultrahtml": "^1.5.3"
   },
   "devDependencies": {

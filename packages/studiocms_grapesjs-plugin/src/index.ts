@@ -74,7 +74,7 @@ export type PluginOptions = {
 
 export type RequiredPluginOptions = Required<PluginOptions>;
 
-const plugin: Plugin<PluginOptions> = (editor, opts: Partial<PluginOptions> = {}) => {
+const plugin: Plugin = (editor) => {
 	const config: RequiredPluginOptions = {
 		blocks: ['link-block', 'quote', 'text-basic'],
 		block: () => ({}),
@@ -86,7 +86,6 @@ const plugin: Plugin<PluginOptions> = (editor, opts: Partial<PluginOptions> = {}
 		textCleanCanvas: 'Are you sure you want to clear the canvas?',
 		showStylesOnChange: true,
 		useCustomTheme: true,
-		...opts,
 	};
 
 	if (config.useCustomTheme && typeof window !== 'undefined') {

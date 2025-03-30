@@ -2,7 +2,7 @@
   "$schema": "../node_modules/@changesets/config/schema.json",
   "changelog": ["@changesets/changelog-github", { "repo": "withstudiocms/experiments" }],
   "commit": false,
-  "fixed": [],
+  "fixed": [["@studiocms/wysiwyg", "@studiocms/grapesjs-plugin"]],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
