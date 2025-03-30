@@ -88,40 +88,40 @@ const plugin: Plugin = (editor) => {
 		useCustomTheme: true,
 	};
 
-	if (config.useCustomTheme && typeof window !== 'undefined') {
-		const primaryColor = 'hsl(var(--background-step-3))';
-		const secondaryColor = 'hsl(var(--text-normal))';
-		const tertiaryColor = 'hsl(var(--background-step-1))';
-		const quaternaryColor = 'hsl(var(--primary-base))';
-		const prefix = 'gjs-';
-		let cssString = '';
+	// if (config.useCustomTheme && typeof window !== 'undefined') {
+	// 	const primaryColor = 'hsl(var(--background-step-3))';
+	// 	const secondaryColor = 'hsl(var(--text-normal))';
+	// 	const tertiaryColor = 'hsl(var(--background-step-1))';
+	// 	const quaternaryColor = 'hsl(var(--primary-base))';
+	// 	const prefix = 'gjs-';
+	// 	let cssString = '';
 
-		// biome-ignore lint/complexity/noForEach: <explanation>
-		[
-			['one', primaryColor],
-			['two', secondaryColor],
-			['three', tertiaryColor],
-			['four', quaternaryColor],
-		].forEach(([cnum, ccol]) => {
-			cssString += `
-        .${prefix}${cnum}-bg {
-          background-color: ${ccol};
-        }
+	// 	// biome-ignore lint/complexity/noForEach: <explanation>
+	// 	[
+	// 		['one', primaryColor],
+	// 		['two', secondaryColor],
+	// 		['three', tertiaryColor],
+	// 		['four', quaternaryColor],
+	// 	].forEach(([cnum, ccol]) => {
+	// 		cssString += `
+	//     .${prefix}${cnum}-bg {
+	//       background-color: ${ccol};
+	//     }
 
-        .${prefix}${cnum}-color {
-          color: ${ccol};
-        }
+	//     .${prefix}${cnum}-color {
+	//       color: ${ccol};
+	//     }
 
-        .${prefix}${cnum}-color-h:hover {
-          color: ${ccol};
-        }
-      `;
-		});
+	//     .${prefix}${cnum}-color-h:hover {
+	//       color: ${ccol};
+	//     }
+	//   `;
+	// 	});
 
-		const style = document.createElement('style');
-		style.innerText = cssString;
-		document.head.appendChild(style);
-	}
+	// 	const style = document.createElement('style');
+	// 	style.innerText = cssString;
+	// 	document.head.appendChild(style);
+	// }
 
 	// Load blocks
 	blocks(editor, config);
