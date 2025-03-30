@@ -3,12 +3,12 @@ type Shared = {
 };
 
 declare global {
-	var studiocmsWYSIWYGStudio: Shared;
+	var studiocmsWYSIWYG: Shared;
 }
 
 /**
- * A shared object used across the WYSIWYG Studio module. This object is either retrieved
- * from the global `studiocmsWYSIWYGStudio` property or initialized as a new object with
+ * A shared object used across the WYSIWYG module. This object is either retrieved
+ * from the global `studiocmsWYSIWYG` property or initialized as a new object with
  * default properties if it does not already exist.
  *
  * @remarks
@@ -16,8 +16,8 @@ declare global {
  * sanitization-related configurations or utilities.
  */
 export const shared: Shared =
-	globalThis.studiocmsWYSIWYGStudio ||
+	globalThis.studiocmsWYSIWYG ||
 	// biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
-	(globalThis.studiocmsWYSIWYGStudio = {
+	(globalThis.studiocmsWYSIWYG = {
 		sanitize: {},
 	});

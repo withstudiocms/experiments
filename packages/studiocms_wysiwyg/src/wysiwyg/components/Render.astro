@@ -1,28 +1,11 @@
 ---
 import type { PluginPageTypeRendererProps } from 'studiocms/types';
-import { importComponentsKeys } from 'studiocms/lib/renderer/runtime.js';
 import { shared } from '../shared.js';
-import { createComponentProxy, transformHTML } from '../../runtime/AstroComponentProxy.js';
-import { parse } from '../../utils.js';
-
-// Import components
-const _components = await importComponentsKeys();
-
-// Create component proxy
-// @ts-expect-error - $$result is a global variable injected by Astro during compilation and not a editor-known variable
-const components = createComponentProxy($$result, _components);
+import { prepareRender } from '../../common/prepareRender.js';
 
 interface Props extends PluginPageTypeRendererProps {}
 
-// Get default content
-const { defaultContent } = Astro.props.data;
-
-// Get content to render
-const contentToRender = defaultContent?.content
-	? parse<{ __STUDIOCMS_HTML: string }>(defaultContent.content).__STUDIOCMS_HTML
-	: '<h1>Error: No content found</h1>';
-
-// Render content
-const renderedContent = await transformHTML(contentToRender, components, shared?.sanitize);
+// @ts-expect-error - $$result is a global variable injected by Astro during compilation and not a editor-known variable
+const data = await prepareRender($$result, Astro.props.data, shared?.sanitize);
 ---
-<Fragment set:html={renderedContent} />
+<Fragment set:html={data} />
