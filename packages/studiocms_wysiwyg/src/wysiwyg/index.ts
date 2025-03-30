@@ -6,23 +6,23 @@
 /// <reference types="./virtual.d.ts" preserve="true" />
 /// <reference types="studiocms/v/types" />
 
-import type { AstroIntegration } from 'astro';
-import { addVirtualImports, createResolver } from 'astro-integration-kit';
+import { createResolver } from 'astro-integration-kit';
 import { type StudioCMSPlugin, definePlugin } from 'studiocms/plugins';
+import type { SanitizeOptions } from 'ultrahtml/transformers/sanitize';
+import { shared } from './shared.js';
 
-// export function studiocmsWYSIWYGDBTables(): AstroIntegration {
-// 	const { resolve } = createResolver(import.meta.url);
-// 	return {
-// 		name: '@studiocms/wysiwyg/db',
-// 		hooks: {
-// 			'astro:db:setup': ({ extendDb }) => {
-// 				extendDb({ configEntrypoint: resolve('./db/config.js') });
-// 			},
-// 		},
-// 	};
-// }
+/**
+ * Represents the configuration options for the StudioCMS WYSIWYG Plugin.
+ */
+export type StudioCMSWYSIWYGOptions = {
+	/** Options passed to the HTML Transformer during rendering */
+	sanitize?: SanitizeOptions;
+};
 
-export function studiocmsWYSIWYG(): StudioCMSPlugin {
+/**
+ * StudioCMS WYSIWYG Editor
+ */
+function studiocmsWYSIWYG(options?: StudioCMSWYSIWYGOptions): StudioCMSPlugin {
 	// Resolve the path to the current file
 	const { resolve } = createResolver(import.meta.url);
 
@@ -38,16 +38,26 @@ export function studiocmsWYSIWYG(): StudioCMSPlugin {
 			{
 				identifier: 'studiocms/wysiwyg',
 				label: 'WYSIWYG',
-				rendererComponent: 'studiocms/html',
-				pageContentComponent: 'studiocms/html',
+				rendererComponent: resolve('./components/Render.astro'),
+				pageContentComponent: resolve('./components/Editor.astro'),
 			},
 		],
 		integration: {
 			name: packageIdentifier,
 			hooks: {
-				'astro:config:setup': () => {},
-				'astro:config:done': () => {},
+				'astro:config:setup': (params) => {
+					params.injectRoute({
+						entrypoint: resolve('./routes/partial.astro'),
+						pattern: '/studiocms_api/wysiwyg_editor/partial',
+						prerender: false,
+					});
+				},
+				'astro:config:done': () => {
+					shared.sanitize = options?.sanitize || {};
+				},
 			},
 		},
 	});
 }
+
+export default studiocmsWYSIWYG;

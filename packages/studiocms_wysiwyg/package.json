@@ -42,8 +42,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "build-scripts build 'src/**/*.{ts,astro}'",
-    "dev": "build-scripts dev 'src/**/*.{ts,astro}'"
+    "build": "build-scripts build 'src/**/*.{ts,astro,css,js}'",
+    "dev": "build-scripts dev 'src/**/*.{ts,astro,css,js}'"
   },
   "exports": {
     ".": {
@@ -63,7 +63,22 @@
   "dependencies": {
     "@grapesjs/studio-sdk": "^1.0.35",
     "@grapesjs/studio-sdk-plugins": "^1.0.16",
+    "@studiocms/grapesjs-plugin": "workspace:*",
+    "@studiocms/ui": "^0.4.16",
     "astro-integration-kit": "catalog:",
+    "grapesjs": "^0.22.6",
+    "grapesjs-blocks-basic": "^1.0.2",
+    "grapesjs-plugin-forms": "^2.0.6",
+    "grapesjs-component-countdown": "1.0.2",
+    "grapesjs-plugin-export": "^1.0.12",
+    "grapesjs-tabs": "^1.0.6",
+    "grapesjs-custom-code": "^1.0.2",
+    "grapesjs-touch": "^0.1.1",
+    "grapesjs-parser-postcss": "^1.0.3",
+    "grapesjs-tooltip": "0.1.8",
+    "grapesjs-tui-image-editor": "^1.0.2",
+    "grapesjs-typed": "^2.0.1",
+    "grapesjs-style-bg": "^2.0.2",
     "ultrahtml": "^1.5.3"
   },
   "devDependencies": {
