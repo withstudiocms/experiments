@@ -1,6 +1,6 @@
 {
   "name": "@studiocms/grapesjs-plugin",
-  "version": "0.1.0-experimental.0",
+  "version": "0.1.0-experimental.1",
   "description": "Plugin for the GrapesJS Editor",
   "main": "dist/index.js",
   "files": [
