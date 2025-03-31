@@ -7,7 +7,5 @@
     "@studiocms/wysiwyg": "0.1.0-experimental.0",
     "playground": "0.0.1"
   },
-  "changesets": [
-    "evil-peaches-sort"
-  ]
+  "changesets": ["evil-peaches-sort"]
 }
