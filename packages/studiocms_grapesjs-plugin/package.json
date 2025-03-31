@@ -1,0 +1,45 @@
+{
+  "name": "@studiocms/grapesjs-plugin",
+  "version": "0.1.0-experimental.0",
+  "description": "Plugin for the GrapesJS Editor",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "grapesjs-cli build",
+    "start": "grapesjs-cli serve"
+  },
+  "keywords": [
+    "grapesjs",
+    "plugin",
+    "webpage",
+    "preset",
+    "wysiwyg"
+  ],
+  "author": {
+    "name": "Adam Matthiesen | Jacob Jenkins | Paul Valladares",
+    "url": "https://studiocms.dev"
+  },
+  "contributors": [
+    "Adammatthiesen",
+    "jdtjenkins",
+    "dreyfus92",
+    "code.spirit"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withstudiocms/experiments.git",
+    "directory": "packages/studiocms_grapesjs-plugin"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "grapesjs": "^0.22.6",
+    "grapesjs-cli": "^4.1.3"
+  },
+  "homepage": "https://studiocms.dev",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

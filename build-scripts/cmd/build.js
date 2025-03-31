@@ -1,7 +1,6 @@
 import { execSync } from 'node:child_process';
 import fs from 'node:fs/promises';
 import esbuild from 'esbuild';
-import { copy } from 'esbuild-plugin-copy';
 import glob from 'fast-glob';
 import { dim, gray, green, red, yellow } from 'kleur/colors';
 
@@ -13,6 +12,10 @@ const defaultConfig = {
 	target: 'node18',
 	sourcemap: false,
 	sourcesContent: false,
+	loader: {
+		'.astro': 'copy',
+		'.d.ts': 'copy',
+	},
 };
 
 const dt = new Intl.DateTimeFormat('en-us', {
@@ -39,15 +42,6 @@ const dtsGen = (buildTsConfig) => ({
 		});
 	},
 });
-
-const CopyConfig = {
-	assets: [
-		{
-			from: ['./src/**/*.!(ts|js|css)'],
-			to: '.',
-		},
-	],
-};
 
 export default async function build(...args) {
 	const config = Object.assign({}, defaultConfig);
@@ -96,7 +90,7 @@ export default async function build(...args) {
 			outdir,
 			outExtension: forceCJS ? { '.js': '.cjs' } : {},
 			format,
-			plugins: [copy(CopyConfig), dtsGen(buildTsConfig)],
+			plugins: [dtsGen(buildTsConfig)],
 		});
 		console.log(dim(`[${date}] `) + green('√ Build Complete'));
 		return;
@@ -127,7 +121,7 @@ export default async function build(...args) {
 		outdir,
 		format,
 		sourcemap: 'linked',
-		plugins: [copy(CopyConfig), rebuildPlugin],
+		plugins: [rebuildPlugin],
 	});
 
 	console.log(
