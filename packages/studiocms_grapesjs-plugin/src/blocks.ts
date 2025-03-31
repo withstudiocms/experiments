@@ -1,4 +1,4 @@
-import type { Editor, BlockProperties } from 'grapesjs';
+import type { BlockProperties, Editor } from 'grapesjs';
 import type { RequiredPluginOptions } from '.';
 
 export default (editor: Editor, opts: RequiredPluginOptions) => {

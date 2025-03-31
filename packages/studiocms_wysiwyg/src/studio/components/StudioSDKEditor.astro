@@ -1,8 +1,8 @@
 ---
 import '@grapesjs/studio-sdk/style';
-import type { PluginPageTypeEditorProps } from 'studiocms/types';
+import { AstroSVG, firstUpperCase } from 'studiocms:wysiwyg/studio/client';
 import { importComponentsKeys } from 'studiocms/lib/renderer/runtime.js';
-import { firstUpperCase, AstroSVG } from 'studiocms:wysiwyg/studio/client';
+import type { PluginPageTypeEditorProps } from 'studiocms/types';
 
 const componentKeys = Object.keys(await importComponentsKeys());
 

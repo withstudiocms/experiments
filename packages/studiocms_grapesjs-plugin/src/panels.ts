@@ -1,7 +1,7 @@
 import type { Editor } from 'grapesjs';
 import type { RequiredPluginOptions } from '.';
 
-import { cmdDeviceDesktop, cmdDeviceTablet, cmdDeviceMobile, cmdClear, cmdSave } from './consts';
+import { cmdClear, cmdDeviceDesktop, cmdDeviceMobile, cmdDeviceTablet, cmdSave } from './consts';
 
 export default (editor: Editor, opts: RequiredPluginOptions) => {
 	const { Panels } = editor;

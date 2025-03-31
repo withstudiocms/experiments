@@ -1,7 +1,7 @@
 import blog from '@studiocms/blog';
-import { defineStudioCMSConfig } from 'studiocms/config';
-import WYSIWYGStudio from '@studiocms/wysiwyg/studio';
 import WYSIWYG from '@studiocms/wysiwyg';
+import WYSIWYGStudio from '@studiocms/wysiwyg/studio';
+import { defineStudioCMSConfig } from 'studiocms/config';
 
 export default defineStudioCMSConfig({
 	dbStartPage: false,
