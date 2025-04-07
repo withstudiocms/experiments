@@ -46,6 +46,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+    "@atproto/api": "^0.14.20",
 		"@studiocms/ui": "^0.4.16",
 		"astro-integration-kit": "catalog:",
 		"ultrahtml": "^1.5.3",
