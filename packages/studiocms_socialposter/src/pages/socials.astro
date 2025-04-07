@@ -278,7 +278,6 @@ const options = [
         }
 
         const responses: any = []
-
         for (const item of todo) {
             const response = await fetch(item.url, {
                 body: JSON.stringify(jsonData),
@@ -288,10 +287,16 @@ const options = [
                 }
             })
 
-            if (response.ok) {
-                const responseData = await response.json();
-                responses.push(responseData);
-            }
+-            if (response.ok) {
+-                const responseData = await response.json();
+-                responses.push(responseData);
+-            }
++            const responseData = await response.json();
++            if (!response.ok) {
++                responses.push({ error: `Server returned ${response.status} - ${responseData?.message || "No error detail"}` });
++            } else {
++                responses.push(responseData);
++            }
         }
 
         let errors: number = 0
