@@ -57,35 +57,36 @@ export const POST: APIRoute = async (context: APIContext) => {
 
 		return response(200, JSON.stringify('Successfully sent Threads message'));
 	} catch (e) {
-		console.error('Threads API Error:', {
-			// @ts-ignore
-			message: e.message,
-			// @ts-ignore
-			response: e.response?.data || e.response,
-			// @ts-ignore
-			status: e.response?.status,
-			config: {
-				// @ts-ignore
-				url: e.config?.url,
-				// @ts-ignore
-				params: e.config?.params,
+		logger.error('Threads API Error:', e);
+		
+		// Type the error appropriately
+		type ApiError = Error & {
+			response?: {
+				data?: {
+					error?: { message?: string },
+					message?: string
+				},
+				status?: number
 			},
-		});
-
-		const errorMessage =
-			// @ts-ignore
-			e.response?.data?.error?.message ||
-			// @ts-ignore
-			e.response?.data?.message ||
-			// @ts-ignore
-			e.message ||
+			config?: {
+				url?: string,
+				params?: Record<string, string>
+			}
+		};
+		
+		const err = e as ApiError;
+		const errorMessage = 
+			err.response?.data?.error?.message ||
+			err.response?.data?.message ||
+			err.message ||
 			'Failed to post to Threads';
 
 		return response(
 			500,
 			JSON.stringify({
-				error: errorMessage || 'Failed to post to Threads',
+				error: errorMessage,
 			})
 		);
+	}
 	}
 };
