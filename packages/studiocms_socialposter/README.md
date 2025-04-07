@@ -23,6 +23,26 @@ THREADS_USER_ID=your_user_id
 THREADS_ACCESS_TOKEN=your_access_token
 ```
 
+### Usage
+
+Add this plugin in your StudioCMS config (`studiocms.config.mjs`) and enable the desired options.
+
+```ts
+import { defineStudioCMSConfig } from 'studiocms/config';
+import socialPoster from '@studiocms/socialposter';
+
+export default defineStudioCMSConfig({
+  // other options here
+  plugins: [
+    socialPoster({
+      bluesky: false,
+      threads: false,
+      twitter: false,
+    })
+  ],
+});
+```
+
 ## License
 
 [MIT Licensed](./LICENSE).
