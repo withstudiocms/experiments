@@ -139,13 +139,22 @@ const { bluesky, threads, twitter } = socialsConfig;
         const todo: { url: string, name: string }[] = []
 
         if (bluesky) {
-            todo.push({name: 'BlueSky', url: '/studiocms_api/socialposter/post-to-bluesky'});
+            todo.push({ 
+                name: 'BlueSky', 
+                url: '/studiocms_api/socialposter/post-to-bluesky' 
+            });
         }
         if (threads) {
-            todo.push({name: 'Threads', url: '/studiocms_api/socialposter/post-to-threads'});
+            todo.push({ 
+                name: 'Threads', 
+                url: '/studiocms_api/socialposter/post-to-threads' 
+            });
         }
         if (twitter) {
-            todo.push({name: 'Twitter', url: '/studiocms_api/socialposter/post-to-twitter'});
+            todo.push({ 
+                name: 'Twitter', 
+                url: '/studiocms_api/socialposter/post-to-twitter' 
+            });
         }
 
         const responses: any = []
