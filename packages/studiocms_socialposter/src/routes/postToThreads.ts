@@ -1,6 +1,7 @@
 import { THREADS_ACCESS_TOKEN, THREADS_USER_ID } from 'astro:env/server';
 import { response } from '../utils/response.js';
 import type { APIContext, APIRoute } from 'astro';
+import logger from 'studiocms:logger';
 
 export const POST: APIRoute = async (context: APIContext) => {
 	if (!THREADS_ACCESS_TOKEN || !THREADS_USER_ID) {
@@ -57,25 +58,25 @@ export const POST: APIRoute = async (context: APIContext) => {
 
 		return response(200, JSON.stringify('Successfully sent Threads message'));
 	} catch (e) {
-		logger.error('Threads API Error:', e);
-		
+		logger.error(`Threads API Error: ${e}`);
+
 		// Type the error appropriately
 		type ApiError = Error & {
 			response?: {
 				data?: {
-					error?: { message?: string },
-					message?: string
-				},
-				status?: number
-			},
+					error?: { message?: string };
+					message?: string;
+				};
+				status?: number;
+			};
 			config?: {
-				url?: string,
-				params?: Record<string, string>
-			}
+				url?: string;
+				params?: Record<string, string>;
+			};
 		};
-		
+
 		const err = e as ApiError;
-		const errorMessage = 
+		const errorMessage =
 			err.response?.data?.error?.message ||
 			err.response?.data?.message ||
 			err.message ||
@@ -87,6 +88,5 @@ export const POST: APIRoute = async (context: APIContext) => {
 				error: errorMessage,
 			})
 		);
-	}
 	}
 };
