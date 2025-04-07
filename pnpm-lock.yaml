@@ -126,9 +126,6 @@ importers:
       twitter-api-v2:
         specifier: ^1.22.0
         version: 1.22.0
-      ultrahtml:
-        specifier: ^1.5.3
-        version: 1.5.3
       vite:
         specifier: catalog:min
         version: 6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0)

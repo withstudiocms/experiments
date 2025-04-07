@@ -50,7 +50,6 @@
 		"@studiocms/ui": "^0.4.16",
 		"astro-integration-kit": "catalog:",
     "twitter-api-v2": "^1.22.0",
-		"ultrahtml": "^1.5.3",
     "quill": "^2.0.3"
 	},
 	"devDependencies": {
