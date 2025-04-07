@@ -11,7 +11,7 @@ export default defineStudioCMSConfig({
 		blog(),
 		WYSIWYGStudio({ licenseKey: 'LICENSE' }),
 		WYSIWYG(),
-		socialPoster({ bluesky: true }),
+		socialPoster({ bluesky: true, threads: true, twitter: true }),
 	],
 	dashboardConfig: {
 		developerConfig: {

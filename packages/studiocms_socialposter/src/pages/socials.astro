@@ -4,6 +4,30 @@ import socialsConfig from 'studiocms:socialposter/config';
 import { Card, Toggle, Button, Icon } from 'studiocms:ui/components';
 
 const { bluesky, threads, twitter } = socialsConfig;
+
+const options = [
+	{
+		label: 'BlueSky',
+		name: 'bluesky',
+		counterId: 'bsky-counter',
+		limit: 300,
+		enabled: bluesky,
+	},
+	{
+		label: 'Threads / Instagram',
+		name: 'threads',
+		counterId: 'threads-counter',
+		limit: 500,
+		enabled: threads,
+	},
+	{
+		label: 'Twitter / X',
+		name: 'twitter',
+		counterId: 'twitter-counter',
+		limit: 280,
+		enabled: twitter,
+	},
+];
 ---
 <div class="socials-container">
 
@@ -21,17 +45,21 @@ const { bluesky, threads, twitter } = socialsConfig;
         <div class="card-content">
 
             <div id="editor"></div>
-    
-            <div>Select where to post</div>
 
-            { bluesky && <Toggle label="BlueSky" name="bluesky" color={'info'} /> }
-            { threads && <Toggle label="Threads / Instagram" name="threads" color={'info'} /> }
-            { twitter && <Toggle label="Twitter / X" name="twitter" color={'info'} /> }
+            { 
+                options
+                    .filter(({enabled}) => enabled === true)
+                    .map(({ label, limit, name, counterId }) => (
+                    <div style="display: flex; justify-content: space-between;">
+                        <Toggle {label} {name} color={'info'} />
+                        <div id={counterId}>0 / {limit}</div>
+                    </div> 
+                ))
+            }
 
         </div>
 
-        <div slot="footer" style="display: flex; justify-content: space-between;">
-            <div id="counter">0 / 280</div>
+        <div slot="footer" style="display: flex; justify-content: right;">
 
             <Button id="post-button" variant={'solid'} color={'primary'} type="submit">
                 <Icon slot="start-content" name={'share-20-solid'} width={20} height={20} />
@@ -50,14 +78,23 @@ const { bluesky, threads, twitter } = socialsConfig;
 
     class Counter {
         quill: Quill;
-        options: { container: string };
-        container: HTMLElement;
+        options: { bsky: string, threads: string, twitter: string };
+        bsky: HTMLElement | null;
+        threads: HTMLElement | null;
+        twitter: HTMLElement | null;
 
-        constructor(quill: Quill, options: { container: string }) {
+        constructor(quill: Quill, options: { bsky: string, threads: string, twitter: string }) {
             this.quill = quill;
             this.options = options;
-            this.container = document.querySelector(options.container) as HTMLElement;
+            this.bsky = document.getElementById(options.bsky);
+            this.threads = document.getElementById(options.threads);
+            this.twitter = document.getElementById(options.twitter);
             quill.on(Quill.events.TEXT_CHANGE, this.update.bind(this));
+            this.setupToggleListeners([
+                { Counter: this.bsky!, limit: 300, Toggle: '[name="bluesky"]' },
+                { Counter: this.threads!, limit: 500, Toggle: '[name="threads"]' },
+                { Counter: this.twitter!, limit: 280, Toggle: '[name="twitter"]' },
+            ])
         }
 
         calculate() {
@@ -65,15 +102,88 @@ const { bluesky, threads, twitter } = socialsConfig;
             return text.length;
         }
 
+        setDanger(elm: HTMLElement) {
+            elm.style.color = 'hsl(var(--danger-active))';
+            elm.style.backgroundColor = 'hsl(var(--danger-flat-active))'
+        }
+
+        setSafe(elm: HTMLElement) {
+            elm.style.color = 'hsl(var(--text-muted))';
+            elm.style.backgroundColor = 'hsl(var(--background-step-2))'
+        }
+
+        updateBSky(length: number, elm: HTMLElement) {
+            elm.innerText = `${length} / 300`;
+            if (length > 300) {
+                this.setDanger(elm);
+            } else {
+                this.setSafe(elm);
+            }
+        }
+
+        updateThreads(length: number, elm: HTMLElement) {
+            elm.innerText = `${length} / 500`;
+            if (length > 500) {
+                this.setDanger(elm);
+            } else {
+                this.setSafe(elm);
+            }
+        }
+
+        updateTwitter(length: number, elm: HTMLElement) {
+            elm.innerText = `${length} / 280`;
+            if (length > 280) {
+                this.setDanger(elm);
+            } else {
+                this.setSafe(elm);
+            }
+        }
+
+        isEnabled(elm: HTMLElement | null, selector: string) {
+            if (!elm) return false;
+
+            const checkbox = document.querySelector<HTMLInputElement>(selector);
+            if (!checkbox || !checkbox.checked) return false;
+            return true;
+        }
+
+        setupToggleListeners(elms: { Counter: HTMLElement, Toggle: string, limit: number }[]) {
+            for (const elm of elms) {
+                const Elm = document.querySelector<HTMLInputElement>(elm.Toggle);
+                Elm?.addEventListener('click', () => {
+                    if (Elm.checked) {
+                        const length = this.calculate();
+                        const counter = elm.Counter;
+
+                        counter.innerText = `${length} / ${elm.limit}`
+                        if (length > elm.limit) {
+                            this.setDanger(counter);
+                        } else {
+                            this.setSafe(counter);
+                        }
+                    } else {
+                        const counter = elm.Counter;
+
+                        counter.innerText = `0 / ${elm.limit}`
+                        this.setSafe(counter);
+                    }
+                })
+            }
+        }
+
         update() {
             const length = this.calculate();
-            this.container.innerText = `${length} / 280`;
-            if (length > 280) {
-                this.container.style.color = 'hsl(var(--danger-active))';
-                this.container.style.backgroundColor = 'hsl(var(--danger-flat-active))'
-            } else {
-                this.container.style.color = 'hsl(var(--text-muted))';
-                this.container.style.backgroundColor = 'hsl(var(--background-step-2))'
+
+            if (this.isEnabled(this.bsky, '[name="bluesky"]')) {
+                this.updateBSky(length, this.bsky!);
+            }
+
+            if (this.isEnabled(this.threads, '[name="threads"]')) {
+                this.updateThreads(length, this.threads!);
+            }
+
+            if (this.isEnabled(this.twitter, '[name="twitter"]')) {
+                this.updateTwitter(length, this.twitter!);
             }
         }
     }
@@ -83,11 +193,13 @@ const { bluesky, threads, twitter } = socialsConfig;
     // We can now initialize Quill with something like this:
     const quill = new Quill(editor, {
         theme: 'snow',
-        placeholder: 'What are you doing?',
+        placeholder: 'What are you sharing?',
         modules: {
             toolbar: false,
             counter: {
-                container: '#counter',
+                bsky: 'bsky-counter',
+                threads: 'threads-counter',
+                twitter: 'twitter-counter'
             },
         },
     });
@@ -107,15 +219,6 @@ const { bluesky, threads, twitter } = socialsConfig;
             return;
         }
 
-        if (content.length > 280) {
-            toast({
-                title: 'Error',
-                type: 'danger',
-                description: 'Content must be under 280 characters!'
-            })
-            return;
-        }
-
         const bluesky = formData.get('bluesky') === 'on'
         const threads = formData.get('threads') === 'on'
         const twitter = formData.get('twitter') === 'on'
@@ -127,6 +230,23 @@ const { bluesky, threads, twitter } = socialsConfig;
                 description: 'No Options Selected!'
             });
             return;
+        }
+
+        const lengths: number[] = [];
+
+        if (bluesky) lengths.push(300)
+        if (threads) lengths.push(500)
+        if (twitter) lengths.push(280)
+
+        for (const ln of lengths) {
+            if (content.length > ln) {
+                toast({
+                    title: 'Error',
+                    type: 'danger',
+                    description: `Content must be under ${ln} characters!`
+                })
+                return;
+            }
         }
 
         const jsonData = {
@@ -258,7 +378,7 @@ const { bluesky, threads, twitter } = socialsConfig;
     .card-content {
         display: flex;
         flex-direction: column;
-        gap: .5rem;
+        gap: 1rem;
     }
 
     #editor {
@@ -267,10 +387,13 @@ const { bluesky, threads, twitter } = socialsConfig;
         width: 100%;
         height: 10rem;
         background-color: hsl(var(--background-step-1));
-        color: hsl(var(--text-normal))
+        color: hsl(var(--text-normal));
+        font-size: medium;
     }
 
-    #counter {
+    #bsky-counter,
+    #threads-counter,
+    #twitter-counter {
         border: 1px solid hsl(var(--border));
         background-color: hsl(var(--background-step-2));
         border-radius: var(--radius-lg);
