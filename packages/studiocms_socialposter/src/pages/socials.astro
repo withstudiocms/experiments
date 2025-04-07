@@ -6,6 +6,13 @@ import { Card, Toggle, Button, Icon } from 'studiocms:ui/components';
 const { bluesky, threads, twitter } = socialsConfig;
 ---
 <div class="socials-container">
+
+    {/* 
+    
+        // TODO: Add support for being able to display pages and their current content to make it easy to get excerpts for creating new posts.
+
+    */}
+
     <Card fullWidth as="form" action="#" id="socials-post">
         <div slot="header">
             <h2>Create Your Post</h2>
@@ -14,21 +21,21 @@ const { bluesky, threads, twitter } = socialsConfig;
         <div class="card-content">
 
             <div id="editor"></div>
-            <div id="counter">0 / 280</div>
     
-            <Card>
-                <div class="card-content">
-                    { bluesky && <Toggle label="BlueSky" name="bluesky" color={'info'} /> }
-                    { threads && <Toggle label="Threads / Instagram" name="threads" color={'info'} /> }
-                    { twitter && <Toggle label="Twitter / X" name="twitter" color={'info'} /> }
-                </div>
-            </Card>
+            <div>Select where to post:</div>
+
+            { bluesky && <Toggle label="BlueSky" name="bluesky" color={'info'} /> }
+            { threads && <Toggle label="Threads / Instagram" name="threads" color={'info'} /> }
+            { twitter && <Toggle label="Twitter / X" name="twitter" color={'info'} /> }
+
         </div>
 
-        <div slot="footer">
-            <Button id="post" variant={'solid'} color={'primary'} type="submit">
+        <div slot="footer" style="display: flex; justify-content: space-between;">
+            <div id="counter">0 / 280</div>
+
+            <Button id="post-button" variant={'solid'} color={'primary'} type="submit">
                 <Icon slot="start-content" name={'share-20-solid'} width={20} height={20} />
-                Post
+                Create Post
             </Button>
         </div>
     </Card>
@@ -54,7 +61,7 @@ const { bluesky, threads, twitter } = socialsConfig;
         }
 
         calculate() {
-            const text = this.quill.getText();
+            const text = this.quill.getText().trim();
             return text.length;
         }
 
@@ -62,9 +69,11 @@ const { bluesky, threads, twitter } = socialsConfig;
             const length = this.calculate();
             this.container.innerText = `${length} / 280`;
             if (length > 280) {
-                this.container.style.color = 'hsl(var(--danger-base))';
+                this.container.style.color = 'hsl(var(--danger-active))';
+                this.container.style.backgroundColor = 'hsl(var(--danger-flat-active))'
             } else {
                 this.container.style.color = 'hsl(var(--text-muted))';
+                this.container.style.backgroundColor = 'hsl(var(--background-step-2))'
             }
         }
     }
@@ -151,7 +160,8 @@ const { bluesky, threads, twitter } = socialsConfig;
             })
 
             if (response.ok) {
-                responses.push(await response.json());
+                const responseData = await response.json();
+                responses.push(responseData);
             }
         }
 
@@ -195,13 +205,19 @@ const { bluesky, threads, twitter } = socialsConfig;
 
     #editor {
         border: 1px solid hsl(var(--border));
+        border-radius: var(--radius-md);
+        width: 100%;
     }
 
     #counter {
         border: 1px solid hsl(var(--border));
-        border-width: 0px 1px 1px 1px;
-        color: (hsl(var(--text-muted)));
-        padding: 5px 15px;
-        text-align: right;
+        background-color: hsl(var(--background-step-2));
+        border-radius: var(--radius-lg);
+        border-width: 1px 1px 1px 1px;
+        color: hsl(var(--text-muted));
+        align-items: center;
+        text-align: center;
+        width: 6rem;
+        align-content: center;
     }
 </style>

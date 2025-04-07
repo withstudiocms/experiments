@@ -13,11 +13,11 @@ catalogs:
       specifier: ^9.1.2
       version: 9.1.3
     '@studiocms/blog':
-      specifier: 0.1.0-beta.13
-      version: 0.1.0-beta.13
+      specifier: 0.1.0-beta.14
+      version: 0.1.0-beta.14
     '@studiocms/devapps':
-      specifier: 0.1.0-beta.13
-      version: 0.1.0-beta.13
+      specifier: 0.1.0-beta.14
+      version: 0.1.0-beta.14
     '@types/node':
       specifier: ^22.0.0
       version: 22.13.13
@@ -31,8 +31,8 @@ catalogs:
       specifier: ^0.33.5
       version: 0.33.5
     studiocms:
-      specifier: 0.1.0-beta.13
-      version: 0.1.0-beta.13
+      specifier: 0.1.0-beta.14
+      version: 0.1.0-beta.14
     typescript:
       specifier: ^5.7
       version: 5.8.2
@@ -41,8 +41,8 @@ catalogs:
       specifier: ^5.5
       version: 5.5.5
     studiocms:
-      specifier: 0.1.0-beta.13
-      version: 0.1.0-beta.13
+      specifier: 0.1.0-beta.14
+      version: 0.1.0-beta.14
     vite:
       specifier: ^6.2.0
       version: 6.2.3
@@ -119,7 +119,7 @@ importers:
         version: 2.0.3
       studiocms:
         specifier: catalog:min
-        version: 0.1.0-beta.13(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
+        version: 0.1.0-beta.14(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
       ultrahtml:
         specifier: ^1.5.3
         version: 1.5.3
@@ -195,7 +195,7 @@ importers:
         version: 2.0.1
       studiocms:
         specifier: catalog:min
-        version: 0.1.0-beta.13(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
+        version: 0.1.0-beta.14(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
       ultrahtml:
         specifier: ^1.5.3
         version: 1.5.3
@@ -217,10 +217,13 @@ importers:
         version: 9.1.3(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))
       '@studiocms/blog':
         specifier: 'catalog:'
-        version: 0.1.0-beta.13(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(studiocms@0.1.0-beta.13(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0)))(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
+        version: 0.1.0-beta.14(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(studiocms@0.1.0-beta.14(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0)))(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
       '@studiocms/devapps':
         specifier: 'catalog:'
-        version: 0.1.0-beta.13(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(studiocms@0.1.0-beta.13(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0)))(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
+        version: 0.1.0-beta.14(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(studiocms@0.1.0-beta.14(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0)))(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
+      '@studiocms/socialposter':
+        specifier: workspace:*
+        version: link:../packages/studiocms_socialposter
       '@studiocms/wysiwyg':
         specifier: workspace:*
         version: link:../packages/studiocms_wysiwyg
@@ -232,7 +235,7 @@ importers:
         version: 0.33.5
       studiocms:
         specifier: 'catalog:'
-        version: 0.1.0-beta.13(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
+        version: 0.1.0-beta.14(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -1303,11 +1306,6 @@ packages:
   '@manypkg/get-packages@1.1.3':
     resolution: {integrity: sha512-fo+QhuU3qE/2TQMQmbVMqaQ6EWbMhi4ABWP+O4AM1NqPBuy0OrApV5LO6BrrgnhtAHS2NH6RrVk9OL181tTi8A==}
 
-  '@matthiesenxyz/integration-utils@0.3.0':
-    resolution: {integrity: sha512-i0Cw7iH0H6YfcFny/lss/ZtgAX8eqDeMWzhvmgMIWlxgZAsrRdnI7BWiTHpjb3aMdLLsXEcY3vnQ+RaSQaaW8Q==}
-    peerDependencies:
-      astro: ^4.14 || ^5
-
   '@mixmark-io/domino@2.2.0':
     resolution: {integrity: sha512-Y28PR25bHXUg88kCV7nivXrP2Nj2RueZ3/l/jdx6J9f8J4nsEGcgX0Qe6lt7Pa+J79+kPiJU3LguR6O/6zrLOw==}
 
@@ -1423,18 +1421,6 @@ packages:
 
   '@oslojs/jwt@0.2.0':
     resolution: {integrity: sha512-bLE7BtHrURedCn4Mco3ma9L4Y1GR2SMBuIvjWr7rmQ4/W/4Jy70TIAgZ+0nIlk0xHz1vNP8x8DCns45Sb2XRbg==}
-
-  '@pnpm/config.env-replace@1.1.0':
-    resolution: {integrity: sha512-htyl8TWnKL7K/ESFa1oW2UB5lVDxuF5DpM7tBi6Hu2LNL3mWkIzNLG6N4zoCUP1lCKNxWy/3iu8mS8MvToGd6w==}
-    engines: {node: '>=12.22.0'}
-
-  '@pnpm/network.ca-file@1.0.2':
-    resolution: {integrity: sha512-YcPQ8a0jwYU9bTdJDpXjMi7Brhkr1mXsXrUJvjqM2mQDgkRiz8jFaQGOdaLxgjtUfQgZhKy/O3cG/YwmgKaxLA==}
-    engines: {node: '>=12.22.0'}
-
-  '@pnpm/npm-conf@2.3.1':
-    resolution: {integrity: sha512-c83qWb22rNRuB0UaVCI0uRPNRr8Z0FWnEIvT47jiHAmOIUHbBOg5XvV7pM5x+rKn9HRpjxquDbXYSXr3fAKFcw==}
-    engines: {node: '>=12'}
 
   '@rollup/pluginutils@5.1.4':
     resolution: {integrity: sha512-USm05zrsFxYLPdWWq+K3STlWiT/3ELn3RcV5hJMghpeAIhxfsUIg6mt12CBJBInWMV4VneoV7SfGv8xIwo2qNQ==}
@@ -1583,19 +1569,19 @@ packages:
     engines: {node: '>=8.10'}
     hasBin: true
 
-  '@studiocms/blog@0.1.0-beta.13':
-    resolution: {integrity: sha512-sTiiZFLftFNIUECAaidGulwp+/Koim0u6ebuOwZmAuG2Yj1MJQ+dD9SOQFSwAs6ZeBw+ygJn2hiy8/aHAMAGEg==}
+  '@studiocms/blog@0.1.0-beta.14':
+    resolution: {integrity: sha512-wyNPXBlkPCXO30dG0WxWmwSnlCuuA5YL2IEKVvKe3YEXC6SkOjXl2b8euZwU/dWZhkZqj/fD5/tdloPxHEY8ow==}
     peerDependencies:
       astro: ^5.5.0
-      studiocms: 0.1.0-beta.13
+      studiocms: 0.1.0-beta.14
       vite: ^6.2.0
 
-  '@studiocms/devapps@0.1.0-beta.13':
-    resolution: {integrity: sha512-5gPrusLYa9KICMpH8Xg4Wrin3HIIMpgfZ+I3i1Er9TQpIaf7QktoPMKR4ppZYFwNi81QNBnzrk0mSDFqsunvzg==}
+  '@studiocms/devapps@0.1.0-beta.14':
+    resolution: {integrity: sha512-RJJAU2APZCfdJmDUvxxXh1EwhHkmsDp39qwVth9ScA8L3/GmtXqsPnSXDP/NAPbraq/t3GuykshRLaloz730sg==}
     peerDependencies:
       '@astrojs/db': ^0.14.7
       astro: ^5.5.0
-      studiocms: 0.1.0-beta.13
+      studiocms: 0.1.0-beta.14
       vite: ^6.2.0
     peerDependenciesMeta:
       studiocms:
@@ -1967,11 +1953,6 @@ packages:
     resolution: {integrity: sha512-6t10qk83GOG8p0vKmaCr8eiilZwO171AvbROMtvvNiwrTly62t+7XkA8RdIIVbpMhCASAsxgAzdRSwh6nw/5Dg==}
     engines: {node: '>=4'}
 
-  astro-integration-kit@0.17.0:
-    resolution: {integrity: sha512-fe31CCKmrGYn/kkBd1J4b7P02gEdMdEIFBz14zdAud+YAmJeLtZD6wmrCz3LDau+lE1oM1hQnvmZXVSM/YveKw==}
-    peerDependencies:
-      astro: ^4.12.0 || ^5.0.0-beta
-
   astro-integration-kit@0.18.0:
     resolution: {integrity: sha512-Z0QW5IQjosuKQDEGYYkvUX6EhEtrmE4/oViqWz23QveV8U7AuyFsTdg00WRNPevWZl/5a4lLUeDpv4bCRynRRg==}
     peerDependencies:
@@ -2081,9 +2062,6 @@ packages:
     resolution: {integrity: sha512-KDi1Ny1gSePi1vm0q4oxSF8b4DR44GF4BbmS2YdhPLOEqd8pDviZOGH/GsmRwoWJ2+5Lr085X7naowMwKHDG1A==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
-
-  buffer-equal-constant-time@1.0.1:
-    resolution: {integrity: sha512-zRpUiDwd/xk6ADqPMATG8vc9VPrkck7T07OIx0gnjmJAnHnTVXNQG3vfvWNuiZIkwu9KrKdA1iJKfsfTVxE6NA==}
 
   buffer-from@1.1.2:
     resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
@@ -2308,9 +2286,6 @@ packages:
   confbox@0.1.8:
     resolution: {integrity: sha512-RMtmw0iFkeR4YV+fUOSucriAQNb9g8zFR52MWCtl+cCZOFRNL6zeB395vPzFhEjjn4fMxXudmELnl/KF/WrK6w==}
 
-  config-chain@1.1.13:
-    resolution: {integrity: sha512-qj+f8APARXHrM0hraqXYb2/bOVSV4PvJQlNZ/DVj0QrmNM2q2euizkeuVckQ57J+W0mRH6Hvi+k50M4Jul2VRQ==}
-
   connect-history-api-fallback@2.0.0:
     resolution: {integrity: sha512-U73+6lQFmfiNPrYbXqr6kZ1i1wiRqXnp2nhMsINseWXO8lDau0LGEffJ8kQi4EjLZympVgRdvqjAgiZ1tgzDDA==}
     engines: {node: '>=0.8'}
@@ -2413,10 +2388,6 @@ packages:
 
   deep-diff@1.0.2:
     resolution: {integrity: sha512-aWS3UIVH+NPGCD1kki+DCU9Dua032iSsO43LqQpcs4R3+dVv7tX0qBGjiVHJHjplsoUM2XRO/KB92glqc68awg==}
-
-  deep-extend@0.6.0:
-    resolution: {integrity: sha512-LOHxIOaPYdHlJRtCQfDIVZtfw/ufM8+rVj649RIHzcm/vGwQRXFt6OPqIFWsm2XEMrNIEtWR64sY1LEKD2vAOA==}
-    engines: {node: '>=4.0.0'}
 
   default-browser-id@5.0.0:
     resolution: {integrity: sha512-A6p/pu/6fyBcA1TRz/GqWYPViplrftcW2gZC9q79ngNCKAeR/X3gcEdXQHl4KNXV+3wgIJ1CPkJQ3IHM6lcsyA==}
@@ -2658,9 +2629,6 @@ packages:
 
   easy-table@1.2.0:
     resolution: {integrity: sha512-OFzVOv03YpvtcWGe5AayU5G2hgybsg3iqA6drU8UaoZyB9jLGMTrz9+asnLp/E+6qPh88yEI1gvyZFZ41dmgww==}
-
-  ecdsa-sig-formatter@1.0.11:
-    resolution: {integrity: sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==}
 
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
@@ -3004,9 +2972,6 @@ packages:
     resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
     engines: {node: '>= 0.4'}
 
-  graceful-fs@4.2.10:
-    resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
-
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
@@ -3254,9 +3219,6 @@ packages:
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
 
-  ini@1.3.8:
-    resolution: {integrity: sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==}
-
   inquirer@8.2.6:
     resolution: {integrity: sha512-M1WuAmb7pn9zdFRtQYk26ZBoY043Sse0wVDdk4Bppr+JOXyQYybdtvK+l9wUibhtjdjvtoiNy8tk+EgsYIUqKg==}
     engines: {node: '>=12.0.0'}
@@ -3452,16 +3414,6 @@ packages:
   jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
 
-  jsonwebtoken@9.0.2:
-    resolution: {integrity: sha512-PRp66vJ865SSqOlgqS8hujT5U4AOgMfhrwYIuIhfKaoSCZcirrmASQr8CX7cUg+RMih+hgznrjp99o+W4pJLHQ==}
-    engines: {node: '>=12', npm: '>=6'}
-
-  jwa@1.4.1:
-    resolution: {integrity: sha512-qiLX/xhEEFKUAJ6FiBMbes3w9ATzyk5W7Hvzpa/SLYdxNtng+gcurvrI7TbACjIXlsJyr05/S1oUhZrc63evQA==}
-
-  jws@3.2.2:
-    resolution: {integrity: sha512-YHlZCB6lMTllWDtSPHz/ZXTsi8S00usEV6v1tjq8tOUZzw7DpSDWVXjXDre6ed1w/pd495ODpHZYSdkRTsa0HA==}
-
   katex@0.16.21:
     resolution: {integrity: sha512-XvqR7FgOHtWupfMiigNzmh+MgUVmDGU2kXZm899ZkPfcuoPuFxyHmXsgATDpFZDAXCI8tvinaVcDo8PIIJSo4A==}
     hasBin: true
@@ -3485,10 +3437,6 @@ packages:
     peerDependencies:
       '@types/node': '>=18'
       typescript: '>=5.0.4'
-
-  ky@1.7.5:
-    resolution: {integrity: sha512-HzhziW6sc5m0pwi5M196+7cEBtbt0lCYi67wNsiwMUmz833wloE0gbzJPWKs1gliFKQb34huItDQX97LyOdPdA==}
-    engines: {node: '>=18'}
 
   launch-editor@2.10.0:
     resolution: {integrity: sha512-D7dBRJo/qcGX9xlvt/6wUYzQxjh5G1RvZPgPv8vi4KRU99DVQL/oW7tnVOCCTm2HGeo3C5HvGE5Yrh6UBoZ0vA==}
@@ -3539,30 +3487,9 @@ packages:
   lodash.debounce@4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
 
-  lodash.includes@4.3.0:
-    resolution: {integrity: sha512-W3Bx6mdkRTGtlJISOvVD/lbqjTlPPUDTMnlXZFnVwi9NKJ6tiAk6LVdlhZMm17VZisqhKcgzpO5Wz91PCt5b0w==}
-
-  lodash.isboolean@3.0.3:
-    resolution: {integrity: sha512-Bz5mupy2SVbPHURB98VAcw+aHh4vRV5IPNhILUCsOzRmsTmSQ17jIuqopAentWoehktxGd9e/hbIXq980/1QJg==}
-
   lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
     deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
-
-  lodash.isinteger@4.0.4:
-    resolution: {integrity: sha512-DBwtEWN2caHQ9/imiNeEA5ys1JoRtRfY3d7V9wkqtbycnAmTvRRmbHKDV4a0EYc678/dia0jrte4tjYwVBaZUA==}
-
-  lodash.isnumber@3.0.3:
-    resolution: {integrity: sha512-QYqzpfwO3/CWf3XP+Z+tkQsfaLL/EnUlXWVkIk5FUPc4sBdTehEqZONuyRt2P67PXAk+NXmTBcc97zw9t1FQrw==}
-
-  lodash.isplainobject@4.0.6:
-    resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
-
-  lodash.isstring@4.0.1:
-    resolution: {integrity: sha512-0wJxfxH1wgO3GrbuP+dTTk7op+6L41QCXbGINEmD+ny/G/eCqGzxyCsh7159S+mgDDcoarnBw6PC1PS5+wUGgw==}
-
-  lodash.once@4.1.1:
-    resolution: {integrity: sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==}
 
   lodash.startcase@4.4.0:
     resolution: {integrity: sha512-+WKqsK294HMSc2jEbNgpHpd0JfIBhp7rEV4aqXWqFr6AlXov+SlcgB1Fv01y2kGe3Gc8nMW7VA0SrGuSkRfIEg==}
@@ -4041,10 +3968,6 @@ packages:
     resolution: {integrity: sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==}
     engines: {node: '>=6'}
 
-  package-json@10.0.1:
-    resolution: {integrity: sha512-ua1L4OgXSBdsu1FPb7F3tYH0F48a6kxvod4pLUlGY9COeJAJQNX/sNH2IiEmsxw7lqYiAwrdHMjz1FctOsyDQg==}
-    engines: {node: '>=18'}
-
   package-manager-detector@0.2.11:
     resolution: {integrity: sha512-BEnLolu+yuz22S56CU1SUKq3XC3PkwD5wv4ikR4MfGvnRVcmzXR9DwSlW2fEamyTPyXHomBJRzgapeuBvRNzJQ==}
 
@@ -4215,9 +4138,6 @@ packages:
   prosemirror-view@1.38.1:
     resolution: {integrity: sha512-4FH/uM1A4PNyrxXbD+RAbAsf0d/mM0D/wAKSVVWK7o0A9Q/oOXJBrw786mBf2Vnrs/Edly6dH6Z2gsb7zWwaUw==}
 
-  proto-list@1.2.4:
-    resolution: {integrity: sha512-vtK/94akxsTMhe0/cbfpR+syPuszcuwhqVjJq26CuNDgFGj682oRBXOP5MJpv2r7JtE8MsiepGIqvvOTBwn2vA==}
-
   proxy-addr@2.0.7:
     resolution: {integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==}
     engines: {node: '>= 0.10'}
@@ -4265,10 +4185,6 @@ packages:
   raw-body@2.5.2:
     resolution: {integrity: sha512-8zGqypfENjCIqGhgXToC8aB2r7YrBX+AQAfIPs/Mlk+BtPTztOvTS01NRW/3Eh60J+a48lt8qsCzirQ6loCVfA==}
     engines: {node: '>= 0.8'}
-
-  rc@1.2.8:
-    resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
-    hasBin: true
 
   react-dom@19.0.0:
     resolution: {integrity: sha512-4GV5sHFG0e/0AD4X+ySy6UJd3jVl1iNsNHdpad0qhABJ11twS3TTBnseqsKurKcsNqCEFeGL3uLpVChpIO3QfQ==}
@@ -4331,14 +4247,6 @@ packages:
   regexpu-core@6.2.0:
     resolution: {integrity: sha512-H66BPQMrv+V16t8xtmq+UC0CBpiTBA60V8ibS1QVReIp8T1z8hwFxqcGzm9K6lgsN7sB5edVH8a+ze6Fqm4weA==}
     engines: {node: '>=4'}
-
-  registry-auth-token@5.1.0:
-    resolution: {integrity: sha512-GdekYuwLXLxMuFTwAPg5UKGLW/UXzQrZvH/Zj791BQif5T05T0RsaLfHc9q3ZOKi7n+BoprPD9mJ0O0k4xzUlw==}
-    engines: {node: '>=14'}
-
-  registry-url@6.0.1:
-    resolution: {integrity: sha512-+crtS5QjFRqFCoQmvGduwYWEBng99ZvmFvF+cUJkGYF1L1BfU8C6Zp9T7f5vPAwyLkUExpvK+ANVZmGU49qi4Q==}
-    engines: {node: '>=12'}
 
   regjsgen@0.8.0:
     resolution: {integrity: sha512-RvwtGe3d7LvWiDQXeQw8p5asZUmfU1G/l6WbUXeHta7Y2PEIvBTwH6E2EfmYUK8pxcxEdEmaomqyp0vZZ7C+3Q==}
@@ -4719,10 +4627,6 @@ packages:
     resolution: {integrity: sha512-BrpvfNAE3dcvq7ll3xVumzjKjZQ5tI1sEUIKr3Uoks0XUl45St3FlatVqef9prk4jRDzhW6WZg+3bk93y6pLjA==}
     engines: {node: '>=6'}
 
-  strip-json-comments@2.0.1:
-    resolution: {integrity: sha512-4gB8na07fecVVkOI6Rs4e7T6NOTki5EmL7TUduTs6bu3EdnSycntVJ4re8kgZA+wx9IueI2Y11bfbgwtzuE0KQ==}
-    engines: {node: '>=0.10.0'}
-
   strip-json-comments@5.0.1:
     resolution: {integrity: sha512-0fk9zBqO67Nq5M/m45qHCJxylV/DhBlIOVExqgOMiCCrzrhU6tCibRXNqE3jwJLftzE9SNuZtYbpzcO+i9FiKw==}
     engines: {node: '>=14.16'}
@@ -4730,8 +4634,8 @@ packages:
   strnum@1.1.2:
     resolution: {integrity: sha512-vrN+B7DBIoTTZjnPNewwhx6cBA/H+IS7rfW68n7XxC1y7uoiGQBxaKzqucGUgavX15dJgiGztLJ8vxuEzwqBdA==}
 
-  studiocms@0.1.0-beta.13:
-    resolution: {integrity: sha512-h8iH/DnOh+/qGcvhhauDzorDc+TwHXUnTmf9+LDLzQyDGA3x6Kj649sQNf3etCbUegO4n41t1HcF594gZt5Trw==}
+  studiocms@0.1.0-beta.14:
+    resolution: {integrity: sha512-BGwUqhkLUF82qqxEhnGtizwwCBI1EzQdHW1T3W57aMa4KOv0PWzr0pK85GQIMpIbOIcYbN/lV+/Wo5roptfC5g==}
     hasBin: true
     peerDependencies:
       '@astrojs/db': ^0.14.7
@@ -6665,13 +6569,6 @@ snapshots:
       globby: 11.1.0
       read-yaml-file: 1.1.0
 
-  '@matthiesenxyz/integration-utils@0.3.0(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))':
-    dependencies:
-      astro: 5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2)
-      astro-integration-kit: 0.17.0(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))
-      package-json: 10.0.1
-      semver: 7.7.1
-
   '@mixmark-io/domino@2.2.0': {}
 
   '@nanostores/i18n@0.12.2(nanostores@0.11.4)':
@@ -6799,18 +6696,6 @@ snapshots:
     dependencies:
       '@oslojs/encoding': 0.4.1
 
-  '@pnpm/config.env-replace@1.1.0': {}
-
-  '@pnpm/network.ca-file@1.0.2':
-    dependencies:
-      graceful-fs: 4.2.10
-
-  '@pnpm/npm-conf@2.3.1':
-    dependencies:
-      '@pnpm/config.env-replace': 1.1.0
-      '@pnpm/network.ca-file': 1.0.2
-      config-chain: 1.1.13
-
   '@rollup/pluginutils@5.1.4(rollup@4.37.0)':
     dependencies:
       '@types/estree': 1.0.7
@@ -6926,15 +6811,15 @@ snapshots:
       ignore: 5.3.2
       p-map: 4.0.0
 
-  '@studiocms/blog@0.1.0-beta.13(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(studiocms@0.1.0-beta.13(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0)))(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))':
+  '@studiocms/blog@0.1.0-beta.14(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(studiocms@0.1.0-beta.14(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0)))(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))':
     dependencies:
       '@astrojs/rss': 4.0.11
       astro: 5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2)
       astro-integration-kit: 0.18.0(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))
-      studiocms: 0.1.0-beta.13(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
+      studiocms: 0.1.0-beta.14(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
       vite: 6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0)
 
-  '@studiocms/devapps@0.1.0-beta.13(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(studiocms@0.1.0-beta.13(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0)))(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))':
+  '@studiocms/devapps@0.1.0-beta.14(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(studiocms@0.1.0-beta.14(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0)))(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))':
     dependencies:
       '@astrojs/db': 0.14.9(@types/react@19.0.12)(react@19.0.0)
       astro: 5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2)
@@ -6944,7 +6829,7 @@ snapshots:
       turndown: 7.2.0
       vite: 6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0)
     optionalDependencies:
-      studiocms: 0.1.0-beta.13(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
+      studiocms: 0.1.0-beta.14(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
 
   '@studiocms/markdown-remark-processor@1.2.0':
     dependencies:
@@ -7355,12 +7240,6 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  astro-integration-kit@0.17.0(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2)):
-    dependencies:
-      astro: 5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2)
-      pathe: 1.1.2
-      recast: 0.23.11
-
   astro-integration-kit@0.18.0(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2)):
     dependencies:
       astro: 5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2)
@@ -7591,8 +7470,6 @@ snapshots:
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.24.4)
 
-  buffer-equal-constant-time@1.0.1: {}
-
   buffer-from@1.1.2: {}
 
   buffer@5.7.1:
@@ -7816,11 +7693,6 @@ snapshots:
 
   confbox@0.1.8: {}
 
-  config-chain@1.1.13:
-    dependencies:
-      ini: 1.3.8
-      proto-list: 1.2.4
-
   connect-history-api-fallback@2.0.0: {}
 
   content-disposition@0.5.4:
@@ -7902,8 +7774,6 @@ snapshots:
   decode-uri-component@0.4.1: {}
 
   deep-diff@1.0.2: {}
-
-  deep-extend@0.6.0: {}
 
   default-browser-id@5.0.0: {}
 
@@ -8052,10 +7922,6 @@ snapshots:
       ansi-regex: 5.0.1
     optionalDependencies:
       wcwidth: 1.0.1
-
-  ecdsa-sig-formatter@1.0.11:
-    dependencies:
-      safe-buffer: 5.2.1
 
   ee-first@1.1.1: {}
 
@@ -8416,8 +8282,6 @@ snapshots:
 
   gopd@1.2.0: {}
 
-  graceful-fs@4.2.10: {}
-
   graceful-fs@4.2.11: {}
 
   grapesjs-blocks-basic@1.0.2: {}
@@ -8765,8 +8629,6 @@ snapshots:
 
   inherits@2.0.4: {}
 
-  ini@1.3.8: {}
-
   inquirer@8.2.6:
     dependencies:
       ansi-escapes: 4.3.2
@@ -8919,30 +8781,6 @@ snapshots:
     optionalDependencies:
       graceful-fs: 4.2.11
 
-  jsonwebtoken@9.0.2:
-    dependencies:
-      jws: 3.2.2
-      lodash.includes: 4.3.0
-      lodash.isboolean: 3.0.3
-      lodash.isinteger: 4.0.4
-      lodash.isnumber: 3.0.3
-      lodash.isplainobject: 4.0.6
-      lodash.isstring: 4.0.1
-      lodash.once: 4.1.1
-      ms: 2.1.3
-      semver: 7.7.1
-
-  jwa@1.4.1:
-    dependencies:
-      buffer-equal-constant-time: 1.0.1
-      ecdsa-sig-formatter: 1.0.11
-      safe-buffer: 5.2.1
-
-  jws@3.2.2:
-    dependencies:
-      jwa: 1.4.1
-      safe-buffer: 5.2.1
-
   katex@0.16.21:
     dependencies:
       commander: 8.3.0
@@ -8973,8 +8811,6 @@ snapshots:
       typescript: 5.8.2
       zod: 3.24.2
       zod-validation-error: 3.4.0(zod@3.24.2)
-
-  ky@1.7.5: {}
 
   launch-editor@2.10.0:
     dependencies:
@@ -9048,21 +8884,7 @@ snapshots:
 
   lodash.debounce@4.0.8: {}
 
-  lodash.includes@4.3.0: {}
-
-  lodash.isboolean@3.0.3: {}
-
   lodash.isequal@4.5.0: {}
-
-  lodash.isinteger@4.0.4: {}
-
-  lodash.isnumber@3.0.3: {}
-
-  lodash.isplainobject@4.0.6: {}
-
-  lodash.isstring@4.0.1: {}
-
-  lodash.once@4.1.1: {}
 
   lodash.startcase@4.4.0: {}
 
@@ -9683,13 +9505,6 @@ snapshots:
 
   p-try@2.2.0: {}
 
-  package-json@10.0.1:
-    dependencies:
-      ky: 1.7.5
-      registry-auth-token: 5.1.0
-      registry-url: 6.0.1
-      semver: 7.7.1
-
   package-manager-detector@0.2.11:
     dependencies:
       quansync: 0.2.10
@@ -9880,8 +9695,6 @@ snapshots:
       prosemirror-state: 1.4.3
       prosemirror-transform: 1.10.3
 
-  proto-list@1.2.4: {}
-
   proxy-addr@2.0.7:
     dependencies:
       forwarded: 0.2.0
@@ -9939,13 +9752,6 @@ snapshots:
       http-errors: 2.0.0
       iconv-lite: 0.4.24
       unpipe: 1.0.0
-
-  rc@1.2.8:
-    dependencies:
-      deep-extend: 0.6.0
-      ini: 1.3.8
-      minimist: 1.2.8
-      strip-json-comments: 2.0.1
 
   react-dom@19.0.0(react@19.0.0):
     dependencies:
@@ -10025,14 +9831,6 @@ snapshots:
       regjsparser: 0.12.0
       unicode-match-property-ecmascript: 2.0.0
       unicode-match-property-value-ecmascript: 2.2.0
-
-  registry-auth-token@5.1.0:
-    dependencies:
-      '@pnpm/npm-conf': 2.3.1
-
-  registry-url@6.0.1:
-    dependencies:
-      rc: 1.2.8
 
   regjsgen@0.8.0: {}
 
@@ -10551,13 +10349,11 @@ snapshots:
 
   strip-final-newline@2.0.0: {}
 
-  strip-json-comments@2.0.1: {}
-
   strip-json-comments@5.0.1: {}
 
   strnum@1.1.2: {}
 
-  studiocms@0.1.0-beta.13(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0)):
+  studiocms@0.1.0-beta.14(@astrojs/db@0.14.9(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@libsql/client@0.15.1)(@types/react@19.0.12)(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0)):
     dependencies:
       '@astrojs/db': 0.14.9(@types/react@19.0.12)(react@19.0.0)
       '@astrojs/markdown-remark': 6.3.1
@@ -10570,7 +10366,6 @@ snapshots:
       '@iconify-json/simple-icons': 1.2.29
       '@inox-tools/inline-mod': 2.0.3(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
       '@inox-tools/runtime-logger': 0.4.2(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))
-      '@matthiesenxyz/integration-utils': 0.3.0(astro@5.5.5(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))
       '@nanostores/i18n': 0.12.2(nanostores@0.11.4)
       '@nanostores/persistent': 0.10.2(nanostores@0.11.4)
       '@oslojs/binary': 1.0.0
@@ -10594,7 +10389,6 @@ snapshots:
       figlet: 1.8.0
       fuse.js: 7.1.0
       is-unicode-supported: 2.1.0
-      jsonwebtoken: 9.0.2
       katex: 0.16.21
       lodash: 4.17.21
       mdast-util-from-markdown: 2.0.2
@@ -10603,7 +10397,6 @@ snapshots:
       mrmime: 2.0.1
       nanostores: 0.11.4
       nodemailer: 6.10.0
-      package-json: 10.0.1
       semver: 7.7.1
       slice-ansi: 7.1.0
       socks: 2.8.4
