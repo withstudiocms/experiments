@@ -1,5 +1,4 @@
 import { THREADS_ACCESS_TOKEN, THREADS_USER_ID } from 'astro:env/server';
-import logger from 'studiocms:logger';
 import { response } from '../utils/response.js';
 import type { APIContext, APIRoute } from 'astro';
 
@@ -58,12 +57,34 @@ export const POST: APIRoute = async (context: APIContext) => {
 
 		return response(200, JSON.stringify('Successfully sent Threads message'));
 	} catch (e) {
-		logger.error(`Error posting to Threads: ${e}`);
+		console.error('Threads API Error:', {
+			// @ts-ignore
+			message: e.message,
+			// @ts-ignore
+			response: e.response?.data || e.response,
+			// @ts-ignore
+			status: e.response?.status,
+			config: {
+				// @ts-ignore
+				url: e.config?.url,
+				// @ts-ignore
+				params: e.config?.params,
+			},
+		});
+
+		const errorMessage =
+			// @ts-ignore
+			e.response?.data?.error?.message ||
+			// @ts-ignore
+			e.response?.data?.message ||
+			// @ts-ignore
+			e.message ||
+			'Failed to post to Threads';
 
 		return response(
 			500,
 			JSON.stringify({
-				error: (e as Error).message || 'Failed to post to Threads',
+				error: errorMessage || 'Failed to post to Threads',
 			})
 		);
 	}
