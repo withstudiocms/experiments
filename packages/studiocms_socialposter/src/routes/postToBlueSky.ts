@@ -1,25 +1,27 @@
-import type { APIContext, APIRoute } from "astro";
-import { AtpAgent } from "@atproto/api";
-import {
-	BLUESKY_PASSWORD,
-	BLUESKY_SERVICE,
-	BLUESKY_USERNAME,
-} from "astro:env/server";
-import logger from "studiocms:logger";
-import { response } from "../utils/response.js";
+import type { APIContext, APIRoute } from 'astro';
+import { AtpAgent } from '@atproto/api';
+import { BLUESKY_PASSWORD, BLUESKY_SERVICE, BLUESKY_USERNAME } from 'astro:env/server';
+import logger from 'studiocms:logger';
+import { response } from '../utils/response.js';
+import { getUserData, verifyUserPermissionLevel } from 'studiocms:auth/lib/user';
 
 export const POST: APIRoute = async (context: APIContext) => {
+	const userSessionData = await getUserData(context);
+
+	const isEditor = await verifyUserPermissionLevel(userSessionData, 'editor');
+
+	if (!isEditor) {
+		return response(400, 'Unauthorized');
+	}
+
 	if (!BLUESKY_PASSWORD || !BLUESKY_SERVICE || !BLUESKY_USERNAME) {
-		return response(500, JSON.stringify({ error: "Missing ENV Variables" }));
+		return response(500, JSON.stringify({ error: 'Missing ENV Variables' }));
 	}
 
 	const { content } = await context.request.json();
 
 	if (!content) {
-		return response(
-			500,
-			JSON.stringify({ error: "Content must not be empty" }),
-		);
+		return response(500, JSON.stringify({ error: 'Content must not be empty' }));
 	}
 
 	const agent = new AtpAgent({
@@ -37,18 +39,15 @@ export const POST: APIRoute = async (context: APIContext) => {
 			createdAt: new Date().toISOString(),
 		});
 
-		return response(
-			200,
-			JSON.stringify({ message: "Successfully sent BlueSky message" }),
-		);
+		return response(200, JSON.stringify({ message: 'Successfully sent BlueSky message' }));
 	} catch (e) {
 		logger.error(`Error posting to Bluesky: ${e}`);
 
 		return response(
 			500,
 			JSON.stringify({
-				error: (e as Error).message || "Failed to post to BlueSky",
-			}),
+				error: (e as Error).message || 'Failed to post to BlueSky',
+			})
 		);
 	}
 };

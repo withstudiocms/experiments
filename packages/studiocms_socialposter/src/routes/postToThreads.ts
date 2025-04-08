@@ -2,8 +2,17 @@ import { THREADS_ACCESS_TOKEN, THREADS_USER_ID } from 'astro:env/server';
 import { response } from '../utils/response.js';
 import type { APIContext, APIRoute } from 'astro';
 import logger from 'studiocms:logger';
+import { getUserData, verifyUserPermissionLevel } from 'studiocms:auth/lib/user';
 
 export const POST: APIRoute = async (context: APIContext) => {
+	const userSessionData = await getUserData(context);
+
+	const isEditor = await verifyUserPermissionLevel(userSessionData, 'editor');
+
+	if (!isEditor) {
+		return response(400, 'Unauthorized');
+	}
+
 	if (!THREADS_ACCESS_TOKEN || !THREADS_USER_ID) {
 		return response(500, JSON.stringify({ error: 'Missing ENV Variables' }));
 	}

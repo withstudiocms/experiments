@@ -8,8 +8,17 @@ import logger from 'studiocms:logger';
 import { response } from '../utils/response.js';
 import type { APIContext, APIRoute } from 'astro';
 import { TwitterApi } from 'twitter-api-v2';
+import { getUserData, verifyUserPermissionLevel } from 'studiocms:auth/lib/user';
 
 export const POST: APIRoute = async (context: APIContext) => {
+	const userSessionData = await getUserData(context);
+
+	const isEditor = await verifyUserPermissionLevel(userSessionData, 'editor');
+
+	if (!isEditor) {
+		return response(400, 'Unauthorized');
+	}
+
 	if (!TWITTER_API_KEY || !TWITTER_API_SECRET || !TWITTER_ACCESS_TOKEN || !TWITTER_ACCESS_SECRET) {
 		return response(500, JSON.stringify({ error: 'Missing ENV Variables' }));
 	}
