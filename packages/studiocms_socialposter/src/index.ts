@@ -8,9 +8,9 @@
 /// <reference types="../ui.d.ts" />
 /// <reference types="studiocms/v/types" />
 import { addVirtualImports, createResolver } from 'astro-integration-kit';
+import { envField } from 'astro/config';
 import { type StudioCMSPlugin, definePlugin } from 'studiocms/plugins';
 import { addAstroEnvConfig } from './utils/astroEnvConfig.js';
-import { envField } from 'astro/config';
 
 export interface StudioCMSSocialPosterOptions {
 	bluesky: boolean;

@@ -1,7 +1,7 @@
 import blog from '@studiocms/blog';
+import socialPoster from '@studiocms/socialposter';
 import WYSIWYG from '@studiocms/wysiwyg';
 import WYSIWYGStudio from '@studiocms/wysiwyg/studio';
-import socialPoster from '@studiocms/socialposter';
 import { defineStudioCMSConfig } from 'studiocms/config';
 
 export default defineStudioCMSConfig({

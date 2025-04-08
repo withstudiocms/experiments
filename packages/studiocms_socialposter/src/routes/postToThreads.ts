@@ -1,8 +1,8 @@
 import { THREADS_ACCESS_TOKEN, THREADS_USER_ID } from 'astro:env/server';
-import { response } from '../utils/response.js';
-import type { APIContext, APIRoute } from 'astro';
-import logger from 'studiocms:logger';
 import { getUserData, verifyUserPermissionLevel } from 'studiocms:auth/lib/user';
+import logger from 'studiocms:logger';
+import type { APIContext, APIRoute } from 'astro';
+import { response } from '../utils/response.js';
 
 export const POST: APIRoute = async (context: APIContext) => {
 	const userSessionData = await getUserData(context);

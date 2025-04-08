@@ -1,9 +1,9 @@
-import type { APIContext, APIRoute } from 'astro';
-import { AtpAgent } from '@atproto/api';
 import { BLUESKY_PASSWORD, BLUESKY_SERVICE, BLUESKY_USERNAME } from 'astro:env/server';
-import logger from 'studiocms:logger';
-import { response } from '../utils/response.js';
 import { getUserData, verifyUserPermissionLevel } from 'studiocms:auth/lib/user';
+import logger from 'studiocms:logger';
+import { AtpAgent } from '@atproto/api';
+import type { APIContext, APIRoute } from 'astro';
+import { response } from '../utils/response.js';
 
 export const POST: APIRoute = async (context: APIContext) => {
 	const userSessionData = await getUserData(context);

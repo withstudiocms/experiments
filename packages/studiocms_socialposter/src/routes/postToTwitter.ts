@@ -4,11 +4,11 @@ import {
 	TWITTER_API_KEY,
 	TWITTER_API_SECRET,
 } from 'astro:env/server';
+import { getUserData, verifyUserPermissionLevel } from 'studiocms:auth/lib/user';
 import logger from 'studiocms:logger';
-import { response } from '../utils/response.js';
 import type { APIContext, APIRoute } from 'astro';
 import { TwitterApi } from 'twitter-api-v2';
-import { getUserData, verifyUserPermissionLevel } from 'studiocms:auth/lib/user';
+import { response } from '../utils/response.js';
 
 export const POST: APIRoute = async (context: APIContext) => {
 	const userSessionData = await getUserData(context);
