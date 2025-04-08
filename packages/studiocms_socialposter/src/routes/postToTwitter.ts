@@ -37,6 +37,13 @@ export const POST: APIRoute = async (context: APIContext) => {
 		return response(400, JSON.stringify({ error: 'Content must not be empty' }));
 	}
 
+	if (content.length > 280) {
+		return response(
+			400,
+			JSON.stringify({ error: "Content exceeds Twitter's 280 character limit" })
+		);
+	}
+
 	try {
 		// Create the tweet
 		await client.v2.tweet(content);

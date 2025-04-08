@@ -24,6 +24,10 @@ export const POST: APIRoute = async (context: APIContext) => {
 		return response(400, JSON.stringify({ error: 'Content must not be empty' }));
 	}
 
+	if (content.length > 300) {
+		return response(400, JSON.stringify({ error: 'Content exceeds the 300-character limit' }));
+	}
+
 	const agent = new AtpAgent({
 		service: new URL(BLUESKY_SERVICE),
 	});
