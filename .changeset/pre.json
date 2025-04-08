@@ -5,7 +5,11 @@
     "build-scripts": "0.0.14",
     "@studiocms/grapesjs-plugin": "0.1.0-experimental.0",
     "@studiocms/wysiwyg": "0.1.0-experimental.0",
-    "playground": "0.0.1"
+    "playground": "0.0.1",
+    "@studiocms/socialposter": "0.1.0-experimental.0"
   },
-  "changesets": ["evil-peaches-sort"]
+  "changesets": [
+    "every-seas-judge",
+    "evil-peaches-sort"
+  ]
 }

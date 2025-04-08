@@ -1,6 +1,6 @@
 {
 	"name": "@studiocms/socialposter",
-	"version": "0.1.0-experimental.0",
+	"version": "0.1.0-experimental.1",
 	"description": "Allow cross-posting to your social media accounts from your StudioCMS dashboard with ease!",
 	"author": {
 		"name": "Adam Matthiesen | Jacob Jenkins | Paul Valladares",
@@ -11,7 +11,12 @@
 		"url": "git+https://github.com/withstudiocms/experiments.git",
 		"directory": "packages/studiocms_socialposter"
 	},
-	"contributors": ["Adammatthiesen", "jdtjenkins", "dreyfus92", "code.spirit"],
+	"contributors": [
+		"Adammatthiesen",
+		"jdtjenkins",
+		"dreyfus92",
+		"code.spirit"
+	],
 	"license": "MIT",
 	"keywords": [
 		"astro",
@@ -33,7 +38,9 @@
 		"provenance": true
 	},
 	"sideEffects": false,
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"build": "build-scripts build 'src/**/*.{ts,astro,css,js}'",
 		"dev": "build-scripts dev 'src/**/*.{ts,astro,css,js}'"
@@ -46,11 +53,11 @@
 	},
 	"type": "module",
 	"dependencies": {
-    "@atproto/api": "^0.14.20",
+		"@atproto/api": "^0.14.20",
 		"@studiocms/ui": "^0.4.16",
 		"astro-integration-kit": "catalog:",
-    "twitter-api-v2": "^1.22.0",
-    "quill": "^2.0.3"
+		"twitter-api-v2": "^1.22.0",
+		"quill": "^2.0.3"
 	},
 	"devDependencies": {
 		"@types/node": "catalog:"
