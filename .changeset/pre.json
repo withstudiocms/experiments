@@ -8,8 +8,5 @@
     "playground": "0.0.1",
     "@studiocms/socialposter": "0.1.0-experimental.0"
   },
-  "changesets": [
-    "every-seas-judge",
-    "evil-peaches-sort"
-  ]
+  "changesets": ["every-seas-judge", "evil-peaches-sort"]
 }
