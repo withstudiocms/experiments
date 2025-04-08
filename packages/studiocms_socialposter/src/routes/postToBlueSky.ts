@@ -11,7 +11,7 @@ export const POST: APIRoute = async (context: APIContext) => {
 	const isEditor = await verifyUserPermissionLevel(userSessionData, 'editor');
 
 	if (!isEditor) {
-		return response(400, 'Unauthorized');
+		return response(403, JSON.stringify({ error: 'Forbidden' }));
 	}
 
 	if (!BLUESKY_PASSWORD || !BLUESKY_SERVICE || !BLUESKY_USERNAME) {
@@ -21,7 +21,7 @@ export const POST: APIRoute = async (context: APIContext) => {
 	const { content } = await context.request.json();
 
 	if (!content) {
-		return response(500, JSON.stringify({ error: 'Content must not be empty' }));
+		return response(400, JSON.stringify({ error: 'Content must not be empty' }));
 	}
 
 	const agent = new AtpAgent({

@@ -16,7 +16,7 @@ export const POST: APIRoute = async (context: APIContext) => {
 	const isEditor = await verifyUserPermissionLevel(userSessionData, 'editor');
 
 	if (!isEditor) {
-		return response(400, 'Unauthorized');
+		return response(403, JSON.stringify({ error: 'Forbidden' }));
 	}
 
 	if (!TWITTER_API_KEY || !TWITTER_API_SECRET || !TWITTER_ACCESS_TOKEN || !TWITTER_ACCESS_SECRET) {
@@ -34,7 +34,7 @@ export const POST: APIRoute = async (context: APIContext) => {
 	const { content } = await context.request.json();
 
 	if (!content) {
-		return response(500, JSON.stringify({ error: 'Content must not be empty' }));
+		return response(400, JSON.stringify({ error: 'Content must not be empty' }));
 	}
 
 	try {
