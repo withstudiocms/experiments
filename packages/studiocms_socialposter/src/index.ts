@@ -39,12 +39,15 @@ function studiocmsSocialPoster(opts?: Partial<StudioCMSSocialPosterOptions>): St
 	return definePlugin({
 		identifier: packageIdentifier,
 		name: 'StudioCMS Social Poster',
-		studiocmsMinimumVersion: '0.1.0-beta.14',
+		studiocmsMinimumVersion: '0.1.0-beta.15',
 		dashboardPages: {
 			user: [
 				{
 					title: {
-						'en-us': 'Share to Social Media',
+						en: 'Share to Social Media',
+						de: 'Share to Social Media',
+						es: 'Share to Social Media',
+						fr: 'Share to Social Media',
 					},
 					description: 'Share content on Social media',
 					sidebar: 'single',
