@@ -1,5 +1,14 @@
 # @studiocms/wysiwyg
 
+## 0.1.0-experimental.2
+
+### Patch Changes
+
+- [#12](https://github.com/withstudiocms/experiments/pull/12) [`848df9e`](https://github.com/withstudiocms/experiments/commit/848df9e4d108de0a5bb3bec4d465512184e39cf0) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Update StudioCMS to beta.15
+
+- Updated dependencies []:
+  - @studiocms/grapesjs-plugin@0.1.0-experimental.2
+
 ## 0.1.0-experimental.1
 
 ### Patch Changes
