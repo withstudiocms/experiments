@@ -1,9 +1,9 @@
 import type { SSRResult } from 'astro';
 import { importComponentsKeys } from 'studiocms/lib/renderer/runtime.js';
+import { createComponentProxy, transformHTML } from 'studiocms/runtime';
 import type { PluginPageTypeRendererProps } from 'studiocms/types';
 import type { SanitizeOptions } from 'ultrahtml/transformers/sanitize';
 import { parse } from '../utils.js';
-import { createComponentProxy, transformHTML } from 'studiocms/runtime';
 
 /**
  * Prepares HTML content for rendering in the WYSIWYG editor.
