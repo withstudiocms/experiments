@@ -1,5 +1,15 @@
 # @studiocms/socialposter
 
+## 0.1.0-experimental.2
+
+### Patch Changes
+
+- [#12](https://github.com/withstudiocms/experiments/pull/12) [`848df9e`](https://github.com/withstudiocms/experiments/commit/848df9e4d108de0a5bb3bec4d465512184e39cf0) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Update StudioCMS to beta.15
+
+- [#10](https://github.com/withstudiocms/experiments/pull/10) [`e8325a2`](https://github.com/withstudiocms/experiments/commit/e8325a2b9d9cc15614a90a6b88e6fe74a9a263ef) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - fix: remove redundant call to read Response object
+
+- [#12](https://github.com/withstudiocms/experiments/pull/12) [`848df9e`](https://github.com/withstudiocms/experiments/commit/848df9e4d108de0a5bb3bec4d465512184e39cf0) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Minimum required StudioCMS version is now beta.15
+
 ## 0.1.0-experimental.1
 
 ### Patch Changes
