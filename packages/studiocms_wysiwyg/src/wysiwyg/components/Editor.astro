@@ -42,15 +42,17 @@ interface Props extends PluginPageTypeEditorProps {}
   import { toast } from "@studiocms/ui/components/Toast/toast.js";
   import grapesjs, { type Editor, usePlugin } from "grapesjs";
   import { parse } from "../../utils.js";
-  import blocks from '../editorPlugins/blocks/index.js';
-  import tabs from '../editorPlugins/tabs/index.js';
-  import countdown from '../editorPlugins/countdown.js';
-  import customCode from '../editorPlugins/code/index.js';
-  import tooltip from '../editorPlugins/tooltip.js';
-  import tuiImageEditor from '../editorPlugins/tuiImageEditor.js';
-  import typed from '../editorPlugins/typed/index.js';
-  import forms from '../editorPlugins/forms/index.js';
-  import rte from '../editorPlugins/rte/index.js';
+  import { 
+    blocks, 
+    customCode, 
+    countdown, 
+    forms, 
+    rte, 
+    tabs, 
+    tooltip, 
+    tuiImageEditor, 
+    typed 
+  } from '../editorPlugins/index.js';
   import "@studiocms/grapesjs-plugin";
 
   /**
