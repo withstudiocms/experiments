@@ -69,8 +69,6 @@
     "grapesjs": "^0.22.6",
     "grapesjs-rte-extensions": "^1.0.10",
     "ultrahtml": "^1.5.3",
-    "file-saver": "^2.0.5",
-    "jszip": "^3.10.1",
     "tui-image-editor": "^3.15.3",
     "grapesjs-style-gradient": "^3.0.3"
   },
