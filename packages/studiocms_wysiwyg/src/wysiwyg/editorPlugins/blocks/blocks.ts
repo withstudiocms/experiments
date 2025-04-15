@@ -57,6 +57,7 @@ export default function (editor: Editor, opts: Required<PluginOptions>) {
 	const step = 0.2;
 	const minDim = 1;
 	const currentUnit = 1;
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const resizerBtm: Record<string, any> = {
 		tl: 0,
 		tc: 0,
@@ -67,6 +68,7 @@ export default function (editor: Editor, opts: Required<PluginOptions>) {
 		br: 0,
 		minDim,
 	};
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const resizerRight: Record<string, any> = {
 		...resizerBtm,
 		cr: 1,
@@ -89,6 +91,7 @@ export default function (editor: Editor, opts: Required<PluginOptions>) {
 		'data-gjs-name': 'Row',
 	};
 
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const colAttr: Record<string, any> = {
 		class: clsCell,
 		'data-gjs-draggable': `.${clsRow}`,
@@ -108,6 +111,7 @@ export default function (editor: Editor, opts: Required<PluginOptions>) {
 		(selector) => privateCls.indexOf(selector.getFullName()) >= 0 && selector.set('private', 1)
 	);
 
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const attrsToString = (attrs: Record<string, any>) => {
 		const result = [];
 

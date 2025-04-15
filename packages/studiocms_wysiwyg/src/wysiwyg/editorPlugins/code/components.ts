@@ -26,6 +26,7 @@ export default (editor: Editor, opts: PluginOptions = {}) => {
 				components: {
 					tagName: 'span',
 					components: { type: 'textnode', content: 'Insert here your custom code' },
+					// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 				} as any,
 				...opts.propsCustomCode,
 			},
@@ -65,6 +66,7 @@ export default (editor: Editor, opts: PluginOptions = {}) => {
 		view: {
 			events: {
 				dblclick: 'onActive',
+				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			} as any,
 
 			init() {

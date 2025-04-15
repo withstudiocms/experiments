@@ -169,7 +169,8 @@ const plugin: Plugin<PluginOptions> = (editor, opts = {}) => {
 		});
 	}
 
-	const coundownScript = function (props: Record<string, any>) {
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	const countdownScript = function (props: Record<string, any>) {
 		const startfrom: string = props.startfrom;
 		const endTxt: string = props.endText;
 		// @ts-ignore
@@ -247,7 +248,7 @@ const plugin: Plugin<PluginOptions> = (editor, opts = {}) => {
 				classes: [pfx],
 				endText: options.endText,
 				droppable: false,
-				script: coundownScript,
+				script: countdownScript,
 				'script-props': ['startfrom', 'endText'],
 				traits: [
 					{

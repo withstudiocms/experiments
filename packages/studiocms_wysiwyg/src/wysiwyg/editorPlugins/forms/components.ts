@@ -91,6 +91,7 @@ export default function (editor: Editor) {
 				// The submit of the form might redirect the user from the editor so
 				// we should always prevent the default here.
 				submit: (e: Event) => e.preventDefault(),
+				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			} as any,
 		},
 	});
@@ -196,6 +197,7 @@ export default function (editor: Editor) {
 		view: {
 			events: {
 				mousedown: checkIfInPreview,
+				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			} as any,
 		},
 	});
@@ -216,6 +218,7 @@ export default function (editor: Editor) {
 		view: {
 			events: {
 				click: checkIfInPreview,
+				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			} as any,
 
 			init() {
@@ -223,6 +226,7 @@ export default function (editor: Editor) {
 			},
 
 			handleChecked() {
+				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 				(this.el as any).checked = !!this.model.get('attributes')?.checked;
 			},
 		},
@@ -294,6 +298,7 @@ export default function (editor: Editor) {
 		view: {
 			events: {
 				click: checkIfInPreview,
+				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			} as any,
 		},
 	});
@@ -306,6 +311,7 @@ export default function (editor: Editor) {
 		model: {
 			defaults: {
 				tagName: 'label',
+				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 				components: 'Label' as any,
 				traits: [forTrait],
 			},

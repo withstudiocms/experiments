@@ -34,6 +34,7 @@ import type tuiImageEditor from 'tui-image-editor';
 
 type ImageEditor = tuiImageEditor.ImageEditor;
 type IOptions = tuiImageEditor.IOptions;
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 type Constructor<K> = { new (...any: any): K };
 
 export type PluginOptions = {
@@ -47,6 +48,7 @@ export type PluginOptions = {
 	 * Pass the editor constructor.
 	 * By default, the `tui.ImageEditor` will be used.
 	 */
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	constructor?: any;
 
 	/**
@@ -167,6 +169,7 @@ const plugin: Plugin<PluginOptions> = (editor, options = {}) => {
 	const hasWindow = typeof window !== 'undefined';
 
 	const getConstructor = (): Constructor<ImageEditor> => {
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		return opts.constructor || (hasWindow && (window as any).tui?.ImageEditor);
 	};
 
@@ -295,7 +298,7 @@ const plugin: Plugin<PluginOptions> = (editor, options = {}) => {
           cursor: pointer
         ">
           ${opts.labelApply}
-        </botton>
+        </button>
       `;
 
 			return content;
@@ -330,6 +333,7 @@ const plugin: Plugin<PluginOptions> = (editor, options = {}) => {
 							files: [file],
 						},
 					},
+					// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 					(res: any) => {
 						const obj = res?.data?.[0];
 						const src = obj && (typeof obj === 'string' ? obj : obj.src);

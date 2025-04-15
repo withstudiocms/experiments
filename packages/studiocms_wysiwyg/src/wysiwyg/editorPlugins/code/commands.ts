@@ -19,6 +19,7 @@ export default (editor: Editor, opts: PluginOptions = {}) => {
 	editor.Commands.add(commandNameCustomCode, {
 		keyCustomCode,
 		target: null as null | Component,
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		codeViewer: null as any,
 
 		run(editor, s, opts = {}) {
@@ -38,6 +39,8 @@ export default (editor: Editor, opts: PluginOptions = {}) => {
 		 * Method which tells how to show the custom code
 		 * @param  {Component} target
 		 */
+
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		showCustomCode(target: Component, options: any) {
 			const title = options.title || modalTitle;
 			const code = target.get(keyCustomCode) || '';

@@ -23,6 +23,8 @@ export type PluginOptions = {
 	 * @example
 	 * { label: '</>', attributes: { title: 'Open custom code' } }
 	 */
+
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	toolbarBtnCustomCode?: Record<string, any>;
 
 	/**
@@ -41,6 +43,8 @@ export type PluginOptions = {
 	 * @example
 	 * { theme: 'hopscotch', readOnly: 0 }
 	 */
+
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	codeViewOptions?: Record<string, any>;
 
 	/**
@@ -52,6 +56,8 @@ export type PluginOptions = {
 	/**
 	 * Object to extend the default custom code command.
 	 */
+
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	commandCustomCode?: Record<string, any>;
 };
 

@@ -99,6 +99,7 @@ export default (editor: Editor, config: TabConfig) => {
 				return content;
 			},
 
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			clone(opt: { _inner?: boolean; symbol?: boolean; symbolInv?: boolean } = {}, ...args: any[]) {
 				const fromParent = opt._inner;
 				if (fromParent) {

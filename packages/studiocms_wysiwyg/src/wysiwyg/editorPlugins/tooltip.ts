@@ -97,7 +97,7 @@ export type PluginOptions = {
 
 	/**
 	 * Indicate if the tooltip can be styled.
-	 * You can pass an array of which proprties can be styled.
+	 * You can pass an array of which properties can be styled.
 	 * @example ['color', 'background-color']
 	 */
 	stylableTooltip?: string[] | boolean;
@@ -143,7 +143,7 @@ const plugin: Plugin<PluginOptions> = (editor, opts = {}) => {
 		privateClasses: true,
 
 		// Indicate if the tooltip can be styled. You can also pass an array
-		// of which proprties can be styled. Eg. `['color', 'background-color']`
+		// of which properties can be styled. Eg. `['color', 'background-color']`
 		stylableTooltip: [
 			'background-color',
 			'padding',
@@ -435,6 +435,7 @@ const plugin: Plugin<PluginOptions> = (editor, opts = {}) => {
 						},
 					},
 				]),
+				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 				...(propsTooltip as any),
 			},
 

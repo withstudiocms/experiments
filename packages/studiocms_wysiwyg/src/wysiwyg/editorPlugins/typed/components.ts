@@ -4,10 +4,12 @@ import { cmpId, traitStringId } from './utils.js';
 
 declare global {
 	interface Window {
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		Typed: any;
 	}
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const getTraitType = (value: any): string => {
 	if (typeof value === 'number') return 'number';
 	if (typeof value === 'boolean') return 'checkbox';
@@ -46,6 +48,7 @@ export default (editor: Editor, opts: RequiredPluginOptions) => {
 		.filter((item) => ['strings'].indexOf(item) < 0)
 		.map((name) => ({
 			changeProp: true,
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			type: getTraitType((typedProps as any)[name]),
 			min: 0,
 			name,
@@ -76,7 +79,9 @@ export default (editor: Editor, opts: RequiredPluginOptions) => {
 						return [];
 					};
 					const strings = getStrings(props.strings);
+					// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 					const int = (num: any) => Number.parseInt(num, 10) || 0;
+					// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 					const bool = (val: any) => !!val;
 					const init = () => {
 						const el = this as unknown as HTMLElement;
@@ -104,6 +109,7 @@ export default (editor: Editor, opts: RequiredPluginOptions) => {
 						};
 
 						if (strings?.length) {
+							// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 							(config as any).strings = strings;
 						}
 
@@ -119,6 +125,7 @@ export default (editor: Editor, opts: RequiredPluginOptions) => {
 						init();
 					}
 				},
+				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			}) as any,
 		},
 	});

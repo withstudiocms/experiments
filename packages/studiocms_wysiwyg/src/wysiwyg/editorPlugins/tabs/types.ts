@@ -91,6 +91,7 @@ export interface TabAttributes {
 	id?: string;
 	'aria-labelledby'?: string;
 	hidden?: boolean;
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	[key: string]: any;
 }
 

@@ -28,8 +28,11 @@ export default (editor: Editor, config: TabsOptions): void => {
 
 		const matches =
 			(body as HTMLElement).matches ||
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			(body as any).webkitMatchesSelector ||
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			(body as any).mozMatchesSelector ||
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			(body as any).msMatchesSelector;
 
 		const each = (
@@ -154,6 +157,7 @@ export default (editor: Editor, config: TabsOptions): void => {
 				...config.tabsProps,
 			},
 
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			isTabsComponent(comp: any): comp is TabsComponent {
 				return comp.findTabs !== undefined;
 			},
@@ -175,6 +179,7 @@ export default (editor: Editor, config: TabsOptions): void => {
 				});
 			},
 
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			__onTab(tab: TabComponent, index: number, v: any, opts: any = {}) {
 				if (!opts.avoidStore && !opts.temporary) {
 					tab.__initTab(index);

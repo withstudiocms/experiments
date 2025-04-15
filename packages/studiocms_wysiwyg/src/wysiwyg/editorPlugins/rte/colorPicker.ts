@@ -4,7 +4,7 @@
 //Modified to work Copyright (c) 2020-21 Brendon Ngirazi
 //Modified to Typescript Copyright (c) 2025 withstudiocms
 
-interface PiklorOptions {
+interface ColorPickerOptions {
 	open?: HTMLElement | string;
 	openEvent?: string;
 	style?: {
@@ -16,19 +16,19 @@ interface PiklorOptions {
 	closeOnBlur?: boolean;
 }
 
-export default class Piklor {
+export default class ColorPicker {
 	private elm: HTMLElement;
 	private cbs: Array<(color: string) => void>;
 	private color: string;
 	private isOpen: boolean;
 	private colors: string[];
-	private options: PiklorOptions;
+	private options: ColorPickerOptions;
 
 	/**
-	 * Piklor
-	 * Creates a new `Piklor` instance.
+	 * ColorPicker
+	 * Creates a new `ColorPicker` instance.
 	 *
-	 * @name Piklor
+	 * @name ColorPicker
 	 * @function
 	 * @param {String|HTMLElement} sel The element where the color picker will live.
 	 * @param {Array<string>} colors An array of strings representing colors.
@@ -43,9 +43,9 @@ export default class Piklor {
 	 *  - `autoclose` (Boolean): If `false`, the color picker will not be hided by default (default: `true`).
 	 *  - `closeOnBlur` (Boolean): If `true`, the color picker will be closed when clicked outside of it (default: `false`).
 	 *
-	 * @return {Piklor} The `Piklor` instance.
+	 * @return {ColorPicker} The `ColorPicker` instance.
 	 */
-	constructor(sel: string | HTMLElement, colors?: string[], options: PiklorOptions = {}) {
+	constructor(sel: string | HTMLElement, colors?: string[], options: ColorPickerOptions = {}) {
 		const defaultColors = [
 			'#1abc9c',
 			'#2ecc71',

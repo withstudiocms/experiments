@@ -45,6 +45,7 @@ export default function (editor: Editor) {
 
 				const el = document.createElement('textarea');
 				el.value = optionsArr.join('\n');
+				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 				this.$input = el as any;
 			}
 

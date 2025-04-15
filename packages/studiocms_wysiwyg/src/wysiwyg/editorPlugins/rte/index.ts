@@ -1,4 +1,4 @@
-import Piklor from './colorPicker.js';
+import ColorPicker from './colorPicker.js';
 import type { Plugin } from 'grapesjs';
 
 interface FontOptions {
@@ -194,7 +194,7 @@ const plugin: Plugin<RichTextEditorOptions> = (editor, opts = {}) => {
 				},
 			});
 
-		const pk1: Record<string, Piklor> = {};
+		const pk1: Record<string, ColorPicker> = {};
 		options.fonts?.fontColor &&
 			rte.add('fontColor', {
 				icon: `${icons?.fontColor || '<b style="pointer-events:none;border-bottom:2px solid">A</b>'}
@@ -216,7 +216,7 @@ const plugin: Plugin<RichTextEditorOptions> = (editor, opts = {}) => {
 						editor.Config.container?.replace('#', '')
 					}`;
 					if (!pk1[pikerEle])
-						pk1[pikerEle] = new Piklor(
+						pk1[pikerEle] = new ColorPicker(
 							pikerEle,
 							options.fonts?.fontColor
 								? Array.isArray(options.fonts.fontColor)
@@ -232,7 +232,7 @@ const plugin: Plugin<RichTextEditorOptions> = (editor, opts = {}) => {
 				},
 			});
 
-		const pk2: Record<string, Piklor> = {};
+		const pk2: Record<string, ColorPicker> = {};
 		options.fonts?.hilite &&
 			rte.add('hiliteColor', {
 				icon: `${
@@ -254,7 +254,7 @@ const plugin: Plugin<RichTextEditorOptions> = (editor, opts = {}) => {
 						editor.Config.container?.replace('#', '')
 					}`;
 					if (!pk2[pikerEle])
-						pk2[pikerEle] = new Piklor(
+						pk2[pikerEle] = new ColorPicker(
 							pikerEle,
 							options.fonts?.hilite
 								? Array.isArray(options.fonts.hilite)
