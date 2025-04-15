@@ -160,9 +160,6 @@ importers:
       grapesjs-rte-extensions:
         specifier: ^1.0.10
         version: 1.0.10
-      grapesjs-style-gradient:
-        specifier: ^3.0.3
-        version: 3.0.3
       studiocms:
         specifier: catalog:min
         version: 0.1.0-beta.15(@astrojs/db@0.14.10(@types/react@19.0.12)(react@19.0.0))(@astrojs/markdown-remark@6.3.1)(@types/react@19.0.12)(astro@5.6.1(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(react@19.0.0)(vite@6.2.6(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
@@ -3254,17 +3251,11 @@ packages:
   grapesjs-rte-extensions@1.0.10:
     resolution: {integrity: sha512-zP4UqgRAFpMH8JEIFy0JUhDpGOWtcR+AsXln7Mf4CNvhMI4o+IELMF4ZDD9Tuu+4wAml1rOX5S0w9fbj0Bbh9g==}
 
-  grapesjs-style-gradient@3.0.3:
-    resolution: {integrity: sha512-FDXPvFFg2a+2hh6IyGlPhdFVj2UYzOGd4lRsY3sb6057U0/tmLrzPAPDC2IpmaSddICOEYfJiAW/oMIci/SShQ==}
-
   grapesjs@0.22.6:
     resolution: {integrity: sha512-V4sD0jDhE95bz3bwC3gD+DmZzelwgozlarcFrEQFGv7HwYmKOIVXni7i8NVj/DLRGCD5jVHmr4k/sV5oSXPajw==}
 
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
-
-  grapick@0.1.13:
-    resolution: {integrity: sha512-2v7DdmXKbl9+GsL2ZRl2qEMD+PeczYJBSifwx+5SGbaSh0pZ+b6GLya87cBfN953wwXsZqyzuSVPBzqRz8F12g==}
 
   h3@1.15.1:
     resolution: {integrity: sha512-+ORaOBttdUm1E2Uu/obAyCguiI7MbBvsLTndc3gyK3zU+SYLoZXlyCP9Xgy0gikkGufFLTZXCXD6+4BsufnmHA==}
@@ -9202,10 +9193,6 @@ snapshots:
 
   grapesjs-rte-extensions@1.0.10: {}
 
-  grapesjs-style-gradient@3.0.3:
-    dependencies:
-      grapick: 0.1.13
-
   grapesjs@0.22.6:
     dependencies:
       '@types/backbone': 1.4.15
@@ -9218,8 +9205,6 @@ snapshots:
       underscore: 1.13.1
 
   graphemer@1.4.0: {}
-
-  grapick@0.1.13: {}
 
   h3@1.15.1:
     dependencies:

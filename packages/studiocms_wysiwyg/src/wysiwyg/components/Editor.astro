@@ -49,7 +49,6 @@ interface Props extends PluginPageTypeEditorProps {}
   import tooltip from '../editorPlugins/tooltip.js';
   import tuiImageEditor from '../editorPlugins/tuiImageEditor.js';
   import typed from '../editorPlugins/typed/index.js';
-  import styleBg from '../editorPlugins/styleBg.js';
   import forms from '../editorPlugins/forms/index.js';
   import "@studiocms/grapesjs-plugin";
   // @ts-ignore
@@ -218,7 +217,6 @@ interface Props extends PluginPageTypeEditorProps {}
         ],
       }),
       usePlugin(typed),
-      usePlugin(styleBg),
       usePlugin(forms),
       usePlugin(rte),
       '@studiocms/grapesjs-plugin',
