@@ -224,7 +224,5 @@ export default class Piklor {
 		this.cbs.forEach((cb) => {
 			cb?.(c);
 		});
-
-		this.cbs = [];
 	}
 }
