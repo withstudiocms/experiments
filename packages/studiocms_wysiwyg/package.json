@@ -73,8 +73,7 @@
     "grapesjs-style-gradient": "^3.0.3"
   },
   "devDependencies": {
-    "@types/node": "catalog:",
-    "@types/file-saver": "^2.0.7"
+    "@types/node": "catalog:"
   },
   "peerDependencies": {
     "astro": "catalog:min",
