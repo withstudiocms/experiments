@@ -67,7 +67,6 @@
     "@studiocms/ui": "^0.4.16",
     "astro-integration-kit": "catalog:",
     "grapesjs": "^0.22.6",
-    "grapesjs-rte-extensions": "^1.0.10",
     "ultrahtml": "^1.5.3",
     "tui-image-editor": "^3.15.3"
   },
