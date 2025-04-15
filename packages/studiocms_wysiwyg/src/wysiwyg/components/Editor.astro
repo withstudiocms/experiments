@@ -51,8 +51,8 @@ interface Props extends PluginPageTypeEditorProps {}
   import typed from '../editorPlugins/typed/index.js';
   import forms from '../editorPlugins/forms/index.js';
   import "@studiocms/grapesjs-plugin";
-  // @ts-ignore
-  import rte from "grapesjs-rte-extensions";
+  // // @ts-ignore
+  // import rte from "grapesjs-rte-extensions";
 
   /**
    * Represents an array of Astro component blocks, where each block contains metadata
@@ -218,7 +218,7 @@ interface Props extends PluginPageTypeEditorProps {}
       }),
       usePlugin(typed),
       usePlugin(forms),
-      usePlugin(rte),
+      // usePlugin(rte),
       '@studiocms/grapesjs-plugin',
     ],
     blockManager: {
