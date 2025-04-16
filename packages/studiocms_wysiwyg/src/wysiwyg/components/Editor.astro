@@ -1,7 +1,7 @@
 ---
 import '@studiocms/ui/css/colors.css';
 import 'grapesjs/dist/css/grapes.min.css';
-import 'grapesjs-rte-extensions/dist/grapesjs-rte-extensions.min.css';
+import '../editorPlugins/rte/styles.css';
 import '../styles/main.css';
 import { importComponentsKeys } from 'studiocms/lib/renderer/runtime.js';
 import type { PluginPageTypeEditorProps } from 'studiocms/types';
@@ -41,24 +41,19 @@ interface Props extends PluginPageTypeEditorProps {}
 <script>
   import { toast } from "@studiocms/ui/components/Toast/toast.js";
   import grapesjs, { type Editor, usePlugin } from "grapesjs";
-  import "@studiocms/grapesjs-plugin";
-  import blocks from "grapesjs-blocks-basic";
-  import countdown from "grapesjs-component-countdown";
-  import exporter from "grapesjs-plugin-export";
-  import customCode from "grapesjs-custom-code";
-  import postcss from "grapesjs-parser-postcss";
-  import tooltip from "grapesjs-tooltip";
-  import tuiImage from "grapesjs-tui-image-editor";
-  import typed from "grapesjs-typed";
-  import styleBg from "grapesjs-style-bg";
-  import forms from "grapesjs-plugin-forms";
-  // @ts-ignore
-  import rte from "grapesjs-rte-extensions";
-  // @ts-ignore
-  import tabs from "grapesjs-tabs";
-  // @ts-ignore
-  import touch from "grapesjs-touch";
   import { parse } from "../../utils.js";
+  import { 
+    blocks, 
+    customCode, 
+    countdown, 
+    forms, 
+    rte, 
+    tabs, 
+    tooltip, 
+    tuiImageEditor, 
+    typed 
+  } from '../editorPlugins/index.js';
+  import "@studiocms/grapesjs-plugin";
 
   /**
    * Represents an array of Astro component blocks, where each block contains metadata
@@ -199,21 +194,19 @@ interface Props extends PluginPageTypeEditorProps {}
     panels: { defaults: [] },
     plugins: [
       usePlugin(getPlugin(componentKeys)),
-      usePlugin(blocks, { flexGrid: true }),
-      usePlugin(tabs, {
-        tabsBlock: { category: "Extra" },
+      usePlugin(inlineStorage),
+      usePlugin(blocks, { 
+        flexGrid: true 
       }),
-      usePlugin(touch, {
-        block: {
-          category: "Extra",
-          content: {
-            type: "typed",
-            "type-speed": 40,
-            strings: ["Text row one", "Text row two", "Text row three"],
-          },
+      usePlugin(tabs, {
+        tabsBlock: { 
+          category: 'Extra' 
         },
       }),
-      usePlugin(tuiImage, {
+      usePlugin(countdown),
+      usePlugin(customCode),
+      usePlugin(tooltip),
+      usePlugin(tuiImageEditor, {
         script: [
           "https://uicdn.toast.com/tui.code-snippet/v1.5.2/tui-code-snippet.min.js",
           "https://uicdn.toast.com/tui-color-picker/v2.2.7/tui-color-picker.min.js",
@@ -224,17 +217,10 @@ interface Props extends PluginPageTypeEditorProps {}
           "https://uicdn.toast.com/tui-image-editor/v3.15.2/tui-image-editor.min.css",
         ],
       }),
-      usePlugin(countdown),
-      usePlugin(exporter),
-      usePlugin(customCode),
-      usePlugin(postcss),
-      usePlugin(tooltip),
       usePlugin(typed),
-      usePlugin(styleBg),
-      usePlugin(inlineStorage),
       usePlugin(forms),
       usePlugin(rte),
-      "@studiocms/grapesjs-plugin",
+      '@studiocms/grapesjs-plugin',
     ],
     blockManager: {
       blocks: convertComponentBlocks(rawBlocks),
