@@ -1,5 +1,14 @@
 # @studiocms/wysiwyg
 
+## 0.1.0-experimental.3
+
+### Patch Changes
+
+- [#13](https://github.com/withstudiocms/experiments/pull/13) [`b4d6d6d`](https://github.com/withstudiocms/experiments/commit/b4d6d6d60d30711f09918465d3ff7b8f08969aa5) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Merge grapesJS OSS plugins due to build error from all external plugins
+
+- Updated dependencies []:
+  - @studiocms/grapesjs-plugin@0.1.0-experimental.3
+
 ## 0.1.0-experimental.2
 
 ### Patch Changes
