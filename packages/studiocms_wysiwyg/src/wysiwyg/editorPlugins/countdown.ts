@@ -29,7 +29,7 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import type { Plugin, BlockProperties, ComponentDefinition } from 'grapesjs';
+import type { BlockProperties, ComponentDefinition, Plugin } from 'grapesjs';
 
 export type PluginOptions = {
 	/**

@@ -1,7 +1,7 @@
-import type { Editor, Component } from 'grapesjs';
-import type { TabComponent } from './Tab.js';
-import type { TabsOptions, TabComponentProps, CustomWindow, TabTemplate } from '../types.js';
+import type { Component, Editor } from 'grapesjs';
 import { resolveTemplate } from '../options.js';
+import type { CustomWindow, TabComponentProps, TabTemplate, TabsOptions } from '../types.js';
+import type { TabComponent } from './Tab.js';
 
 interface TabsComponent extends Component {
 	addTab(): void;

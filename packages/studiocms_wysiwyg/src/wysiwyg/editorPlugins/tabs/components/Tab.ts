@@ -1,6 +1,6 @@
-import type { Editor, Component } from 'grapesjs';
-import type { TabConfig } from '../types.js';
+import type { Component, Editor } from 'grapesjs';
 import { resolveTemplate } from '../options.js';
+import type { TabConfig } from '../types.js';
 
 export interface TabComponent extends Component {
 	tabContent?: Component;

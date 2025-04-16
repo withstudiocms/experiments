@@ -1,5 +1,4 @@
 import type { BlockProperties, Editor } from 'grapesjs';
-import type { PluginOptions } from './index.js';
 import {
 	typeButton,
 	typeCheckbox,
@@ -10,6 +9,7 @@ import {
 	typeSelect,
 	typeTextarea,
 } from './components.js';
+import type { PluginOptions } from './index.js';
 
 export default function (editor: Editor, opt: Required<PluginOptions>) {
 	const opts = opt;

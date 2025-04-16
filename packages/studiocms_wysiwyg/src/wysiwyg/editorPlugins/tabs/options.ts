@@ -1,4 +1,4 @@
-import type { TabsOptions, TabTemplate, TabTemplateProps } from './types.js';
+import type { TabTemplate, TabTemplateProps, TabsOptions } from './types.js';
 
 const defaultStyle = (config: TabsOptions): string => `
   .${config.classTab} {

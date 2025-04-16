@@ -1,10 +1,10 @@
 import type { Editor } from 'grapesjs';
 import type { TabsOptions } from '../types.js';
 import Tab from './Tab.js';
-import Tabs from './Tabs.js';
+import TabContainer from './TabContainer.js';
 import TabContent from './TabContent.js';
 import TabContents from './TabContents.js';
-import TabContainer from './TabContainer.js';
+import Tabs from './Tabs.js';
 
 type ComponentLoader = (editor: Editor, config: TabsOptions) => void;
 

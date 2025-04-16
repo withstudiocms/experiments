@@ -1,6 +1,6 @@
 import type { Editor } from 'grapesjs';
 import type { PluginOptions } from './index.js';
-import { keyCustomCode, commandNameCustomCode, typeCustomCode } from './utils.js';
+import { commandNameCustomCode, keyCustomCode, typeCustomCode } from './utils.js';
 
 export default (editor: Editor, opts: PluginOptions = {}) => {
 	const { Components } = editor;

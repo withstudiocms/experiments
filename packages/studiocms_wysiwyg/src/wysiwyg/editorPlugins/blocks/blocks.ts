@@ -1,4 +1,4 @@
-import type { Editor, BlockProperties } from 'grapesjs';
+import type { BlockProperties, Editor } from 'grapesjs';
 import type { PluginOptions } from './index.js';
 
 export default function (editor: Editor, opts: Required<PluginOptions>) {

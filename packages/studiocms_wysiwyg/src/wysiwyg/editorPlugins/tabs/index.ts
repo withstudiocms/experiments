@@ -1,8 +1,8 @@
 import type { Editor, Plugin } from 'grapesjs';
-import loadComponents from './components/index.js';
 import loadBlocks from './blocks.js';
-import type { TabsOptions } from './types.js';
+import loadComponents from './components/index.js';
 import defaultOptions from './options.js';
+import type { TabsOptions } from './types.js';
 
 export type PluginOptions = TabsOptions;
 

@@ -1,4 +1,4 @@
-import type { Editor, Component } from 'grapesjs';
+import type { Component, Editor } from 'grapesjs';
 import type { PluginOptions } from './index.js';
 import { commandNameCustomCode, keyCustomCode } from './utils.js';
 

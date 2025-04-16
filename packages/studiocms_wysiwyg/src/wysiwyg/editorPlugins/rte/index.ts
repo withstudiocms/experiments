@@ -1,5 +1,5 @@
-import ColorPicker from './colorPicker.js';
 import type { Plugin } from 'grapesjs';
+import ColorPicker from './colorPicker.js';
 
 interface FontOptions {
 	fontName?: string[] | boolean;
