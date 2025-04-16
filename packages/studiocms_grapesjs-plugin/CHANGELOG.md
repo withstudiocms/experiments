@@ -1,5 +1,7 @@
 # @studiocms/grapesjs-plugin
 
+## 0.1.0-experimental.3
+
 ## 0.1.0-experimental.2
 
 ## 0.1.0-experimental.1
