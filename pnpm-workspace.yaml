@@ -1,23 +1,23 @@
 catalog:
-  '@astrojs/db': ^0.14.10
+  '@astrojs/db': ^0.14.11
   '@astrojs/check': ^0.9.4
-  '@astrojs/node': ^9.1.2
-  '@studiocms/blog': 0.1.0-beta.15
-  '@studiocms/devapps': 0.1.0-beta.15
+  '@astrojs/node': ^9.2.0
+  '@studiocms/blog': 0.1.0-beta.16
+  '@studiocms/devapps': 0.1.0-beta.16
   '@types/node': ^22.0.0
-  astro: ^5.6
+  astro: ^5.7.1
   astro-integration-kit: ^0.18
   sharp: ^0.34.0
-  studiocms: 0.1.0-beta.15
+  studiocms: 0.1.0-beta.16
   typescript: ^5.7
   vite: ^6.2.5
 
 catalogs:
   min:
-    astro: ^5.6
-    studiocms: 0.1.0-beta.15
+    astro: ^5.7.1
+    studiocms: ">=0.1.0-beta.14"
     '@astrojs/db': ^0.14.7
-    vite: ^6.2.6
+    vite: ^6.2.5
 
 packages:
   - "packages/*"
