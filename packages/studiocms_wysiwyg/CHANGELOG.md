@@ -1,5 +1,14 @@
 # @studiocms/wysiwyg
 
+## 0.1.0-experimental.4
+
+### Patch Changes
+
+- [#16](https://github.com/withstudiocms/experiments/pull/16) [`d0f9307`](https://github.com/withstudiocms/experiments/commit/d0f9307f8b2998c64fe66c9e381e39bcde641bae) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Fix deps to allow newer versions
+
+- Updated dependencies []:
+  - @studiocms/grapesjs-plugin@0.1.0-experimental.4
+
 ## 0.1.0-experimental.3
 
 ### Patch Changes
