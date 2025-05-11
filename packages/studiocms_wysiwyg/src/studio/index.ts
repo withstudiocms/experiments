@@ -51,40 +51,48 @@ function studiocmsWYSIWYGStudio(options: StudioCMSWYSIWYGStudioOptions): StudioC
 	return definePlugin({
 		identifier: packageIdentifier,
 		name: 'StudioCMS WYSIWYG (GrapesJS StudioSDK)',
-		studiocmsMinimumVersion: '0.1.0-beta.13',
-		pageTypes: [
-			{
-				identifier: 'studiocms/wysiwyg/studio',
-				label: 'GrapesJS StudioSDK',
-				rendererComponent: resolve('./components/Render.astro'),
-				pageContentComponent: resolve('./components/StudioSDKEditor.astro'),
-			},
-		],
-		integration: {
-			name: packageIdentifier,
-			hooks: {
-				'astro:config:setup': (params) => {
-					addVirtualImports(params, {
-						name: packageIdentifier,
-						imports: {
-							'studiocms:wysiwyg/studio/client': `
-								export const licenseKey = ${JSON.stringify(options.licenseKey)};
-								export const youtubeAPIKey = ${JSON.stringify(options.youtubeAPIKey)};
-								export const googleFontsAPIKey = ${JSON.stringify(options.googleFontsAPIKey)};
-								export * from '${resolve('./utils.js')}';
-							`,
-						},
-					});
+		studiocmsMinimumVersion: '0.1.0-beta.18',
+		hooks: {
+			'studiocms:astro:config': ({ addIntegrations }) => {
+				addIntegrations({
+					name: packageIdentifier,
+					hooks: {
+						'astro:config:setup': (params) => {
+							addVirtualImports(params, {
+								name: packageIdentifier,
+								imports: {
+									'studiocms:wysiwyg/studio/client': `
+										export const licenseKey = ${JSON.stringify(options.licenseKey)};
+										export const youtubeAPIKey = ${JSON.stringify(options.youtubeAPIKey)};
+										export const googleFontsAPIKey = ${JSON.stringify(options.googleFontsAPIKey)};
+										export * from '${resolve('./utils.js')}';
+									`,
+								},
+							});
 
-					params.injectRoute({
-						entrypoint: resolve('./routes/partial.astro'),
-						pattern: '/studiocms_api/wysiwyg_editor/studiosdk/partial',
-						prerender: false,
-					});
-				},
-				'astro:config:done': () => {
-					shared.sanitize = options.sanitize || {};
-				},
+							params.injectRoute({
+								entrypoint: resolve('./routes/partial.astro'),
+								pattern: '/studiocms_api/wysiwyg_editor/studiosdk/partial',
+								prerender: false,
+							});
+						},
+						'astro:config:done': () => {
+							shared.sanitize = options.sanitize || {};
+						},
+					},
+				});
+			},
+			'studiocms:config:setup': ({ setRendering }) => {
+				setRendering({
+					pageTypes: [
+						{
+							identifier: 'studiocms/wysiwyg/studio',
+							label: 'GrapesJS StudioSDK',
+							rendererComponent: resolve('./components/Render.astro'),
+							pageContentComponent: resolve('./components/StudioSDKEditor.astro'),
+						},
+					],
+				});
 			},
 		},
 	});
