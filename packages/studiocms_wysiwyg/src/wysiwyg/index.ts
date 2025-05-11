@@ -33,28 +33,36 @@ function studiocmsWYSIWYG(options?: StudioCMSWYSIWYGOptions): StudioCMSPlugin {
 	return definePlugin({
 		identifier: packageIdentifier,
 		name: 'StudioCMS WYSIWYG Editor',
-		studiocmsMinimumVersion: '0.1.0-beta.13',
-		pageTypes: [
-			{
-				identifier: 'studiocms/wysiwyg',
-				label: 'WYSIWYG',
-				rendererComponent: resolve('./components/Render.astro'),
-				pageContentComponent: resolve('./components/Editor.astro'),
+		studiocmsMinimumVersion: '0.1.0-beta.18',
+		hooks: {
+			'studiocms:astro:config': ({ addIntegrations }) => {
+				addIntegrations({
+					name: packageIdentifier,
+					hooks: {
+						'astro:config:setup': (params) => {
+							params.injectRoute({
+								entrypoint: resolve('./routes/partial.astro'),
+								pattern: '/studiocms_api/wysiwyg_editor/partial',
+								prerender: false,
+							});
+						},
+						'astro:config:done': () => {
+							shared.sanitize = options?.sanitize || {};
+						},
+					},
+				});
 			},
-		],
-		integration: {
-			name: packageIdentifier,
-			hooks: {
-				'astro:config:setup': (params) => {
-					params.injectRoute({
-						entrypoint: resolve('./routes/partial.astro'),
-						pattern: '/studiocms_api/wysiwyg_editor/partial',
-						prerender: false,
-					});
-				},
-				'astro:config:done': () => {
-					shared.sanitize = options?.sanitize || {};
-				},
+			'studiocms:config:setup': ({ setRendering }) => {
+				setRendering({
+					pageTypes: [
+						{
+							identifier: 'studiocms/wysiwyg',
+							label: 'WYSIWYG',
+							rendererComponent: resolve('./components/Render.astro'),
+							pageContentComponent: resolve('./components/Editor.astro'),
+						},
+					],
+				});
 			},
 		},
 	});
