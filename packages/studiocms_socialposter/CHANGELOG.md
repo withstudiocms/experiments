@@ -1,5 +1,11 @@
 # @studiocms/socialposter
 
+## 0.1.0-experimental.4
+
+### Patch Changes
+
+- [#19](https://github.com/withstudiocms/experiments/pull/19) [`df7df72`](https://github.com/withstudiocms/experiments/commit/df7df72e1c0b87f9b9197753207a3925b873b551) Thanks [@Adammatthiesen](https://github.com/Adammatthiesen)! - Update to support beta.18
+
 ## 0.1.0-experimental.3
 
 ### Patch Changes
