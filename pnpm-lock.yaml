@@ -165,7 +165,7 @@ importers:
         version: 3.15.3
       ultrahtml:
         specifier: ^1.5.3
-        version: 1.5.3
+        version: 1.6.0
       vite:
         specifier: catalog:min
         version: 6.2.6(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0)
@@ -3765,6 +3765,7 @@ packages:
 
   libsql@0.5.5:
     resolution: {integrity: sha512-TEFJ1X6lP0yDZIUYznlvQnzdajQ7TEPAAw1C9AvFiDp4OSBiH//yj3VHbYQSFkeHtFvL+6O4waOWQM1LA5Qggw==}
+    cpu: [x64, arm64, wasm32]
     os: [darwin, linux, win32]
 
   listr-silent-renderer@1.1.1:
@@ -5318,9 +5319,6 @@ packages:
 
   uint8arrays@3.0.0:
     resolution: {integrity: sha512-HRCx0q6O9Bfbp+HHSfQQKD7wU70+lydKVt4EghkdOvlK/NlrF90z+eXV34mUd48rNvVJXwkrMSPpCATkct8fJA==}
-
-  ultrahtml@1.5.3:
-    resolution: {integrity: sha512-GykOvZwgDWZlTQMtp5jrD4BVL+gNn2NVlVafjcFUJ7taY20tqYdwdoWBFy6GBJsNTZe1GkGPkSl5knQAjtgceg==}
 
   ultrahtml@1.6.0:
     resolution: {integrity: sha512-R9fBn90VTJrqqLDwyMph+HGne8eqY1iPfYhPzZrvKpIfwkWZbcYlfpsb8B9dTvBfpy1/hqAD7Wi8EKfP9e8zdw==}
@@ -11885,8 +11883,6 @@ snapshots:
   uint8arrays@3.0.0:
     dependencies:
       multiformats: 9.9.0
-
-  ultrahtml@1.5.3: {}
 
   ultrahtml@1.6.0: {}
 
