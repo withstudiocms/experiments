@@ -1,7 +1,5 @@
 import blog from '@studiocms/blog';
 import socialPoster from '@studiocms/socialposter';
-import WYSIWYG from '@studiocms/wysiwyg';
-import WYSIWYGStudio from '@studiocms/wysiwyg/studio';
 import { defineStudioCMSConfig } from 'studiocms/config';
 
 export default defineStudioCMSConfig({
@@ -9,8 +7,6 @@ export default defineStudioCMSConfig({
 	verbose: true,
 	plugins: [
 		blog(),
-		WYSIWYGStudio({ licenseKey: 'LICENSE' }),
-		WYSIWYG(),
 		socialPoster({ bluesky: true, threads: true, twitter: true }),
 	],
 	dashboardConfig: {
