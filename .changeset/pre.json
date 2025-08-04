@@ -3,19 +3,15 @@
   "tag": "experimental",
   "initialVersions": {
     "build-scripts": "0.0.14",
-    "@studiocms/grapesjs-plugin": "0.1.0-experimental.0",
-    "@studiocms/wysiwyg": "0.1.0-experimental.0",
     "playground": "0.0.1",
     "@studiocms/socialposter": "0.1.0-experimental.0"
   },
   "changesets": [
     "blue-buses-doubt",
     "every-seas-judge",
-    "evil-peaches-sort",
     "fifty-taxes-rhyme",
     "fresh-pandas-stop",
     "light-carrots-taste",
-    "strong-dancers-crash",
-    "three-flies-add"
+    "strong-dancers-crash"
   ]
 }
