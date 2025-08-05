@@ -5,10 +5,7 @@ import { defineStudioCMSConfig } from 'studiocms/config';
 export default defineStudioCMSConfig({
 	dbStartPage: false,
 	verbose: true,
-	plugins: [
-		blog(),
-		socialPoster({ bluesky: true, threads: true, twitter: true }),
-	],
+	plugins: [blog(), socialPoster({ bluesky: true, threads: true, twitter: true })],
 	dashboardConfig: {
 		developerConfig: {
 			demoMode: false,
