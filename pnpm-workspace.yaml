@@ -23,3 +23,10 @@ packages:
   - "packages/*"
   - "playground"
   - "build-scripts"
+
+minimumReleaseAge: 4320
+
+minimumReleaseAgeExclude:
+  - studiocms
+  - '@studiocms/*'
+  - '@withstudiocms/*'
