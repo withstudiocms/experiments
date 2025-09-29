@@ -54,7 +54,7 @@
 	"type": "module",
 	"dependencies": {
 		"@atproto/api": "^0.14.20",
-		"@studiocms/ui": "^0.4.16",
+		"@studiocms/ui": "^0.4.17",
 		"astro-integration-kit": "catalog:",
 		"twitter-api-v2": "^1.22.0",
 		"quill": "^2.0.3"

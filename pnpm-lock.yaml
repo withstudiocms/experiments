@@ -100,8 +100,8 @@ importers:
         specifier: ^0.14.20
         version: 0.14.20
       '@studiocms/ui':
-        specifier: ^0.4.16
-        version: 0.4.16(astro@5.7.4(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(vite@6.2.6(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
+        specifier: ^0.4.17
+        version: 0.4.17(astro@5.7.4(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(vite@6.2.6(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
       astro:
         specifier: catalog:min
         version: 5.7.4(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2)
@@ -1157,8 +1157,8 @@ packages:
   '@studiocms/markdown-remark-processor@1.2.0':
     resolution: {integrity: sha512-3qOupRze2HKO2VdcrN0c5j9ZYoM8hlhFjrs4m5pg4w5Do5I1MTuDDTXmfRnZ+CwDrXyUaYr+DK1Csb7zMYjzyA==}
 
-  '@studiocms/ui@0.4.16':
-    resolution: {integrity: sha512-X1LKS/OX5tT5rcNKR1nPU6saSH8YXyYVMZk2LKuaJkgRyEqkKocbNeXV3qebHIaOY5jL/jhwAXYvz+lwSInF9A==}
+  '@studiocms/ui@0.4.17':
+    resolution: {integrity: sha512-SEIfBFuBLjCERpwLfq9dywXjDEvSNi0cRlM1u2qu2FNn9X24kDEkOEdNDDeyyYCn5FcOlz21lcIxtoqpPSg/wA==}
     peerDependencies:
       astro: ^4.5 || ^5.0.0-beta.0
       vite: ^5.0.0 || ^6.0.0
@@ -4259,7 +4259,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@studiocms/ui@0.4.16(astro@5.7.4(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(vite@6.2.6(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))':
+  '@studiocms/ui@0.4.17(astro@5.7.4(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(vite@6.2.6(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))':
     dependencies:
       '@iconify-json/heroicons': 1.2.2
       '@iconify/types': 2.0.0
@@ -6244,7 +6244,7 @@ snapshots:
       '@oslojs/crypto': 1.0.1
       '@oslojs/encoding': 1.1.0
       '@studiocms/markdown-remark-processor': 1.2.0
-      '@studiocms/ui': 0.4.16(astro@5.7.4(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(vite@6.2.6(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
+      '@studiocms/ui': 0.4.17(astro@5.7.4(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2))(vite@6.2.6(@types/node@22.13.13)(jiti@2.4.2)(terser@5.39.0))
       '@withstudiocms/cli-kit': 0.1.0
       arctic: 3.5.0
       astro: 5.7.4(@types/node@22.13.13)(jiti@2.4.2)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2)
