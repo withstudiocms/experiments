@@ -1,15 +1,15 @@
 catalog:
-  '@astrojs/db': ^0.14.11
+  '@astrojs/db': ^0.18.0
   '@astrojs/check': ^0.9.4
   '@astrojs/node': ^9.2.0
   '@studiocms/blog': 0.1.0-beta.18
   '@studiocms/devapps': 0.1.0-beta.18
   '@types/node': ^22.0.0
   astro: ^5.7.1
-  astro-integration-kit: ^0.18
+  astro-integration-kit: ^0.19.0
   sharp: ^0.34.0
   studiocms: 0.1.0-beta.18
-  typescript: ^5.7
+  typescript: ^5.9.3
   vite: ^6.2.5
 
 catalogs:
