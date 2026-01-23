@@ -30,3 +30,5 @@ minimumReleaseAgeExclude:
   - studiocms
   - '@studiocms/*'
   - '@withstudiocms/*'
+  # Renovate security update: @astrojs/node@9.4.1
+  - "@astrojs/node@9.4.1"
